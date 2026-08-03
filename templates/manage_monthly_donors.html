@@ -96,6 +96,71 @@
                 </table>
             </div>
         </div>
+
+        <div style="margin-top: 3rem;">
+            <div class="manage-header">
+                <h2 style="font-size: 1.5rem; color: var(--text-main); display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-calendar-check" style="color: #3b82f6;"></i> Payment Tracker - {{ month_name }}
+                </h2>
+            </div>
+            
+            <div class="layout-grid" style="grid-template-columns: 1fr 1fr;">
+                <!-- Unpaid Donors -->
+                <div class="list-card" style="border-top: 4px solid #ef4444;">
+                    <div style="padding: 1.5rem; background: #fff1f2; border-bottom: 1px solid #fecdd3;">
+                        <h3 style="margin: 0; color: #991b1b;"><i class="fas fa-exclamation-circle"></i> Pending Payments ({{ unpaid_donors|length }})</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Expected Amt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for donor in unpaid_donors %}
+                            <tr>
+                                <td style="font-weight: 600;">{{ donor.name }}</td>
+                                <td>{{ donor.phone }}</td>
+                                <td style="font-weight: 600; color: var(--text-muted);">₹{{ donor.monthly_commitment }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="3" style="text-align: center; padding: 1.5rem;">All active donors have paid this month!</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paid Donors -->
+                <div class="list-card" style="border-top: 4px solid #10b981;">
+                    <div style="padding: 1.5rem; background: #ecfdf5; border-bottom: 1px solid #d1fae5;">
+                        <h3 style="margin: 0; color: #065f46;"><i class="fas fa-check-circle"></i> Received Payments ({{ paid_donors|length }})</h3>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date Paid</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for donor in paid_donors %}
+                            <tr>
+                                <td style="font-weight: 600;">{{ donor.name }}</td>
+                                <td>{{ donor.payment_date|date:"M d, Y" }}</td>
+                                <td style="font-weight: 600; color: #10b981;">₹{{ donor.paid_amount }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="3" style="text-align: center; padding: 1.5rem;">No payments received yet this month.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock %}

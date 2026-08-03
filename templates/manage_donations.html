@@ -173,6 +173,16 @@
                         {{ form.amount }}
                     </div>
 
+                    <div class="form-group">
+                        <label for="{{ form.date.id_for_label }}">Date</label>
+                        {{ form.date }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.monthly_donor.id_for_label }}">Link to Monthly Donor (Optional)</label>
+                        {{ form.monthly_donor }}
+                    </div>
+
                     <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
                         {{ form.is_public }}
                         <label for="{{ form.is_public.id_for_label }}" style="margin: 0;">Show publicly on website?</label>

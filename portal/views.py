@@ -195,7 +195,47 @@ def manage_monthly_donors(request):
         form = MonthlyDonorForm()
     
     donors = MonthlyDonor.objects.all().order_by('-join_date')
-    return render(request, 'manage_monthly_donors.html', {'form': form, 'donors': donors})
+    
+    # Calculate Monthly Payment Status
+    from datetime import date
+    today = date.today()
+    current_month = today.month
+    current_year = today.year
+    month_name = today.strftime("%B %Y")
+    
+    # Get all donations this month of type 'monthly'
+    monthly_donations = Donation.objects.filter(
+        donation_type='monthly',
+        date__month=current_month,
+        date__year=current_year,
+        monthly_donor__isnull=False
+    )
+    
+    paid_donor_ids = monthly_donations.values_list('monthly_donor_id', flat=True)
+    
+    paid_donors = []
+    unpaid_donors = []
+    
+    for donor in donors:
+        if not donor.is_active:
+            continue
+            
+        if donor.id in paid_donor_ids:
+            donation = monthly_donations.filter(monthly_donor=donor).first()
+            donor.paid_amount = donation.amount if donation else 0
+            donor.payment_date = donation.date if donation else None
+            paid_donors.append(donor)
+        else:
+            unpaid_donors.append(donor)
+            
+    context = {
+        'form': form, 
+        'donors': donors,
+        'paid_donors': paid_donors,
+        'unpaid_donors': unpaid_donors,
+        'month_name': month_name
+    }
+    return render(request, 'manage_monthly_donors.html', context)
 
 @staff_member_required(login_url='/login/')
 def edit_monthly_donor(request, pk):

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+import django.utils.timezone
 
 class MonthlyDonor(models.Model):
     name = models.CharField(max_length=255)
@@ -77,7 +78,7 @@ class Donation(models.Model):
     monthly_donor = models.ForeignKey(MonthlyDonor, on_delete=models.SET_NULL, null=True, blank=True, help_text="Link this donation to a registered monthly donor")
     donation_type = models.CharField(max_length=20, choices=DONATION_TYPES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(default=django.utils.timezone.now)
     is_public = models.BooleanField(default=True)
 
     class Meta:

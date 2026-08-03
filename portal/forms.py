@@ -4,12 +4,14 @@ from .models import Donation, Expense, Program, Member, MonthlyDonor, Gallery
 class DonationForm(forms.ModelForm):
     class Meta:
         model = Donation
-        fields = ['donor_name', 'donation_type', 'amount', 'is_public']
+        fields = ['donor_name', 'monthly_donor', 'donation_type', 'amount', 'date', 'is_public']
         widgets = {
-            'donor_name': forms.TextInput(attrs={'class': 'form-control', 'id': 'id_donor_name'}),
+            'donor_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'monthly_donor': forms.Select(attrs={'class': 'form-control'}),
             'donation_type': forms.Select(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
-            'is_public': forms.CheckboxInput(attrs={'class': 'form-check-input'})
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'is_public': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }
 
 class ExpenseForm(forms.ModelForm):
