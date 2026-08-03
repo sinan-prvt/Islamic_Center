@@ -65,18 +65,33 @@ from django.http import JsonResponse
 
 def check_contribution(request):
     name = request.GET.get('name', '').strip()
-    if not name:
-        return JsonResponse({'error': 'Please provide a name'}, status=400)
-        
-    # Case-insensitive partial match
-    donations = Donation.objects.filter(donor_name__icontains=name, donation_type='monthly')
-    total_paid = sum(d.amount for d in donations)
+    phone = request.GET.get('phone', '').strip()
     
-    return JsonResponse({
-        'name': name,
-        'total_paid': str(total_paid),
-        'count': donations.count()
-    })
+    if not name or not phone:
+        return JsonResponse({'error': 'Please provide both name and phone number'}, status=400)
+        
+    donor = MonthlyDonor.objects.filter(phone=phone).first()
+    
+    if donor:
+        donations = Donation.objects.filter(monthly_donor=donor, donation_type='monthly')
+        total_paid = sum(d.amount for d in donations)
+        return JsonResponse({
+            'is_registered': True,
+            'name': donor.name,
+            'commitment': str(donor.monthly_commitment),
+            'total_paid': str(total_paid),
+            'count': donations.count()
+        })
+    else:
+        # Fallback to general search if not a registered monthly donor
+        donations = Donation.objects.filter(donor_name__icontains=name, donation_type='monthly')
+        total_paid = sum(d.amount for d in donations)
+        return JsonResponse({
+            'is_registered': False,
+            'name': name,
+            'total_paid': str(total_paid),
+            'count': donations.count()
+        })
 
 def general_donation(request):
     # Transparency Data
@@ -156,3 +171,78 @@ def dashboard(request):
         }
     }
     return render(request, 'dashboard.html', context)
+
+from django.contrib.admin.views.decorators import staff_member_required
+from .forms import DonationForm, ExpenseForm, ProgramForm, MemberForm, MonthlyDonorForm
+from django.contrib import messages
+from .models import MonthlyDonor
+
+@staff_member_required(login_url='/login/')
+def manage_monthly_donors(request):
+    if request.method == 'POST':
+        form = MonthlyDonorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Monthly donor registered successfully!')
+            return redirect('manage_monthly_donors')
+    else:
+        form = MonthlyDonorForm()
+    
+    donors = MonthlyDonor.objects.all().order_by('-join_date')
+    return render(request, 'manage_monthly_donors.html', {'form': form, 'donors': donors})
+
+@staff_member_required(login_url='/login/')
+def manage_members(request):
+    if request.method == 'POST':
+        form = MemberForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Member added successfully!')
+            return redirect('manage_members')
+    else:
+        form = MemberForm()
+    
+    members = Member.objects.all()
+    return render(request, 'manage_members.html', {'form': form, 'members': members})
+
+@staff_member_required(login_url='/login/')
+def manage_donations(request):
+    if request.method == 'POST':
+        form = DonationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Donation added successfully!')
+            return redirect('manage_donations')
+    else:
+        form = DonationForm()
+    
+    donations = Donation.objects.all()
+    return render(request, 'manage_donations.html', {'form': form, 'donations': donations})
+
+@staff_member_required(login_url='/login/')
+def manage_expenses(request):
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Expense logged successfully!')
+            return redirect('manage_expenses')
+    else:
+        form = ExpenseForm()
+    
+    expenses = Expense.objects.all()
+    return render(request, 'manage_expenses.html', {'form': form, 'expenses': expenses})
+
+@staff_member_required(login_url='/login/')
+def manage_programs(request):
+    if request.method == 'POST':
+        form = ProgramForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Program created successfully!')
+            return redirect('manage_programs')
+    else:
+        form = ProgramForm()
+    
+    programs = Program.objects.all()
+    return render(request, 'manage_programs.html', {'form': form, 'programs': programs})

@@ -176,11 +176,7 @@
 
 <div class="dashboard-header">
     <div class="container">
-        <!-- Admin Controls -->
-        <div style="background: rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 8px; display: inline-flex; gap: 15px; margin-bottom: 20px; font-size: 0.9rem;">
-            <span><i class="fas fa-user-shield"></i> Logged in as: <strong>{{ request.user.username }}</strong></span>
-            <a href="{% url 'admin:index' %}" style="color: white; text-decoration: underline;"><i class="fas fa-cog"></i> Go to Backend Admin</a>
-        </div>
+
         
         <h1 class="dashboard-title">Public Transparency Dashboard</h1>
         <p class="dashboard-subtitle">We believe in complete financial transparency. Here is a real-time overview of our community funds, programs, and member activities.</p>
@@ -227,12 +223,12 @@
         <h2 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;"><i class="fas fa-bolt" style="color: var(--primary); margin-right: 10px;"></i> Admin Quick Actions</h2>
         
         <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
-            <a href="{% url 'admin:portal_donation_add' %}" class="btn-donate" style="background: #10b981; padding: 0.8rem 1.5rem;"><i class="fas fa-plus-circle"></i> Add Donation</a>
-            <a href="{% url 'admin:portal_expense_add' %}" class="btn-donate" style="background: #ef4444; padding: 0.8rem 1.5rem;"><i class="fas fa-minus-circle"></i> Log Expense</a>
-            <a href="{% url 'admin:portal_program_add' %}" class="btn-donate" style="background: #f59e0b; padding: 0.8rem 1.5rem;"><i class="fas fa-calendar-plus"></i> New Program</a>
+            <a href="{% url 'manage_donations' %}" class="btn-donate" style="background: #10b981; padding: 0.8rem 1.5rem;"><i class="fas fa-plus-circle"></i> Add Donation</a>
+            <a href="{% url 'manage_expenses' %}" class="btn-donate" style="background: #ef4444; padding: 0.8rem 1.5rem;"><i class="fas fa-minus-circle"></i> Log Expense</a>
+            <a href="{% url 'manage_programs' %}" class="btn-donate" style="background: #f59e0b; padding: 0.8rem 1.5rem;"><i class="fas fa-calendar-plus"></i> New Program</a>
             <a href="{% url 'admin:portal_news_add' %}" class="btn-donate" style="background: #3b82f6; padding: 0.8rem 1.5rem;"><i class="fas fa-bullhorn"></i> Post News</a>
             <a href="{% url 'admin:portal_gallery_add' %}" class="btn-donate" style="background: #8b5cf6; padding: 0.8rem 1.5rem;"><i class="fas fa-images"></i> Add Photo</a>
-            <a href="{% url 'admin:portal_member_changelist' %}" class="btn-donate" style="background: #64748b; padding: 0.8rem 1.5rem;"><i class="fas fa-users-cog"></i> Manage Members</a>
+            <a href="{% url 'manage_members' %}" class="btn-donate" style="background: #64748b; padding: 0.8rem 1.5rem;"><i class="fas fa-users-cog"></i> Manage Members</a>
         </div>
     </div>
     {% endif %}

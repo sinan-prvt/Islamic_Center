@@ -17,4 +17,9 @@ urlpatterns = [
     path('transparency/', views.transparency, name='transparency'),
     path('check-contribution/', views.check_contribution, name='check_contribution'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('manage/monthly-donors/', views.manage_monthly_donors, name='manage_monthly_donors'),
+    path('manage/members/', views.manage_members, name='manage_members'),
+    path('manage/donations/', views.manage_donations, name='manage_donations'),
+    path('manage/expenses/', views.manage_expenses, name='manage_expenses'),
+    path('manage/programs/', views.manage_programs, name='manage_programs'),
 ]

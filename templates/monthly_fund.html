@@ -266,7 +266,7 @@ function checkAndProceed() {
     checkBtn.disabled = true;
     
     // Fetch contribution data (simulating backend check)
-    fetch(`/check-contribution/?name=${encodeURIComponent(nameInput)}`)
+    fetch(`/check-contribution/?name=${encodeURIComponent(nameInput)}&phone=${encodeURIComponent(phoneInput)}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById('step-identify').style.display = 'none';
@@ -274,7 +274,15 @@ function checkAndProceed() {
             
             const statusDiv = document.getElementById('contribution-status');
             
-            if (data.count === 0) {
+            if (data.is_registered) {
+                statusDiv.innerHTML = `<h4 style="color: #065f46; margin: 0 0 0.5rem 0; font-size: 1.1rem;"><i class="fas fa-check-circle"></i> Welcome back, ${data.name}!</h4>
+                                       <div style="background: white; border-radius: 8px; padding: 15px; margin: 10px 0; border: 1px solid #a7f3d0;">
+                                            <p style="margin: 0 0 5px 0; color: var(--text-muted);">Your Monthly Commitment: <strong style="color: var(--text-main); font-size: 1.1rem;">₹${data.commitment}</strong></p>
+                                            <p style="margin: 0; color: var(--text-muted);">Total Paid to date: <strong style="color: #10b981; font-size: 1.1rem;">₹${data.total_paid}</strong> 
+                                            <span style="font-size: 0.85rem;">(across ${data.count} payments)</span></p>
+                                       </div>
+                                       <p style="color: #047857; margin: 0; font-size: 0.95rem;">Please select or enter the amount you'd like to pay today.</p>`;
+            } else if (data.count === 0) {
                 statusDiv.innerHTML = `<h4 style="color: #065f46; margin: 0 0 0.5rem 0; font-size: 1.1rem;">Welcome, ${nameInput}!</h4>
                                        <p style="color: #047857; margin: 0;">You haven't made any monthly contributions yet. Start supporting our cause today!</p>`;
             } else {
