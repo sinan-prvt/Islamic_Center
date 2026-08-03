@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+{% block title %}Gallery - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 2rem;
+        padding: 2rem 0;
+    }
+    .gallery-item {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .gallery-img-container {
+        width: 100%;
+        height: 240px;
+        overflow: hidden;
+    }
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .gallery-item:hover img {
+        transform: scale(1.05);
+    }
+    .gallery-content {
+        padding: 1.5rem;
+    }
+    .gallery-item h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.25rem;
+        color: var(--text-main);
+    }
+    .gallery-item p {
+        margin: 0;
+        color: var(--primary);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-banner">
+    <div class="banner-content">
+        <h1>Photo Gallery</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a> | Gallery
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="gallery-grid">
+        {% for image in images %}
+        <div class="gallery-item">
+            <div class="gallery-img-container">
+                <img src="{{ image.image.url }}" alt="{{ image.title }}">
+            </div>
+            <div class="gallery-content">
+                <h3>{{ image.title }}</h3>
+                {% if image.program %}
+                <p><i class="fas fa-camera-retro"></i> {{ image.program.title }}</p>
+                {% endif %}
+            </div>
+        </div>
+        {% empty %}
+        <!-- Demo Content (Displayed when DB is empty) -->
+        <div class="gallery-item">
+            <div class="gallery-img-container"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop" alt="Community Gathering"></div>
+            <div class="gallery-content">
+                <h3>Annual General Meeting 2023</h3>
+                <p><i class="fas fa-camera-retro"></i> Monthly Meeting</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img-container"><img src="https://images.unsplash.com/photo-1593113589914-0755387f3b89?w=600&h=400&fit=crop" alt="Relief Distribution"></div>
+            <div class="gallery-content">
+                <h3>Ramadan Relief Distribution</h3>
+                <p><i class="fas fa-camera-retro"></i> Relief Activity</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img-container"><img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&h=400&fit=crop" alt="Meeting"></div>
+            <div class="gallery-content">
+                <h3>Executive Committee Session</h3>
+                <p><i class="fas fa-camera-retro"></i> Weekly Dars</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img-container"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=600&h=400&fit=crop" alt="Students Class"></div>
+            <div class="gallery-content">
+                <h3>Weekend Islamic Workshop</h3>
+                <p><i class="fas fa-camera-retro"></i> Islamic Class</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img-container"><img src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?w=600&h=400&fit=crop" alt="Youth Camp"></div>
+            <div class="gallery-content">
+                <h3>Summer Youth Camp</h3>
+                <p><i class="fas fa-camera-retro"></i> Youth Program</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <div class="gallery-img-container"><img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=600&h=400&fit=crop" alt="Award Ceremony"></div>
+            <div class="gallery-content">
+                <h3>Excellence Awards 2024</h3>
+                <p><i class="fas fa-camera-retro"></i> Other</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

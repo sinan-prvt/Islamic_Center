@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SKSSF & SYS Puthupparamba{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0F5132;
+            --primary-light: #198754;
+            --surface: #ffffff;
+            --background: #f8fafc;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --radius-sm: 8px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header Redesign */
+        header {
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background-color: #064e3b;
+            /* Very dark elegant green */
+            color: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 5%;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .top-contact {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .top-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .top-links a {
+            color: #f8fafc;
+            text-decoration: none;
+            padding: 0.2rem 0.8rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .top-links a:hover {
+            color: #fbbf24;
+            /* Subtle gold hover */
+        }
+
+        .main-header {
+            background-color: #ffffff;
+            /* Pure white */
+            color: #1e293b;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-area img {
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-text h2 {
+            font-family: 'PT Sans', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 22px;
+            margin-bottom: 2px;
+            color: #064e3b;
+            /* Dark green text */
+            letter-spacing: 0px;
+        }
+
+        .logo-text p {
+            font-size: 13px;
+            color: #64748b;
+            font-weight: 400;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .main-nav a {
+            color: #475569;
+            text-decoration: none;
+            font-family: 'PT Sans', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            line-height: 20px;
+            transition: color 0.2s;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+        }
+
+        .main-nav a:hover {
+            color: #045a33;
+            background-color: #f8fafc;
+        }
+
+        .btn-donate {
+            background-color: #045a33;
+            /* Deep green */
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(4, 90, 51, 0.2);
+        }
+
+        .btn-donate:hover {
+            background-color: #064e3b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(4, 90, 51, 0.3);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            flex: 1;
+        }
+
+        /* Typography */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Page Banner */
+        .page-banner {
+            background: linear-gradient(135deg, #045a33, #064e3b);
+            color: white;
+            padding: 4rem 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-banner h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-banner .breadcrumbs {
+            font-size: 0.95rem;
+            color: #d1d5db;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .page-banner .breadcrumbs a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .page-banner .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        /* Universal Card Component */
+        .card {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #045a33, #064e3b);
+            color: #e2e8f0;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+        
+        footer p {
+            margin: 0;
+            opacity: 0.9;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <div class="top-bar">
+        <div class="top-contact">
+            <span>📧 info@skssfputhupparamba.com</span>
+            <span>📞 +91 1234 567 890</span>
+        </div>
+        <div class="top-links">
+            <a href="{% url 'news' %}">Announcements</a>
+            <a href="{% url 'monthly_fund' %}">Monthly Fund</a>
+        </div>
+    </div>
+    <header class="main-header">
+        <div class="logo-area">
+            {% load static %}
+            <img src="{% static 'images/logo.jpg' %}" alt="SKSSF Logo" onerror="this.style.display='none'">
+            <div class="logo-text">
+                <h2>Samastha Kerala Sunni Students Federation (SKSSF)</h2>
+                <p>Puthupparamba Unit &ndash; Kerala, India.</p>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'committee' %}">Committee</a>
+            <a href="{% url 'gallery' %}">Gallery</a>
+        </nav>
+        <a href="{% url 'donate' %}" class="btn-donate">Donate Funds</a>
+    </header>
+
+    {% if request.user.is_staff %}
+    <!-- Admin Navigation Bar -->
+    <div style="background: #1e293b; color: white; padding: 10px 0; border-bottom: 3px solid var(--primary); overflow-x: auto;">
+        <div class="container" style="display: flex; gap: 15px; align-items: center; white-space: nowrap; font-size: 0.9rem;">
+            <span style="color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-right: 10px;"><i class="fas fa-tools"></i> Admin Tools:</span>
+            <a href="{% url 'dashboard' %}" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; background: rgba(255,255,255,0.1);"><i class="fas fa-chart-line"></i> Dashboard</a>
+            <a href="{% url 'admin:portal_donation_changelist' %}" style="color: #a7f3d0; text-decoration: none; padding: 5px 10px;"><i class="fas fa-hand-holding-usd"></i> Donations</a>
+            <a href="{% url 'admin:portal_expense_changelist' %}" style="color: #fca5a5; text-decoration: none; padding: 5px 10px;"><i class="fas fa-file-invoice-dollar"></i> Expenses</a>
+            <a href="{% url 'admin:portal_program_changelist' %}" style="color: #fde68a; text-decoration: none; padding: 5px 10px;"><i class="fas fa-calendar-alt"></i> Programs</a>
+            <a href="{% url 'admin:portal_news_changelist' %}" style="color: #bfdbfe; text-decoration: none; padding: 5px 10px;"><i class="fas fa-newspaper"></i> News</a>
+            <a href="{% url 'admin:portal_gallery_changelist' %}" style="color: #ddd6fe; text-decoration: none; padding: 5px 10px;"><i class="fas fa-images"></i> Gallery</a>
+            <a href="{% url 'admin:portal_member_changelist' %}" style="color: #e2e8f0; text-decoration: none; padding: 5px 10px;"><i class="fas fa-users"></i> Members</a>
+            <a href="{% url 'logout' %}" style="color: white; text-decoration: none; padding: 5px 10px; border-radius: 4px; background: #ef4444; margin-left: auto;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SKSSF & SYS Puthupparamba Unit. All rights reserved.</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">
+            <a href="{% url 'dashboard' %}" style="color: rgba(255,255,255,0.7); text-decoration: none;">Admin Dashboard</a>
+        </p>
+    </footer>
+</body>
+
+</html>

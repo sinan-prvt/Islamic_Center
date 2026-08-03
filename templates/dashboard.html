@@ -1,0 +1,375 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Public Dashboard - SKSSF Puthupparamba{% endblock %}
+
+{% block content %}
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    .dashboard-header {
+        background: linear-gradient(135deg, #045a33, #064e3b);
+        color: white;
+        padding: 4rem 0 3rem 0;
+        text-align: center;
+        margin-bottom: -3rem;
+    }
+    
+    .dashboard-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .dashboard-container {
+        padding: 0 1rem;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Stat Cards */
+    .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .stat-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        display: flex;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #f0fdf4;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        margin-right: 1.5rem;
+    }
+
+    .stat-info h3 {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin-bottom: 0.3rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .stat-info p {
+        font-size: 1.8rem;
+        font-weight: 800;
+        color: var(--text-main);
+        margin: 0;
+    }
+
+    /* Dashboard Layout */
+    .dashboard-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+
+    .card-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #f1f5f9;
+        display: flex;
+        align-items: center;
+    }
+
+    .card-title i {
+        color: var(--primary);
+        margin-right: 10px;
+    }
+
+    /* List Items */
+    .list-group {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .list-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #f8fafc;
+    }
+
+    .list-item:last-child {
+        border-bottom: none;
+    }
+
+    .item-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        color: var(--primary);
+    }
+
+    .item-details h4 {
+        margin: 0 0 0.2rem 0;
+        font-size: 1rem;
+        color: var(--text-main);
+    }
+
+    .item-details p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-muted);
+    }
+
+    .item-amount {
+        margin-left: auto;
+        font-weight: 700;
+        color: #10b981;
+    }
+    .item-amount.expense {
+        color: #ef4444;
+    }
+
+    @media (max-width: 992px) {
+        .dashboard-layout {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="dashboard-header">
+    <div class="container">
+        <!-- Admin Controls -->
+        <div style="background: rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 8px; display: inline-flex; gap: 15px; margin-bottom: 20px; font-size: 0.9rem;">
+            <span><i class="fas fa-user-shield"></i> Logged in as: <strong>{{ request.user.username }}</strong></span>
+            <a href="{% url 'admin:index' %}" style="color: white; text-decoration: underline;"><i class="fas fa-cog"></i> Go to Backend Admin</a>
+        </div>
+        
+        <h1 class="dashboard-title">Public Transparency Dashboard</h1>
+        <p class="dashboard-subtitle">We believe in complete financial transparency. Here is a real-time overview of our community funds, programs, and member activities.</p>
+    </div>
+</div>
+
+<div class="container dashboard-container">
+    
+    <!-- KPI Stat Cards -->
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="stat-icon" style="color: #10b981; background: #ecfdf5;"><i class="fas fa-hand-holding-usd"></i></div>
+            <div class="stat-info">
+                <h3>Total Raised</h3>
+                <p>₹{{ total_income|floatformat:2 }}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="color: #ef4444; background: #fef2f2;"><i class="fas fa-file-invoice-dollar"></i></div>
+            <div class="stat-info">
+                <h3>Total Spent</h3>
+                <p>₹{{ total_expenses|floatformat:2 }}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="color: #3b82f6; background: #eff6ff;"><i class="fas fa-users"></i></div>
+            <div class="stat-info">
+                <h3>Active Members</h3>
+                <p>{{ member_count }}</p>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon" style="color: #f59e0b; background: #fffbeb;"><i class="fas fa-calendar-check"></i></div>
+            <div class="stat-info">
+                <h3>Programs Held</h3>
+                <p>{{ program_count }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Quick Actions (Only visible if logged in and staff) -->
+    {% if request.user.is_staff %}
+    <div style="margin-bottom: 3rem; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+        <h2 style="font-size: 1.4rem; color: var(--text-main); margin-bottom: 1.5rem; border-bottom: 1px solid #f1f5f9; padding-bottom: 1rem;"><i class="fas fa-bolt" style="color: var(--primary); margin-right: 10px;"></i> Admin Quick Actions</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+            <a href="{% url 'admin:portal_donation_add' %}" class="btn-donate" style="background: #10b981; padding: 0.8rem 1.5rem;"><i class="fas fa-plus-circle"></i> Add Donation</a>
+            <a href="{% url 'admin:portal_expense_add' %}" class="btn-donate" style="background: #ef4444; padding: 0.8rem 1.5rem;"><i class="fas fa-minus-circle"></i> Log Expense</a>
+            <a href="{% url 'admin:portal_program_add' %}" class="btn-donate" style="background: #f59e0b; padding: 0.8rem 1.5rem;"><i class="fas fa-calendar-plus"></i> New Program</a>
+            <a href="{% url 'admin:portal_news_add' %}" class="btn-donate" style="background: #3b82f6; padding: 0.8rem 1.5rem;"><i class="fas fa-bullhorn"></i> Post News</a>
+            <a href="{% url 'admin:portal_gallery_add' %}" class="btn-donate" style="background: #8b5cf6; padding: 0.8rem 1.5rem;"><i class="fas fa-images"></i> Add Photo</a>
+            <a href="{% url 'admin:portal_member_changelist' %}" class="btn-donate" style="background: #64748b; padding: 0.8rem 1.5rem;"><i class="fas fa-users-cog"></i> Manage Members</a>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="dashboard-layout">
+        
+        <!-- Financial Chart -->
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-chart-pie"></i> Financial Overview</h2>
+            <div style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center;">
+                <canvas id="financeChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Donations Feed -->
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-heart"></i> Recent Contributions</h2>
+            <ul class="list-group">
+                {% for donation in recent_donations %}
+                <li class="list-item">
+                    <div class="item-icon"><i class="fas fa-user"></i></div>
+                    <div class="item-details">
+                        <h4>{{ donation.donor_name }}</h4>
+                        <p>{{ donation.get_donation_type_display }} • {{ donation.date }}</p>
+                    </div>
+                    <div class="item-amount">
+                        +₹{{ donation.amount|floatformat:2 }}
+                    </div>
+                </li>
+                {% empty %}
+                <li class="list-item">
+                    <p>No recent public donations.</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Recent Programs -->
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-calendar-alt"></i> Recent Programs</h2>
+            <ul class="list-group">
+                {% for program in recent_programs %}
+                <li class="list-item">
+                    <div class="item-icon" style="background: #f0fdf4;"><i class="fas fa-check"></i></div>
+                    <div class="item-details">
+                        <h4>{{ program.title }}</h4>
+                        <p>{{ program.get_program_type_display }} • {{ program.date }}</p>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="list-item">
+                    <p>No recent programs.</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Recent News -->
+        <div class="card">
+            <h2 class="card-title"><i class="fas fa-newspaper"></i> Latest Updates</h2>
+            <ul class="list-group">
+                {% for item in recent_news %}
+                <li class="list-item">
+                    <div class="item-icon" style="background: #eff6ff;"><i class="fas fa-bullhorn"></i></div>
+                    <div class="item-details">
+                        <h4>{{ item.title }}</h4>
+                        <p>{{ item.date_published|date:"M d, Y" }}</p>
+                    </div>
+                </li>
+                {% empty %}
+                <li class="list-item">
+                    <p>No recent updates.</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Initialize Chart.js Donut Chart
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('financeChart').getContext('2d');
+        
+        // Pass data from Django securely using the context variable
+        const totalIncome = {{ chart_data.income|default:0 }};
+        const totalExpenses = {{ chart_data.expenses|default:0 }};
+        const currentBalance = {{ chart_data.balance|default:0 }};
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Total Spent', 'Available Balance'],
+                datasets: [{
+                    data: [totalExpenses, currentBalance],
+                    backgroundColor: [
+                        '#ef4444', // Red for expenses
+                        '#10b981'  // Green for balance
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            font: {
+                                family: "'Inter', sans-serif",
+                                size: 14
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += '₹' + context.parsed.toFixed(2);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock %}

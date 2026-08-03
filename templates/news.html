@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}News - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .news-item {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+    }
+    .news-date {
+        color: var(--secondary-green);
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-banner">
+    <div class="banner-content">
+        <h1>News and Events</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a> | News
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% for news in news_items %}
+    <div class="news-item">
+        <h2>{{ news.title }}</h2>
+        <p class="news-date">Published: {{ news.date_published|date:"F d, Y" }}</p>
+        <div style="margin-top: 1rem;">
+            {{ news.content|linebreaks }}
+        </div>
+    </div>
+    {% empty %}
+    <p>No recent news available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

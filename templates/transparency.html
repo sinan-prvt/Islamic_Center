@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% block title %}Transparency - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .transparency-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+    @media (max-width: 768px) {
+        .transparency-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    .panel {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .panel h2 {
+        text-align: center;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .income-title { color: #0a4d2c; }
+    .expense-title { color: #c0392b; }
+    
+    .data-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.8rem 0;
+        border-bottom: 1px dashed #eee;
+    }
+    .data-row.total {
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-top: 2px solid #ccc;
+        border-bottom: none;
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+    .balance-panel {
+        background: var(--dark-gray);
+        color: white;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 2rem;
+    }
+    .balance-panel h2 {
+        font-size: 2.5rem;
+        margin: 0;
+        color: {% if balance >= 0 %}#2ecc71{% else %}#e74c3c{% endif %};
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="section-title">Transparency Report</h1>
+    <p style="text-align: center; margin-bottom: 2rem;">We believe in complete transparency. Here is the public ledger of our income and expenses.</p>
+    
+    <div class="transparency-grid">
+        <!-- Income Panel -->
+        <div class="panel">
+            <h2 class="income-title">Income</h2>
+            <div class="data-row">
+                <span>Monthly Fund</span>
+                <span>₹{{ monthly_income }}</span>
+            </div>
+            <div class="data-row">
+                <span>General Donation</span>
+                <span>₹{{ general_income }}</span>
+            </div>
+            <div class="data-row total">
+                <span>Total Income</span>
+                <span>₹{{ total_income }}</span>
+            </div>
+        </div>
+
+        <!-- Expense Panel -->
+        <div class="panel">
+            <h2 class="expense-title">Expenses</h2>
+            {% for expense in expenses %}
+            <div class="data-row">
+                <span>{{ expense.get_category_display }} - {{ expense.title }}</span>
+                <span>₹{{ expense.amount }}</span>
+            </div>
+            {% empty %}
+            <div class="data-row">
+                <span>No expenses recorded.</span>
+                <span>₹0.00</span>
+            </div>
+            {% endfor %}
+            
+            <div class="data-row total">
+                <span>Total Expenses</span>
+                <span>₹{{ total_expenses }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Balance Panel -->
+    <div class="balance-panel">
+        <p>Current Balance</p>
+        <h2>₹{{ balance }}</h2>
+    </div>
+</div>
+{% endblock %}

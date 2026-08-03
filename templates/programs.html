@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Programs - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .program-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        margin-bottom: 1.5rem;
+        border-left: 5px solid var(--primary-green);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="section-title">Programs & Activities</h1>
+    
+    <h2>Upcoming Programs</h2>
+    {% for program in upcoming %}
+    <div class="program-card">
+        <h3>{{ program.title }}</h3>
+        <p><strong>Type:</strong> {{ program.get_program_type_display }}</p>
+        <p>📅 {{ program.date }} | ⏰ {{ program.time|default:"TBA" }}</p>
+        <p>📍 {{ program.venue|default:"TBA" }}</p>
+        <p>{{ program.description }}</p>
+    </div>
+    {% empty %}
+    <p>No upcoming programs at the moment.</p>
+    {% endfor %}
+    
+    <h2 style="margin-top: 3rem;">Past Programs</h2>
+    {% for program in past %}
+    <div class="program-card" style="border-left-color: var(--dark-gray);">
+        <h3>{{ program.title }}</h3>
+        <p>📅 {{ program.date }}</p>
+        <p>{{ program.description }}</p>
+    </div>
+    {% empty %}
+    <p>No past programs recorded.</p>
+    {% endfor %}
+</div>
+{% endblock %}

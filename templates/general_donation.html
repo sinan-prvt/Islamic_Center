@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% block title %}Donate - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .fund-card {
+        background: white;
+        padding: 4rem 3rem;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        text-align: center;
+        border: 1px solid rgba(0,0,0,0.05);
+        border-top: 5px solid var(--primary);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    .fund-card h2 {
+        font-size: 2.2rem;
+        color: var(--text-main);
+        margin-bottom: 1rem;
+    }
+    .fund-card p {
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+    }
+    .btn-donate-alt {
+        display: inline-block;
+        background: #fbbf24;
+        color: #1e293b;
+        padding: 1.25rem 3rem;
+        font-size: 1.25rem;
+        font-weight: 700;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+        margin-top: 1rem;
+    }
+    .btn-donate-alt:hover {
+        background: #f59e0b;
+        color: #1e293b;
+        box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
+        transform: translateY(-2px);
+    }
+    .ledger-section {
+        margin-top: 4rem;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border: 1px solid rgba(0,0,0,0.05);
+        padding: 3rem;
+    }
+    .ledger-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+    }
+    .stat-box {
+        padding: 1.5rem;
+        border-radius: 12px;
+        text-align: center;
+    }
+    .stat-box.income { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
+    .stat-box.expense { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+    .stat-box.balance { background: var(--dark-gray); color: white; border: 1px solid #334155; }
+    
+    .stat-box h4 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .stat-box .amount {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+    }
+    .tables-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+    }
+    .ledger-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+    .ledger-table th, .ledger-table td {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e2e8f0;
+        text-align: left;
+    }
+    .ledger-table th {
+        color: var(--text-muted);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+    .ledger-table tr:last-child td {
+        border-bottom: none;
+    }
+    .text-right {
+        text-align: right !important;
+    }
+    .amount-plus { color: #059669; font-weight: 600; }
+    .amount-minus { color: #dc2626; font-weight: 600; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-banner">
+    <div class="banner-content">
+        <h1>General Donation</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a> | Donate
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="ledger-section" style="margin-top: 0; margin-bottom: 4rem;">
+        <h2 style="text-align: center; margin-bottom: 1rem; color: var(--text-main);">Unit Fund Ledger & Transparency</h2>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">We believe in complete transparency. Here is the public ledger of our unit's income and expenses.</p>
+        
+        <div class="ledger-stats">
+            <div class="stat-box income">
+                <h4>Total Income</h4>
+                <p class="amount">₹{{ total_income|floatformat:0 }}</p>
+            </div>
+            <div class="stat-box expense">
+                <h4>Total Expenses</h4>
+                <p class="amount">₹{{ total_expenses|floatformat:0 }}</p>
+            </div>
+            <div class="stat-box balance">
+                <h4>Current Balance</h4>
+                <p class="amount">₹{{ balance|floatformat:0 }}</p>
+            </div>
+        </div>
+        
+        <div class="tables-grid">
+            <!-- Recent Donations -->
+            <div>
+                <h3 style="color: var(--text-main); border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; display: inline-block;">Recent Contributions</h3>
+                <table class="ledger-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Donor Name</th>
+                            <th class="text-right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for donation in recent_donations %}
+                        <tr>
+                            <td style="color: var(--text-muted); font-size: 0.9rem;">{{ donation.date|date:"M d, Y" }}</td>
+                            <td>{{ donation.donor_name }} <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">{{ donation.get_donation_type_display }}</span></td>
+                            <td class="text-right amount-plus">+₹{{ donation.amount|floatformat:0 }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">No recent contributions found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Recent Expenses -->
+            <div>
+                <h3 style="color: var(--text-main); border-bottom: 2px solid #dc2626; padding-bottom: 0.5rem; display: inline-block;">Recent Expenses</h3>
+                <table class="ledger-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Expense Title</th>
+                            <th class="text-right">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in recent_expenses %}
+                        <tr>
+                            <td style="color: var(--text-muted); font-size: 0.9rem;">{{ expense.date|date:"M d, Y" }}</td>
+                            <td>{{ expense.title }} <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">{{ expense.get_category_display }}</span></td>
+                            <td class="text-right amount-minus">-₹{{ expense.amount|floatformat:0 }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">No recent expenses recorded.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="fund-card">
+        <h2>Support Our Cause</h2>
+        <p>Make a one-time contribution to support our community initiatives, medical aid, and special events.</p>
+        <div style="margin: 3rem 0; color: var(--primary); font-size: 6rem;">
+            <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <a href="#" class="btn-donate-alt" onclick="alert('Payment Gateway Integration Pending')">Donate Now</a>
+    </div>
+</div>
+{% endblock %}

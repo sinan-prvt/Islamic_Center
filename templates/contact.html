@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Contact - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .contact-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .contact-card h2 {
+        color: var(--primary-green);
+    }
+    .contact-details p {
+        font-size: 1.1rem;
+        margin: 10px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-banner">
+    <div class="banner-content">
+        <h1>Contact Us</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a> | Contact
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="contact-card">
+        <h2>SKSSF & SYS Puthupparamba Unit</h2>
+        <div class="contact-details">
+            <p>📍 Address: Puthupparamba Juma Masjid Premises, Puthupparamba, Kerala</p>
+            <p>📞 Phone: +91 98765 43210</p>
+            <p>✉️ Email: info@skssfputhupparamba.com</p>
+            <p>🟢 WhatsApp: +91 98765 43210</p>
+        </div>
+        <div style="margin-top: 2rem; background: #eee; height: 200px; display: flex; align-items: center; justify-content: center; border-radius: 10px;">
+            <p>[ Google Map Embed Placeholder ]</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block title %}Committee - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+    .team-card {
+        background: white;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+        position: relative;
+    }
+    .team-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+    .team-card-image {
+        position: relative;
+        height: 320px;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .team-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .social-overlay {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #d29a43; /* Golden brown color matching the screenshot */
+        display: flex;
+        flex-direction: column;
+        padding: 15px 10px;
+        gap: 15px;
+        border-radius: 8px 0 0 8px;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .team-card:hover .social-overlay {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+    }
+    .social-icon {
+        color: white;
+        font-size: 1.1rem;
+        width: 38px;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid rgba(255,255,255,0.7);
+        text-decoration: none;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+    .social-icon:hover {
+        background: white;
+        color: #d29a43;
+    }
+    .team-card-info {
+        padding: 1.5rem;
+        text-align: center;
+        border-bottom: 3px solid transparent;
+        transition: border-color 0.3s ease;
+    }
+    .team-card:hover .team-card-info {
+        border-bottom-color: #d29a43;
+    }
+    .team-card-info h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+        color: var(--text-main);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .team-card-info p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        margin: 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-banner">
+    <div class="banner-content">
+        <h1>Committee Members</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a> | Committee
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card-grid">
+        {% for member in members %}
+        <div class="team-card">
+            <div class="team-card-image">
+                {% if member.photo %}
+                <img src="{{ member.photo.url }}" alt="{{ member.name }}">
+                {% else %}
+                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #045a33, #064e3b); color: rgba(255,255,255,0.2); font-size: 6rem;">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                {% endif %}
+                
+                <!-- Hover Social Icons -->
+                <div class="social-overlay">
+                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://wa.me/{{ member.phone|urlencode }}" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="team-card-info">
+                <h3>{{ member.name }}</h3>
+                <p>{{ member.role }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No committee members added yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
