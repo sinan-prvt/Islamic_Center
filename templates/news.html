@@ -1,19 +1,127 @@
 {% extends 'base.html' %}
-{% block title %}News - SKSSF Puthupparamba{% endblock %}
+{% block title %}News and Events - SKSSF Puthupparamba{% endblock %}
 
 {% block extra_head %}
 <style>
-    .news-item {
-        background: white;
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        margin-bottom: 1.5rem;
+    /* Modern News & Events Layout */
+    .news-events-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 900px;
+        margin: 3rem auto;
+        padding: 0 1rem;
     }
-    .news-date {
-        color: var(--secondary-green);
-        font-size: 0.9rem;
-        font-weight: bold;
+    
+    .section-title {
+        color: var(--text-main);
+        font-size: 1.8rem;
+        font-weight: 800;
+        margin-bottom: 2rem;
+        border-bottom: 3px solid #e2e8f0;
+        padding-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .section-title i { color: #10b981; }
+
+    /* Upcoming Events Styling */
+    .event-card {
+        display: flex;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+    .event-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+    
+    .event-date-block {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 130px;
+        text-align: center;
+    }
+    .event-month { font-size: 1.1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .event-day { font-size: 2.5rem; font-weight: 800; line-height: 1; margin: 5px 0; }
+    .event-year { font-size: 0.9rem; opacity: 0.9; }
+
+    .event-details {
+        padding: 2rem;
+        flex: 1;
+    }
+    .event-details h3 { margin-bottom: 0.8rem; color: var(--text-main); font-size: 1.5rem; }
+    .event-meta { display: flex; flex-wrap: wrap; gap: 15px; color: #64748b; font-size: 0.95rem; margin-bottom: 1rem; font-weight: 600; }
+    .event-meta i { color: #10b981; }
+    
+    /* News Article Styling */
+    .news-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        margin-bottom: 2rem;
+        overflow: hidden;
+        transition: transform 0.3s;
+    }
+    .news-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+    .news-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+    }
+    .news-content {
+        padding: 2.5rem;
+    }
+    .news-badge {
+        display: inline-block;
+        background: #e0e7ff;
+        color: #4338ca;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    .news-title { font-size: 1.7rem; color: var(--text-main); margin-bottom: 0.5rem; }
+    .news-date { color: #94a3b8; font-size: 0.95rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px; font-weight: 500;}
+    
+    /* Modal Styling */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.6); z-index: 1000;
+        display: none; align-items: center; justify-content: center;
+        padding: 1rem; backdrop-filter: blur(4px);
+    }
+    .modal-content-box {
+        background: white; border-radius: 12px;
+        width: 100%; max-width: 800px; max-height: 90vh;
+        overflow-y: auto; position: relative;
+        animation: modalFadeIn 0.3s;
+    }
+    @keyframes modalFadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .modal-close {
+        position: absolute; top: 15px; right: 15px;
+        background: rgba(0,0,0,0.5); color: white;
+        border: none; border-radius: 50%; width: 36px; height: 36px;
+        font-size: 1.2rem; cursor: pointer; display: flex;
+        align-items: center; justify-content: center; transition: background 0.3s;
+    }
+    .modal-close:hover { background: rgba(0,0,0,0.8); }
+
+    @media (max-width: 600px) {
+        .event-card { flex-direction: column; }
+        .event-date-block { padding: 1rem; flex-direction: row; gap: 10px; }
+        .event-day { font-size: 1.5rem; margin: 0; }
     }
 </style>
 {% endblock %}
@@ -23,21 +131,129 @@
     <div class="banner-content">
         <h1>News and Events</h1>
         <div class="breadcrumbs">
-            <a href="{% url 'home' %}">Home</a> | News
+            <a href="{% url 'home' %}">Home</a> | News & Events
         </div>
     </div>
 </div>
-<div class="container">
-    {% for news in news_items %}
-    <div class="news-item">
-        <h2>{{ news.title }}</h2>
-        <p class="news-date">Published: {{ news.date_published|date:"F d, Y" }}</p>
-        <div style="margin-top: 1rem;">
-            {{ news.content|linebreaks }}
+
+<div class="container news-events-container">
+    
+    <!-- Upcoming Events First -->
+    <div class="events-section">
+        <h2 class="section-title"><i class="fas fa-calendar-alt"></i> Upcoming Events</h2>
+        
+        {% for event in events %}
+        <div class="event-card" style="cursor: pointer;" onclick="openModal(`{{ event.title|escapejs }}`, 'Event', `{{ event.date|date:'F d, Y'|escapejs }}`, `{{ event.time|default:''|escapejs }}`, `{{ event.venue|default:''|escapejs }}`, `{% if event.banner %}{{ event.banner.url }}{% endif %}`, `desc-event-{{ event.pk }}`)">
+            <div class="event-date-block">
+                <span class="event-month">{{ event.date|date:"M" }}</span>
+                <span class="event-day">{{ event.date|date:"d" }}</span>
+                <span class="event-year">{{ event.date|date:"Y" }}</span>
+            </div>
+            <div class="event-details">
+                <h3><a href="javascript:void(0)" style="color: inherit; text-decoration: none;">{{ event.title }}</a></h3>
+                <div class="event-meta">
+                    {% if event.time %}<span><i class="far fa-clock"></i> {{ event.time }}</span>{% endif %}
+                    {% if event.venue %}<span><i class="fas fa-map-marker-alt"></i> {{ event.venue }}</span>{% endif %}
+                </div>
+                <div style="color: var(--text-muted); line-height: 1.7;">
+                    {{ event.description|truncatewords:25 }}
+                </div>
+                <div id="desc-event-{{ event.pk }}" style="display:none;">{{ event.description|linebreaks }}</div>
+                <a href="javascript:void(0)" style="display: inline-block; margin-top: 1rem; color: #10b981; font-weight: 700; text-decoration: none;">View Details &rarr;</a>
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;">
+            <i class="fas fa-calendar-times" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">No upcoming events scheduled at the moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Latest News Second -->
+    <div class="news-section">
+        <h2 class="section-title" style="margin-top: 2rem;"><i class="fas fa-bullhorn"></i> Latest Announcements</h2>
+        
+        {% for news in news_items %}
+        <div class="news-card" style="cursor: pointer;" onclick="openModal(`{{ news.title|escapejs }}`, 'News', `{{ news.date|date:'F d, Y'|escapejs }}`, '', '', `{% if news.banner %}{{ news.banner.url }}{% endif %}`, `desc-news-{{ news.pk }}`)">
+            {% if news.banner %}
+            <img src="{{ news.banner.url }}" alt="{{ news.title }}" class="news-image">
+            {% endif %}
+            <div class="news-content">
+                <span class="news-badge">News</span>
+                <h3 class="news-title"><a href="javascript:void(0)" style="color: inherit; text-decoration: none;">{{ news.title }}</a></h3>
+                <div class="news-date">
+                    <i class="far fa-calendar"></i> Published: {{ news.date|date:"F d, Y" }}
+                </div>
+                <div style="color: var(--text-muted); line-height: 1.7;">
+                    {{ news.description|truncatewords:30 }}
+                </div>
+                <div id="desc-news-{{ news.pk }}" style="display:none;">{{ news.description|linebreaks }}</div>
+                <a href="javascript:void(0)" style="display: inline-block; margin-top: 1rem; color: #10b981; font-weight: 700; text-decoration: none;">Read More &rarr;</a>
+            </div>
+        </div>
+        {% empty %}
+        <div style="text-align: center; padding: 3rem; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #f1f5f9;">
+            <i class="fas fa-newspaper" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 1rem;"></i>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">No recent news available.</p>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!-- Modal Structure -->
+<div class="modal-overlay" id="detailModal" onclick="closeModal(event)">
+    <div class="modal-content-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+        <img id="modalImg" src="" alt="Banner" style="width: 100%; max-height: 400px; object-fit: cover; display: none;">
+        <div style="padding: 2.5rem;">
+            <span id="modalBadge" class="news-badge" style="display:none;"></span>
+            <h2 id="modalTitle" style="font-size: 2rem; color: var(--text-main); margin-bottom: 1rem; font-weight: 800;"></h2>
+            <div id="modalMeta" style="display: flex; flex-wrap: wrap; gap: 15px; color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem; font-weight: 600; padding-bottom: 1rem; border-bottom: 2px solid #f1f5f9;"></div>
+            <div id="modalDesc" style="color: var(--text-muted); line-height: 1.8; font-size: 1.1rem;"></div>
         </div>
     </div>
-    {% empty %}
-    <p>No recent news available.</p>
-    {% endfor %}
 </div>
+
+<script>
+    function openModal(title, badgeType, dateStr, timeStr, venueStr, imgUrl, descId) {
+        document.getElementById('modalTitle').innerText = title;
+        
+        let badge = document.getElementById('modalBadge');
+        if(badgeType) {
+            badge.innerText = badgeType;
+            badge.style.display = 'inline-block';
+            badge.style.background = badgeType === 'News' ? '#e0e7ff' : '#dcfce7';
+            badge.style.color = badgeType === 'News' ? '#4338ca' : '#166534';
+        } else {
+            badge.style.display = 'none';
+        }
+
+        let meta = '';
+        if(dateStr) meta += `<span><i class="far fa-calendar-alt" style="color:#10b981;"></i> ${dateStr}</span>`;
+        if(timeStr) meta += `<span><i class="far fa-clock" style="color:#10b981;"></i> ${timeStr}</span>`;
+        if(venueStr) meta += `<span><i class="fas fa-map-marker-alt" style="color:#10b981;"></i> ${venueStr}</span>`;
+        document.getElementById('modalMeta').innerHTML = meta;
+
+        let img = document.getElementById('modalImg');
+        if(imgUrl && imgUrl.trim() !== '') {
+            img.src = imgUrl;
+            img.style.display = 'block';
+        } else {
+            img.style.display = 'none';
+        }
+
+        document.getElementById('modalDesc').innerHTML = document.getElementById(descId).innerHTML;
+        
+        document.getElementById('detailModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(e) {
+        if(e && e.target !== document.getElementById('detailModal') && e.currentTarget !== document.querySelector('.modal-close')) return;
+        document.getElementById('detailModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+</script>
 {% endblock %}

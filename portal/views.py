@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Member, Program, Gallery, News, Donation, Expense
+from .models import Member, Program, Gallery, Donation, Expense, MonthlyDonor
 
 def home(request):
-    latest_news = News.objects.filter(is_active=True).first()
+    latest_news = Program.objects.filter(program_type='news').first()
     committee_members = Member.objects.all()[:4]
-    upcoming_programs = Program.objects.filter(is_upcoming=True)[:3]
+    upcoming_programs = Program.objects.filter(is_upcoming=True).exclude(program_type='news').order_by('date')[:3]
     recent_donations = Donation.objects.filter(is_public=True)[:5]
     
     income = sum(d.amount for d in Donation.objects.all())
@@ -39,8 +39,14 @@ def gallery(request):
     return render(request, 'gallery.html', {'images': images})
 
 def news(request):
-    news_items = News.objects.filter(is_active=True)
-    return render(request, 'news.html', {'news_items': news_items})
+    news_items = Program.objects.filter(program_type='news')
+    events = Program.objects.filter(is_upcoming=True).exclude(program_type='news').order_by('date')
+    return render(request, 'news.html', {'news_items': news_items, 'events': events})
+
+def program_detail(request, pk):
+    from django.shortcuts import get_object_or_404
+    program = get_object_or_404(Program, pk=pk)
+    return render(request, 'program_detail.html', {'program': program})
 
 def contact(request):
     return render(request, 'contact.html')
@@ -151,7 +157,7 @@ def dashboard(request):
 
     # Recent Activity
     recent_programs = Program.objects.all()[:5]
-    recent_news = News.objects.filter(is_active=True)[:5]
+    recent_news = Program.objects.filter(program_type='news')[:5]
     recent_donations = Donation.objects.filter(is_public=True)[:5]
 
     context = {
@@ -192,6 +198,30 @@ def manage_monthly_donors(request):
     return render(request, 'manage_monthly_donors.html', {'form': form, 'donors': donors})
 
 @staff_member_required(login_url='/login/')
+def edit_monthly_donor(request, pk):
+    from django.shortcuts import get_object_or_404
+    donor = get_object_or_404(MonthlyDonor, pk=pk)
+    if request.method == 'POST':
+        form = MonthlyDonorForm(request.POST, instance=donor)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Monthly donor updated successfully!')
+            return redirect('manage_monthly_donors')
+    else:
+        form = MonthlyDonorForm(instance=donor)
+    return render(request, 'edit_monthly_donor.html', {'form': form, 'donor': donor})
+
+@staff_member_required(login_url='/login/')
+def delete_monthly_donor(request, pk):
+    from django.shortcuts import get_object_or_404
+    donor = get_object_or_404(MonthlyDonor, pk=pk)
+    if request.method == 'POST':
+        donor.delete()
+        messages.success(request, 'Monthly donor deleted successfully!')
+        return redirect('manage_monthly_donors')
+    return render(request, 'confirm_delete.html', {'object_name': donor.name, 'cancel_url': 'manage_monthly_donors'})
+
+@staff_member_required(login_url='/login/')
 def manage_members(request):
     if request.method == 'POST':
         form = MemberForm(request.POST, request.FILES)
@@ -211,13 +241,37 @@ def manage_donations(request):
         form = DonationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Donation added successfully!')
+            messages.success(request, 'Donation recorded successfully!')
             return redirect('manage_donations')
     else:
         form = DonationForm()
     
-    donations = Donation.objects.all()
+    donations = Donation.objects.all().order_by('-date')
     return render(request, 'manage_donations.html', {'form': form, 'donations': donations})
+
+@staff_member_required(login_url='/login/')
+def edit_donation(request, pk):
+    from django.shortcuts import get_object_or_404
+    donation = get_object_or_404(Donation, pk=pk)
+    if request.method == 'POST':
+        form = DonationForm(request.POST, instance=donation)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Donation updated successfully!')
+            return redirect('manage_donations')
+    else:
+        form = DonationForm(instance=donation)
+    return render(request, 'edit_donation.html', {'form': form, 'donation': donation})
+
+@staff_member_required(login_url='/login/')
+def delete_donation(request, pk):
+    from django.shortcuts import get_object_or_404
+    donation = get_object_or_404(Donation, pk=pk)
+    if request.method == 'POST':
+        donation.delete()
+        messages.success(request, 'Donation deleted successfully!')
+        return redirect('manage_donations')
+    return render(request, 'confirm_delete.html', {'object_name': f"{donation.donor_name}'s Donation of ₹{donation.amount}", 'cancel_url': 'manage_donations'})
 
 @staff_member_required(login_url='/login/')
 def manage_expenses(request):
@@ -230,8 +284,32 @@ def manage_expenses(request):
     else:
         form = ExpenseForm()
     
-    expenses = Expense.objects.all()
+    expenses = Expense.objects.all().order_by('-date')
     return render(request, 'manage_expenses.html', {'form': form, 'expenses': expenses})
+
+@staff_member_required(login_url='/login/')
+def edit_expense(request, pk):
+    from django.shortcuts import get_object_or_404
+    expense = get_object_or_404(Expense, pk=pk)
+    if request.method == 'POST':
+        form = ExpenseForm(request.POST, instance=expense)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Expense updated successfully!')
+            return redirect('manage_expenses')
+    else:
+        form = ExpenseForm(instance=expense)
+    return render(request, 'edit_expense.html', {'form': form, 'expense': expense})
+
+@staff_member_required(login_url='/login/')
+def delete_expense(request, pk):
+    from django.shortcuts import get_object_or_404
+    expense = get_object_or_404(Expense, pk=pk)
+    if request.method == 'POST':
+        expense.delete()
+        messages.success(request, 'Expense deleted successfully!')
+        return redirect('manage_expenses')
+    return render(request, 'confirm_delete.html', {'object_name': f"Expense: {expense.title} (₹{expense.amount})", 'cancel_url': 'manage_expenses'})
 
 @staff_member_required(login_url='/login/')
 def manage_programs(request):
@@ -244,5 +322,29 @@ def manage_programs(request):
     else:
         form = ProgramForm()
     
-    programs = Program.objects.all()
+    programs = Program.objects.all().order_by('-date')
     return render(request, 'manage_programs.html', {'form': form, 'programs': programs})
+
+@staff_member_required(login_url='/login/')
+def edit_program(request, pk):
+    from django.shortcuts import get_object_or_404
+    program = get_object_or_404(Program, pk=pk)
+    if request.method == 'POST':
+        form = ProgramForm(request.POST, request.FILES, instance=program)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Updated successfully!')
+            return redirect('manage_programs')
+    else:
+        form = ProgramForm(instance=program)
+    return render(request, 'edit_program.html', {'form': form, 'program': program})
+
+@staff_member_required(login_url='/login/')
+def delete_program(request, pk):
+    from django.shortcuts import get_object_or_404
+    program = get_object_or_404(Program, pk=pk)
+    if request.method == 'POST':
+        program.delete()
+        messages.success(request, 'Deleted successfully!')
+        return redirect('manage_programs')
+    return render(request, 'confirm_delete.html', {'object_name': program.title, 'cancel_url': 'manage_programs'})

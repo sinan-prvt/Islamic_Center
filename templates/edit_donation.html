@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Donation - SKSSF Administration{% endblock %}
+
+{% block content %}
+<style>
+    .manage-section { padding: 4rem 0; background: #f8fafc; min-height: 80vh; }
+    .container-small { max-width: 600px; margin: 0 auto; }
+    .form-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .form-card h2 { font-size: 1.5rem; color: var(--text-main); margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
+    .form-control { width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; }
+    .form-control:focus { border-color: #10b981; outline: none; }
+    .btn-submit { width: 100%; padding: 1rem; background: #10b981; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 1rem; transition: background 0.3s; }
+    .btn-submit:hover { background: #059669; }
+    .btn-cancel { width: 100%; padding: 1rem; background: #94a3b8; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 0.5rem; display: block; text-align: center; text-decoration: none; }
+</style>
+
+<div class="manage-section">
+    <div class="container container-small">
+        <div class="form-card">
+            <h2><i class="fas fa-edit"></i> Edit Donation: {{ donation.donor_name }}</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group"><label>Donor Name</label>{{ form.donor_name }}</div>
+                <div class="form-group"><label>Fund Type</label>{{ form.donation_type }}</div>
+                <div class="form-group"><label>Amount (₹)</label>{{ form.amount }}</div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    {{ form.is_public }} <label style="margin: 0;">Show publicly on website?</label>
+                </div>
+                <button type="submit" class="btn-submit">Save Changes</button>
+                <a href="{% url 'manage_donations' %}" class="btn-cancel">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

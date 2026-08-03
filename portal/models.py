@@ -32,6 +32,7 @@ class Program(models.Model):
         ('relief', 'Relief Activity'),
         ('class', 'Islamic Class'),
         ('youth', 'Youth Program'),
+        ('news', 'News / Announcement'),
         ('other', 'Other'),
     )
     title = models.CharField(max_length=255)
@@ -60,18 +61,8 @@ class Gallery(models.Model):
         return self.title
 
 
-class News(models.Model):
-    title = models.CharField(max_length=255)
-    content = models.TextField()
-    date_published = models.DateTimeField(auto_now_add=True)
-    is_active = models.BooleanField(default=True)
 
-    class Meta:
-        ordering = ['-date_published']
-        verbose_name_plural = "News"
 
-    def __str__(self):
-        return self.title
 
 
 class Donation(models.Model):
@@ -79,7 +70,7 @@ class Donation(models.Model):
         ('monthly', 'Monthly Fund'),
         ('general', 'General Donation'),
     )
-    donor_name = models.CharField(max_length=255, default='Anonymous')
+    donor_name = models.CharField(max_length=255, default='Anubhavi')
     monthly_donor = models.ForeignKey(MonthlyDonor, on_delete=models.SET_NULL, null=True, blank=True, help_text="Link this donation to a registered monthly donor")
     donation_type = models.CharField(max_length=20, choices=DONATION_TYPES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -101,7 +92,7 @@ class Expense(models.Model):
         ('other', 'Other'),
     )
     title = models.CharField(max_length=255)
-    category = models.CharField(max_length=20, choices=EXPENSE_CATEGORIES)
+    category = models.CharField(max_length=255, help_text="Type or select a category")
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateField(auto_now_add=True)
     description = models.TextField(null=True, blank=True)

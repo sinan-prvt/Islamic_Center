@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Monthly Donor - SKSSF Administration{% endblock %}
+
+{% block content %}
+<style>
+    .manage-section { padding: 4rem 0; background: #f8fafc; min-height: 80vh; }
+    .container-small { max-width: 600px; margin: 0 auto; }
+    .form-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .form-card h2 { font-size: 1.5rem; color: var(--text-main); margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
+    .form-control { width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; }
+    .form-control:focus { border-color: #10b981; outline: none; }
+    .btn-submit { width: 100%; padding: 1rem; background: #10b981; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 1rem; transition: background 0.3s; }
+    .btn-submit:hover { background: #059669; }
+    .btn-cancel { width: 100%; padding: 1rem; background: #94a3b8; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 0.5rem; display: block; text-align: center; text-decoration: none; }
+</style>
+
+<div class="manage-section">
+    <div class="container container-small">
+        <div class="form-card">
+            <h2><i class="fas fa-edit"></i> Edit Donor: {{ donor.name }}</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group"><label>Full Name</label>{{ form.name }}</div>
+                <div class="form-group"><label>Phone Number</label>{{ form.phone }}</div>
+                <div class="form-group"><label>Monthly Commitment (₹)</label>{{ form.monthly_commitment }}</div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                    {{ form.is_active }} <label style="margin: 0;">Active Donor</label>
+                </div>
+                <button type="submit" class="btn-submit">Save Changes</button>
+                <a href="{% url 'manage_monthly_donors' %}" class="btn-cancel">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

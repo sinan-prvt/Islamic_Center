@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Member, Program, Gallery, News, Donation, Expense
+from .models import Member, Program, Gallery, Donation, Expense
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
@@ -19,11 +19,7 @@ class GalleryAdmin(admin.ModelAdmin):
     list_filter = ('date_uploaded',)
     search_fields = ('title',)
 
-@admin.register(News)
-class NewsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'date_published', 'is_active')
-    list_filter = ('is_active', 'date_published')
-    search_fields = ('title',)
+
 
 @admin.register(Donation)
 class DonationAdmin(admin.ModelAdmin):

@@ -156,11 +156,7 @@
                 <h2>Add New Donation</h2>
                 <form method="POST">
                     {% csrf_token %}
-                    
-                    <div class="form-group">
-                        <label for="{{ form.member.id_for_label }}">Link to Registered Member (Optional)</label>
-                        {{ form.member }}
-                    </div>
+
 
                     <div class="form-group">
                         <label for="{{ form.donor_name.id_for_label }}">Donor Name</label>
@@ -196,6 +192,7 @@
                             <th>Type</th>
                             <th>Amount</th>
                             <th>Public</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -212,10 +209,14 @@
                                 <i class="fas fa-times text-danger" style="color: #ef4444;"></i>
                                 {% endif %}
                             </td>
+                            <td>
+                                <a href="{% url 'edit_donation' donation.pk %}" style="color: #3b82f6; margin-right: 10px;" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'delete_donation' donation.pk %}" style="color: #ef4444;" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                         {% empty %}
                         <tr>
-                            <td colspan="5" style="text-align: center; padding: 2rem;">No donations recorded yet.</td>
+                            <td colspan="6" style="text-align: center; padding: 2rem;">No donations recorded yet.</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -236,7 +237,7 @@
                     const selectedText = this.options[this.selectedIndex].text;
                     const nameOnly = selectedText.split(' (')[0]; // Extract just the name before the phone number
                     
-                    if (donorNameInput.value === "" || donorNameInput.value === "Anonymous") {
+                    if (donorNameInput.value === "" || donorNameInput.value === "Anubhavi") {
                         donorNameInput.value = nameOnly;
                     }
                 }

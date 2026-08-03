@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Expense - SKSSF Administration{% endblock %}
+
+{% block content %}
+<style>
+    .manage-section { padding: 4rem 0; background: #f8fafc; min-height: 80vh; }
+    .container-small { max-width: 600px; margin: 0 auto; }
+    .form-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+    .form-card h2 { font-size: 1.5rem; color: var(--text-main); margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px;}
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
+    .form-control { width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; }
+    .form-control:focus { border-color: #ef4444; outline: none; }
+    .btn-submit { width: 100%; padding: 1rem; background: #ef4444; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 1rem; transition: background 0.3s; }
+    .btn-submit:hover { background: #dc2626; }
+    .btn-cancel { width: 100%; padding: 1rem; background: #94a3b8; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 0.5rem; display: block; text-align: center; text-decoration: none; }
+</style>
+
+<div class="manage-section">
+    <div class="container container-small">
+        <div class="form-card">
+            <h2><i class="fas fa-edit"></i> Edit Expense: {{ expense.title }}</h2>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group"><label>Title / Name</label>{{ form.title }}</div>
+                <div class="form-group">
+                    <label>Category</label>
+                    {{ form.category }}
+                    <datalist id="categoryOptions">
+                        <option value="Educational Program">
+                        <option value="Relief">
+                        <option value="Office">
+                        <option value="Event">
+                        <option value="Other">
+                    </datalist>
+                </div>
+                <div class="form-group"><label>Amount (₹)</label>{{ form.amount }}</div>
+                <div class="form-group"><label>Description</label>{{ form.description }}</div>
+                <button type="submit" class="btn-submit">Save Changes</button>
+                <a href="{% url 'manage_expenses' %}" class="btn-cancel">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

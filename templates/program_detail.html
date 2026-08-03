@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% block title %}{{ program.title }} - SKSSF Puthupparamba{% endblock %}
+
+{% block extra_head %}
+<style>
+    .detail-container {
+        max-width: 900px;
+        margin: 3rem auto;
+        padding: 0 1rem;
+    }
+    
+    .detail-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        overflow: hidden;
+    }
+    
+    .detail-banner {
+        width: 100%;
+        max-height: 500px;
+        object-fit: cover;
+        background: #f1f5f9;
+    }
+    
+    .detail-content {
+        padding: 3rem;
+    }
+    
+    .detail-badge {
+        display: inline-block;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+    }
+    .badge-news { background: #e0e7ff; color: #4338ca; }
+    .badge-event { background: #dcfce7; color: #166534; }
+    
+    .detail-title {
+        font-size: 2.2rem;
+        color: var(--text-main);
+        margin-bottom: 1rem;
+        font-weight: 800;
+    }
+    
+    .detail-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        color: #64748b;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid #f1f5f9;
+    }
+    .detail-meta i { color: #10b981; }
+    
+    .detail-body {
+        color: var(--text-muted);
+        line-height: 1.8;
+        font-size: 1.1rem;
+    }
+    
+    .back-btn {
+        display: inline-block;
+        margin-bottom: 2rem;
+        color: #64748b;
+        font-weight: 700;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .back-btn:hover { color: #10b981; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="page-banner">
+    <div class="banner-content">
+        <h1>{% if program.program_type == 'news' %}News Announcement{% else %}Event Details{% endif %}</h1>
+        <div class="breadcrumbs">
+            <a href="{% url 'home' %}">Home</a> | <a href="{% url 'news' %}">News & Events</a> | Details
+        </div>
+    </div>
+</div>
+
+<div class="container detail-container">
+    <a href="{% url 'news' %}" class="back-btn"><i class="fas fa-arrow-left"></i> Back to News & Events</a>
+    
+    <div class="detail-card">
+        {% if program.banner %}
+        <img src="{{ program.banner.url }}" alt="{{ program.title }}" class="detail-banner">
+        {% endif %}
+        
+        <div class="detail-content">
+            {% if program.program_type == 'news' %}
+            <span class="detail-badge badge-news">News</span>
+            {% else %}
+            <span class="detail-badge badge-event">Event</span>
+            {% endif %}
+            
+            <h2 class="detail-title">{{ program.title }}</h2>
+            
+            <div class="detail-meta">
+                <span><i class="far fa-calendar-alt"></i> {{ program.date|date:"F d, Y" }}</span>
+                {% if program.time %}<span><i class="far fa-clock"></i> {{ program.time }}</span>{% endif %}
+                {% if program.venue %}<span><i class="fas fa-map-marker-alt"></i> {{ program.venue }}</span>{% endif %}
+            </div>
+            
+            <div class="detail-body">
+                {{ program.description|linebreaks }}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -4,9 +4,8 @@ from .models import Donation, Expense, Program, Member, MonthlyDonor
 class DonationForm(forms.ModelForm):
     class Meta:
         model = Donation
-        fields = ['monthly_donor', 'donor_name', 'donation_type', 'amount', 'is_public']
+        fields = ['donor_name', 'donation_type', 'amount', 'is_public']
         widgets = {
-            'monthly_donor': forms.Select(attrs={'class': 'form-control', 'id': 'id_member_select'}),
             'donor_name': forms.TextInput(attrs={'class': 'form-control', 'id': 'id_donor_name'}),
             'donation_type': forms.Select(attrs={'class': 'form-control'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
@@ -19,7 +18,7 @@ class ExpenseForm(forms.ModelForm):
         fields = ['title', 'category', 'amount', 'description']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'category': forms.TextInput(attrs={'class': 'form-control', 'list': 'categoryOptions', 'placeholder': 'Select or type category...'}),
             'amount': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
             'description': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
         }

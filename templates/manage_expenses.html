@@ -45,7 +45,17 @@
                 <form method="POST">
                     {% csrf_token %}
                     <div class="form-group"><label>Title / Name</label>{{ form.title }}</div>
-                    <div class="form-group"><label>Category</label>{{ form.category }}</div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        {{ form.category }}
+                        <datalist id="categoryOptions">
+                            <option value="Educational Program">
+                            <option value="Relief">
+                            <option value="Office">
+                            <option value="Event">
+                            <option value="Other">
+                        </datalist>
+                    </div>
                     <div class="form-group"><label>Amount (₹)</label>{{ form.amount }}</div>
                     <div class="form-group"><label>Description (Optional)</label>{{ form.description }}</div>
                     <button type="submit" class="btn-submit">Log Expense</button>
@@ -60,6 +70,7 @@
                             <th>Title</th>
                             <th>Category</th>
                             <th>Amount</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,11 +78,15 @@
                         <tr>
                             <td>{{ exp.date }}</td>
                             <td style="font-weight: 600; color: var(--text-main);">{{ exp.title }}</td>
-                            <td><span style="background: #e2e8f0; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem;">{{ exp.get_category_display }}</span></td>
+                            <td><span style="background: #e2e8f0; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem;">{{ exp.category }}</span></td>
                             <td style="font-weight: 700; color: #ef4444;">₹{{ exp.amount }}</td>
+                            <td>
+                                <a href="{% url 'edit_expense' exp.pk %}" style="color: #3b82f6; margin-right: 10px;" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'delete_expense' exp.pk %}" style="color: #ef4444;" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                         {% empty %}
-                        <tr><td colspan="4" style="text-align: center; padding: 2rem;">No expenses logged yet.</td></tr>
+                        <tr><td colspan="5" style="text-align: center; padding: 2rem;">No expenses logged yet.</td></tr>
                         {% endfor %}
                     </tbody>
                 </table>

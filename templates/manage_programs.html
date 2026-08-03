@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Manage Programs - SKSSF Administration{% endblock %}
+{% block title %}Manage Programs & News - SKSSF Administration{% endblock %}
 
 {% block content %}
 <style>
@@ -29,7 +29,7 @@
     <div class="container">
         
         <div class="manage-header">
-            <h1><i class="fas fa-calendar-alt"></i> Manage Programs</h1>
+            <h1><i class="fas fa-bullhorn"></i> Manage Programs & News</h1>
             <a href="{% url 'dashboard' %}" class="btn-donate" style="background: var(--text-muted);">Back to Dashboard</a>
         </div>
 
@@ -41,7 +41,7 @@
 
         <div class="layout-grid">
             <div class="form-card">
-                <h2>Create New Program</h2>
+                <h2>Create New Program or News</h2>
                 <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="form-group"><label>Program Title</label>{{ form.title }}</div>
@@ -57,7 +57,7 @@
                         {{ form.is_upcoming }}
                         <label style="margin: 0;">Mark as Upcoming Program?</label>
                     </div>
-                    <button type="submit" class="btn-submit">Create Program</button>
+                    <button type="submit" class="btn-submit">Publish</button>
                 </form>
             </div>
 
@@ -66,27 +66,35 @@
                     <thead>
                         <tr>
                             <th>Date</th>
-                            <th>Title</th>
-                            <th>Venue</th>
+                            <th>Title/Type</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for prog in programs %}
                         <tr>
                             <td>{{ prog.date }}</td>
-                            <td style="font-weight: 600; color: var(--text-main);">{{ prog.title }}</td>
-                            <td>{{ prog.venue|default:"N/A" }}</td>
                             <td>
-                                {% if prog.is_upcoming %}
+                                <div style="font-weight: 600; color: var(--text-main);">{{ prog.title }}</div>
+                                <div style="font-size: 0.8rem; color: var(--text-muted);">{{ prog.get_program_type_display }}</div>
+                            </td>
+                            <td>
+                                {% if prog.program_type == 'news' %}
+                                <span style="background: #e0e7ff; color: #4338ca; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Published</span>
+                                {% elif prog.is_upcoming %}
                                 <span style="background: #dcfce7; color: #166534; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Upcoming</span>
                                 {% else %}
                                 <span style="background: #f1f5f9; color: #64748b; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem;">Past</span>
                                 {% endif %}
                             </td>
+                            <td>
+                                <a href="{% url 'edit_program' prog.pk %}" style="color: #3b82f6; margin-right: 10px;" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'delete_program' prog.pk %}" style="color: #ef4444;" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
                         </tr>
                         {% empty %}
-                        <tr><td colspan="4" style="text-align: center; padding: 2rem;">No programs created yet.</td></tr>
+                        <tr><td colspan="4" style="text-align: center; padding: 2rem;">No entries found.</td></tr>
                         {% endfor %}
                     </tbody>
                 </table>
