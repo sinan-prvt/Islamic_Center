@@ -118,10 +118,17 @@
                 
                 <!-- Hover Social Icons -->
                 <div class="social-overlay">
-                    <a href="#" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    {% if member.instagram %}
+                    <a href="{{ member.instagram }}" class="social-icon" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    {% endif %}
+                    {% if member.facebook %}
+                    <a href="{{ member.facebook }}" class="social-icon" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    {% endif %}
+                    {% if member.whatsapp %}
+                    <a href="https://wa.me/{{ member.whatsapp|urlencode }}" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    {% elif member.phone %}
                     <a href="https://wa.me/{{ member.phone|urlencode }}" class="social-icon" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    {% endif %}
                 </div>
             </div>
             

@@ -386,3 +386,27 @@ def delete_gallery(request, pk):
         messages.success(request, 'Deleted successfully!')
         return redirect('manage_gallery')
     return render(request, 'confirm_delete.html', {'object_name': image.title, 'cancel_url': 'manage_gallery'})
+
+@staff_member_required(login_url='/login/')
+def edit_member(request, pk):
+    from django.shortcuts import get_object_or_404
+    member = get_object_or_404(Member, pk=pk)
+    if request.method == 'POST':
+        form = MemberForm(request.POST, request.FILES, instance=member)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Member updated successfully!')
+            return redirect('manage_members')
+    else:
+        form = MemberForm(instance=member)
+    return render(request, 'edit_member.html', {'form': form, 'member': member})
+
+@staff_member_required(login_url='/login/')
+def delete_member(request, pk):
+    from django.shortcuts import get_object_or_404
+    member = get_object_or_404(Member, pk=pk)
+    if request.method == 'POST':
+        member.delete()
+        messages.success(request, 'Member deleted successfully!')
+        return redirect('manage_members')
+    return render(request, 'confirm_delete.html', {'object_name': member.name, 'cancel_url': 'manage_members'})

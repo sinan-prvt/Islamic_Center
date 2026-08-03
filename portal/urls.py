@@ -34,4 +34,6 @@ urlpatterns = [
     path('manage/gallery/', views.manage_gallery, name='manage_gallery'),
     path('manage/gallery/edit/<int:pk>/', views.edit_gallery, name='edit_gallery'),
     path('manage/gallery/delete/<int:pk>/', views.delete_gallery, name='delete_gallery'),
+    path('manage/members/edit/<int:pk>/', views.edit_member, name='edit_member'),
+    path('manage/members/delete/<int:pk>/', views.delete_member, name='delete_member'),
 ]

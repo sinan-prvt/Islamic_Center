@@ -41,13 +41,16 @@ class ProgramForm(forms.ModelForm):
 class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
-        fields = ['name', 'phone', 'role', 'order', 'photo']
+        fields = ['name', 'phone', 'role', 'order', 'photo', 'instagram', 'whatsapp', 'facebook']
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form-control'}),
             'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+91...'}),
             'role': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'e.g. Monthly Donor, Committee Member'}),
             'order': forms.NumberInput(attrs={'class': 'form-control'}),
             'photo': forms.FileInput(attrs={'class': 'form-control'}),
+            'instagram': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'https://instagram.com/...'}),
+            'whatsapp': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+91...'}),
+            'facebook': forms.URLInput(attrs={'class': 'form-control', 'placeholder': 'https://facebook.com/...'}),
         }
 
 class MonthlyDonorForm(forms.ModelForm):
