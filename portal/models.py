@@ -17,7 +17,7 @@ class Member(models.Model):
     role = models.CharField(max_length=100)
     phone = models.CharField(max_length=20)
     photo = models.ImageField(upload_to='committee/', null=True, blank=True)
-    order = models.PositiveIntegerField(default=0, help_text="Order in which they appear on the committee page")
+    order = models.PositiveIntegerField(default=999, help_text="Order in which they appear on the committee page")
     instagram = models.URLField(max_length=255, null=True, blank=True, help_text="Instagram Profile URL")
     whatsapp = models.CharField(max_length=20, null=True, blank=True, help_text="WhatsApp Number with country code")
     facebook = models.URLField(max_length=255, null=True, blank=True, help_text="Facebook Profile URL")

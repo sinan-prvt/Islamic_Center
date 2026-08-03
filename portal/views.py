@@ -197,11 +197,26 @@ def manage_monthly_donors(request):
     donors = MonthlyDonor.objects.all().order_by('-join_date')
     
     # Calculate Monthly Payment Status
-    from datetime import date
+    from datetime import date, datetime
     today = date.today()
-    current_month = today.month
-    current_year = today.year
-    month_name = today.strftime("%B %Y")
+    
+    selected_month_str = request.GET.get('month')
+    if selected_month_str:
+        try:
+            parsed_date = datetime.strptime(selected_month_str, "%Y-%m")
+            current_month = parsed_date.month
+            current_year = parsed_date.year
+            month_name = parsed_date.strftime("%B %Y")
+        except ValueError:
+            current_month = today.month
+            current_year = today.year
+            month_name = today.strftime("%B %Y")
+            selected_month_str = today.strftime("%Y-%m")
+    else:
+        current_month = today.month
+        current_year = today.year
+        month_name = today.strftime("%B %Y")
+        selected_month_str = today.strftime("%Y-%m")
     
     # Get all donations this month of type 'monthly'
     monthly_donations = Donation.objects.filter(
@@ -233,7 +248,8 @@ def manage_monthly_donors(request):
         'donors': donors,
         'paid_donors': paid_donors,
         'unpaid_donors': unpaid_donors,
-        'month_name': month_name
+        'month_name': month_name,
+        'selected_month': selected_month_str
     }
     return render(request, 'manage_monthly_donors.html', context)
 
