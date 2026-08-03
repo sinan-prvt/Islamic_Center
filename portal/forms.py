@@ -1,5 +1,5 @@
 from django import forms
-from .models import Donation, Expense, Program, Member, MonthlyDonor
+from .models import Donation, Expense, Program, Member, MonthlyDonor, Gallery
 
 class DonationForm(forms.ModelForm):
     class Meta:
@@ -59,4 +59,14 @@ class MonthlyDonorForm(forms.ModelForm):
             'phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': '+91...'}),
             'monthly_commitment': forms.NumberInput(attrs={'class': 'form-control', 'step': '0.01'}),
             'is_active': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+        }
+
+class GalleryForm(forms.ModelForm):
+    class Meta:
+        model = Gallery
+        fields = ['title', 'image', 'program']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'image': forms.FileInput(attrs={'class': 'form-control'}),
+            'program': forms.Select(attrs={'class': 'form-control'}),
         }

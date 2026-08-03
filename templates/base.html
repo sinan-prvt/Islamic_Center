@@ -450,7 +450,7 @@
             <a href="{% url 'manage_programs' %}" class="admin-nav-link {% if '/manage/programs/' in request.path %}active{% endif %}">
                 <i class="fas fa-calendar-alt icon-programs"></i> Programs & News
             </a>
-            <a href="{% url 'admin:portal_gallery_changelist' %}" class="admin-nav-link {% if 'gallery' in request.path and 'admin' in request.path %}active{% endif %}">
+            <a href="{% url 'manage_gallery' %}" class="admin-nav-link {% if '/manage/gallery/' in request.path %}active{% endif %}">
                 <i class="fas fa-images icon-gallery"></i> Gallery
             </a>
             <a href="{% url 'manage_members' %}" class="admin-nav-link {% if '/manage/members/' in request.path %}active{% endif %}">

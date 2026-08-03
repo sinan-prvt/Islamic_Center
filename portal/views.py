@@ -179,7 +179,7 @@ def dashboard(request):
     return render(request, 'dashboard.html', context)
 
 from django.contrib.admin.views.decorators import staff_member_required
-from .forms import DonationForm, ExpenseForm, ProgramForm, MemberForm, MonthlyDonorForm
+from .forms import DonationForm, ExpenseForm, ProgramForm, MemberForm, MonthlyDonorForm, GalleryForm
 from django.contrib import messages
 from .models import MonthlyDonor
 
@@ -348,3 +348,41 @@ def delete_program(request, pk):
         messages.success(request, 'Deleted successfully!')
         return redirect('manage_programs')
     return render(request, 'confirm_delete.html', {'object_name': program.title, 'cancel_url': 'manage_programs'})
+
+@staff_member_required(login_url='/login/')
+def manage_gallery(request):
+    if request.method == 'POST':
+        form = GalleryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Image added to gallery!')
+            return redirect('manage_gallery')
+    else:
+        form = GalleryForm()
+    
+    images = Gallery.objects.all().order_by('-date_uploaded')
+    return render(request, 'manage_gallery.html', {'form': form, 'images': images})
+
+@staff_member_required(login_url='/login/')
+def edit_gallery(request, pk):
+    from django.shortcuts import get_object_or_404
+    image = get_object_or_404(Gallery, pk=pk)
+    if request.method == 'POST':
+        form = GalleryForm(request.POST, request.FILES, instance=image)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Updated successfully!')
+            return redirect('manage_gallery')
+    else:
+        form = GalleryForm(instance=image)
+    return render(request, 'edit_gallery.html', {'form': form, 'image': image})
+
+@staff_member_required(login_url='/login/')
+def delete_gallery(request, pk):
+    from django.shortcuts import get_object_or_404
+    image = get_object_or_404(Gallery, pk=pk)
+    if request.method == 'POST':
+        image.delete()
+        messages.success(request, 'Deleted successfully!')
+        return redirect('manage_gallery')
+    return render(request, 'confirm_delete.html', {'object_name': image.title, 'cancel_url': 'manage_gallery'})

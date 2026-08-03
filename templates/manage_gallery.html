@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Gallery - SKSSF Administration{% endblock %}
+
+{% block content %}
+<style>
+    .manage-section { padding: 4rem 0; background: #f8fafc; min-height: 80vh; }
+    .manage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #e2e8f0; }
+    .manage-header h1 { font-size: 2rem; color: var(--text-main); display: flex; align-items: center; gap: 15px; }
+    .manage-header h1 i { color: #f59e0b; }
+    .layout-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 2rem; }
+    .form-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 2rem; }
+    .form-card h2 { font-size: 1.2rem; color: var(--text-main); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
+    .form-control { width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; }
+    .form-control:focus { border-color: #f59e0b; outline: none; }
+    .list-card { background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; padding: 2rem;}
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th, .data-table td { padding: 1rem 1.5rem; text-align: left; border-bottom: 1px solid #f1f5f9; }
+    .data-table th { background: #f8fafc; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+    .data-table tr:hover { background: #fcfcfc; }
+    .btn-submit { width: 100%; padding: 1rem; background: #f59e0b; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 1rem; }
+    .btn-submit:hover { background: #d97706; }
+    .alert { padding: 1rem; background: #dcfce7; color: #166534; border-radius: 8px; margin-bottom: 2rem; }
+    
+    .gallery-img { width: 80px; height: 60px; object-fit: cover; border-radius: 6px; border: 1px solid #e2e8f0; }
+</style>
+
+<div class="manage-section">
+    <div class="container">
+        
+        <div class="manage-header">
+            <h1><i class="fas fa-images"></i> Manage Gallery</h1>
+            <a href="{% url 'dashboard' %}" class="btn-donate" style="background: var(--text-muted);">Back to Dashboard</a>
+        </div>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert"><i class="fas fa-check-circle"></i> {{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="layout-grid">
+            <div class="form-card">
+                <h2>Upload New Image</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group"><label>Title / Caption</label>{{ form.title }}</div>
+                    <div class="form-group"><label>Image File</label>{{ form.image }}</div>
+                    <div class="form-group"><label>Link to Program (Optional)</label>{{ form.program }}</div>
+                    <button type="submit" class="btn-submit">Upload Image</button>
+                </form>
+            </div>
+
+            <div class="list-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Title / Caption</th>
+                            <th>Date Uploaded</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for img in images %}
+                        <tr>
+                            <td><img src="{{ img.image.url }}" class="gallery-img" alt="{{ img.title }}"></td>
+                            <td>
+                                <div style="font-weight: 600; color: var(--text-main);">{{ img.title }}</div>
+                                {% if img.program %}<div style="font-size: 0.8rem; color: var(--text-muted);">Linked: {{ img.program.title }}</div>{% endif %}
+                            </td>
+                            <td>{{ img.date_uploaded|date:"M d, Y" }}</td>
+                            <td>
+                                <a href="{% url 'edit_gallery' img.pk %}" style="color: #3b82f6; margin-right: 10px;" title="Edit"><i class="fas fa-edit"></i></a>
+                                <a href="{% url 'delete_gallery' img.pk %}" style="color: #ef4444;" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr><td colspan="4" style="text-align: center; padding: 2rem;">No images uploaded yet.</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

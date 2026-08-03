@@ -20,11 +20,6 @@
         transform: translateY(-5px);
         box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
-    .gallery-img-container {
-        width: 100%;
-        height: 240px;
-        overflow: hidden;
-    }
     .gallery-item img {
         width: 100%;
         height: 100%;
@@ -33,6 +28,28 @@
     }
     .gallery-item:hover img {
         transform: scale(1.05);
+    }
+    .gallery-overlay {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.4);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; transition: opacity 0.3s ease;
+        cursor: pointer;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .view-btn {
+        background: white; color: var(--text-main);
+        padding: 10px 20px; border-radius: 25px;
+        font-weight: 700; display: flex; align-items: center; gap: 8px;
+        transform: translateY(20px); transition: transform 0.3s ease;
+    }
+    .gallery-item:hover .view-btn { transform: translateY(0); }
+    .gallery-img-container {
+        width: 100%;
+        height: 240px;
+        overflow: hidden;
+        position: relative;
     }
     .gallery-content {
         padding: 1.5rem;
@@ -47,6 +64,36 @@
         color: var(--primary);
         font-size: 0.9rem;
         font-weight: 600;
+    }
+    /* Modal Styling */
+    .modal-overlay {
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.85); z-index: 1000;
+        display: none; align-items: center; justify-content: center;
+        padding: 2rem; backdrop-filter: blur(4px);
+    }
+    .modal-content-box {
+        position: relative; max-width: 1000px; width: 100%;
+        display: flex; flex-direction: column; align-items: center;
+        animation: modalFadeIn 0.3s;
+    }
+    @keyframes modalFadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .modal-close {
+        position: absolute; top: -40px; right: 0;
+        background: none; color: white; border: none;
+        font-size: 2rem; cursor: pointer; transition: color 0.3s;
+    }
+    .modal-close:hover { color: #f59e0b; }
+    .modal-img {
+        max-width: 100%; max-height: 80vh; object-fit: contain;
+        border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .modal-caption {
+        color: white; font-size: 1.2rem; font-weight: 600;
+        margin-top: 1rem; text-align: center;
     }
 </style>
 {% endblock %}
@@ -64,8 +111,11 @@
     <div class="gallery-grid">
         {% for image in images %}
         <div class="gallery-item">
-            <div class="gallery-img-container">
+            <div class="gallery-img-container" onclick="openGalleryModal(`{{ image.image.url }}`, `{{ image.title|escapejs }}`)">
                 <img src="{{ image.image.url }}" alt="{{ image.title }}">
+                <div class="gallery-overlay">
+                    <div class="view-btn"><i class="fas fa-search-plus"></i> View Image</div>
+                </div>
             </div>
             <div class="gallery-content">
                 <h3>{{ image.title }}</h3>
@@ -112,7 +162,10 @@
             </div>
         </div>
         <div class="gallery-item">
-            <div class="gallery-img-container"><img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=600&h=400&fit=crop" alt="Award Ceremony"></div>
+            <div class="gallery-img-container" onclick="openGalleryModal('https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=1200&h=800&fit=crop', 'Excellence Awards 2024')">
+                <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=600&h=400&fit=crop" alt="Award Ceremony">
+                <div class="gallery-overlay"><div class="view-btn"><i class="fas fa-search-plus"></i> View Image</div></div>
+            </div>
             <div class="gallery-content">
                 <h3>Excellence Awards 2024</h3>
                 <p><i class="fas fa-camera-retro"></i> Other</p>
@@ -121,4 +174,29 @@
         {% endfor %}
     </div>
 </div>
+
+<!-- Lightbox Modal -->
+<div class="modal-overlay" id="galleryModal" onclick="closeGalleryModal(event)">
+    <div class="modal-content-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeGalleryModal()">&times;</button>
+        <img id="galleryModalImg" src="" class="modal-img">
+        <div id="galleryModalCaption" class="modal-caption"></div>
+    </div>
+</div>
+
+<script>
+    function openGalleryModal(imgUrl, caption) {
+        document.getElementById('galleryModalImg').src = imgUrl;
+        document.getElementById('galleryModalCaption').innerText = caption;
+        document.getElementById('galleryModal').style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeGalleryModal(e) {
+        if(e && e.target !== document.getElementById('galleryModal') && e.currentTarget !== document.querySelector('.modal-close')) return;
+        document.getElementById('galleryModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+        document.getElementById('galleryModalImg').src = '';
+    }
+</script>
 {% endblock %}
