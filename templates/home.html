@@ -378,6 +378,23 @@
         .about-section, .pillars-section, .news-section {
             padding: 2.5rem 0 !important;
         }
+
+        /* Instagram Grid Mobile */
+        .instagram-grid {
+            grid-template-columns: 1fr 1fr !important;
+            gap: 1rem !important;
+        }
+
+        .instagram-grid > div:nth-child(n+3) {
+            display: none !important;
+        }
+    }
+
+    .instagram-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        justify-items: center;
     }
 </style>
 {% endblock %}
@@ -458,7 +475,7 @@
         <h2 class="section-title">Latest on Instagram</h2>
         <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem; font-size: 1.1rem;">Catch up on our latest events, inspiring reels, and community highlights directly from our feed.</p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; justify-items: center;">
+        <div class="instagram-grid">
             
             <!-- Reel 1 -->
             <div style="width: 100%; max-width: 320px; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
