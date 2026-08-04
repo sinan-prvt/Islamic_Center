@@ -425,14 +425,16 @@
             display: block; /* Overrides flex */
         }
 
-        .top-contact, .top-links {
-            display: none; /* Hide complex elements on mobile */
+        .top-contact {
+            flex-direction: column;
+            gap: 2px;
+            align-items: center;
         }
-        
-        .top-bar::after {
-            content: "SUPPORT OUR COMMUNITY PROGRAMS! DONATE NOW";
-            font-weight: 700;
-            letter-spacing: 1px;
+
+        .top-links {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem;
         }
         
         .main-header {
