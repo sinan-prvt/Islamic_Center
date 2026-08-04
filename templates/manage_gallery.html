@@ -50,11 +50,7 @@
             <a href="{% url 'dashboard' %}" class="btn-donate" style="background: var(--text-muted);">Back to Dashboard</a>
         </div>
 
-        {% if messages %}
-        {% for message in messages %}
-        <div class="alert"><i class="fas fa-check-circle"></i> {{ message }}</div>
-        {% endfor %}
-        {% endif %}
+
 
         <div class="layout-grid">
             <div class="form-card">

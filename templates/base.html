@@ -610,6 +610,42 @@
             font-size: 0.8rem !important;
         }
         
+        /* Modern Toast Notification */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modern-toast {
+            background: white;
+            color: var(--text-main);
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            transform: translateX(120%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 4px solid #10b981;
+        }
+
+        .modern-toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .modern-toast.error { border-left-color: #ef4444; }
+        .modern-toast.warning { border-left-color: #f59e0b; }
+        .modern-toast.info { border-left-color: #3b82f6; }
+        
         /* Global layout fixes for admin pages on mobile */
         .layout-grid {
             grid-template-columns: 1fr !important;
@@ -848,7 +884,34 @@
                 }
             });
         }
+
+        // Modern Toast Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const toasts = document.querySelectorAll('.modern-toast');
+            toasts.forEach((toast, index) => {
+                setTimeout(() => {
+                    toast.classList.add('show');
+                    // Auto dismiss after 4 seconds
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                        setTimeout(() => toast.remove(), 400);
+                    }, 4000);
+                }, index * 200);
+            });
+        });
     </script>
+    
+    <!-- Global Toast Notifications -->
+    <div class="toast-container" id="toast-container">
+        {% if messages %}
+            {% for message in messages %}
+            <div class="modern-toast {% if message.tags %}{{ message.tags }}{% endif %}">
+                <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle{% elif message.tags == 'warning' %}fa-exclamation-triangle{% elif message.tags == 'info' %}fa-info-circle{% else %}fa-check-circle{% endif %}" style="font-size: 1.2rem; {% if message.tags == 'error' %}color: #ef4444;{% elif message.tags == 'warning' %}color: #f59e0b;{% elif message.tags == 'info' %}color: #3b82f6;{% else %}color: #10b981;{% endif %}"></i>
+                <span>{{ message }}</span>
+            </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 </body>
 
 </html>
