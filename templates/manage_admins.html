@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Admin Users - SKSSF Administration{% endblock %}
+
+{% block content %}
+<style>
+    .manage-section { padding: 4rem 0; background: #f8fafc; min-height: 80vh; }
+    .manage-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid #e2e8f0; }
+    .manage-header h1 { font-size: 2rem; color: var(--text-main); display: flex; align-items: center; gap: 15px; }
+    .manage-header h1 i { color: var(--primary); }
+    .layout-grid { display: grid; grid-template-columns: 1fr 2.5fr; gap: 2rem; }
+    .form-card { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); height: fit-content; position: sticky; top: 2rem; }
+    .form-card h2 { font-size: 1.2rem; color: var(--text-main); margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.2rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-muted); font-size: 0.9rem; }
+    .form-control { width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; }
+    .form-control:focus { border-color: var(--primary); outline: none; }
+    .list-card { background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; }
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th, .data-table td { padding: 1rem 1.5rem; text-align: left; border-bottom: 1px solid #f1f5f9; }
+    .data-table th { background: #f8fafc; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+    .data-table tr:hover { background: #fcfcfc; }
+    .btn-submit { width: 100%; padding: 1rem; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 1rem; }
+    .btn-submit:hover { background: #064e3b; }
+
+    @media (max-width: 768px) {
+        .layout-grid {
+            grid-template-columns: 1fr;
+        }
+        .data-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .manage-header h1 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="manage-section">
+    <div class="container">
+        
+        <div class="manage-header">
+            <h1><i class="fas fa-user-shield"></i> Manage Admin Users</h1>
+            <a href="{% url 'dashboard' %}" class="btn-donate" style="background: var(--text-muted);">Back to Dashboard</a>
+        </div>
+
+        <div class="layout-grid">
+            <div class="form-card">
+                <h2>Add New Admin</h2>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group"><label>Username</label>{{ form.username }}</div>
+                    <div class="form-group"><label>First Name</label>{{ form.first_name }}</div>
+                    <div class="form-group"><label>Last Name</label>{{ form.last_name }}</div>
+                    <div class="form-group"><label>Email</label>{{ form.email }}</div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        {{ form.password }}
+                        <small style="color: var(--text-muted); display: block; margin-top: 5px;">Required for new admins.</small>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Add Admin</button>
+                </form>
+            </div>
+
+            <div class="list-card">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for admin in admins %}
+                        <tr>
+                            <td style="font-weight: 600;">{{ admin.username }}</td>
+                            <td>{{ admin.get_full_name }}</td>
+                            <td>{{ admin.email }}</td>
+                            <td style="display: flex; gap: 10px;">
+                                <a href="{% url 'edit_admin' admin.id %}" class="admin-quick-action-btn" style="background: #3b82f6; color: white;"><i class="fas fa-edit"></i></a>
+                                {% if request.user.pk != admin.pk %}
+                                <a href="{% url 'delete_admin' admin.id %}" class="admin-quick-action-btn" style="background: #ef4444; color: white;"><i class="fas fa-trash"></i></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: var(--text-muted);">No admin users found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

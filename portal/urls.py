@@ -37,4 +37,7 @@ urlpatterns = [
     path('manage/gallery/delete/<int:pk>/', views.delete_gallery, name='delete_gallery'),
     path('manage/members/edit/<int:pk>/', views.edit_member, name='edit_member'),
     path('manage/members/delete/<int:pk>/', views.delete_member, name='delete_member'),
+    path('manage/admins/', views.manage_admins, name='manage_admins'),
+    path('manage/admins/edit/<int:pk>/', views.edit_admin, name='edit_admin'),
+    path('manage/admins/delete/<int:pk>/', views.delete_admin, name='delete_admin'),
 ]

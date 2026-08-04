@@ -794,6 +794,9 @@
                 <a href="{% url 'manage_members' %}" class="admin-nav-link {% if '/manage/members/' in request.path %}active{% endif %}">
                     <i class="fas fa-users icon-members"></i> Members
                 </a>
+                <a href="{% url 'manage_admins' %}" class="admin-nav-link {% if '/manage/admins/' in request.path %}active{% endif %}">
+                    <i class="fas fa-user-shield" style="color: #6366f1;"></i> Admin Users
+                </a>
                 <form action="{% url 'logout' %}" method="post" style="margin: 0; padding: 0; width: 100%;">
                     {% csrf_token %}
                     <button type="submit" class="admin-logout" style="border: none; cursor: pointer; font-family: inherit; width: 100%;">

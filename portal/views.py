@@ -492,3 +492,47 @@ def delete_member(request, pk):
         messages.success(request, 'Member deleted successfully!')
         return redirect('manage_members')
     return render(request, 'confirm_delete.html', {'object_name': member.name, 'cancel_url': 'manage_members'})
+
+from .forms import AdminUserForm
+
+@staff_member_required(login_url='/login/')
+def manage_admins(request):
+    admins = User.objects.filter(is_staff=True).order_by('username')
+    if request.method == 'POST':
+        form = AdminUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Admin user added successfully!')
+            return redirect('manage_admins')
+    else:
+        form = AdminUserForm()
+    return render(request, 'manage_admins.html', {'admins': admins, 'form': form})
+
+@staff_member_required(login_url='/login/')
+def edit_admin(request, pk):
+    from django.shortcuts import get_object_or_404
+    admin_user = get_object_or_404(User, pk=pk, is_staff=True)
+    if request.method == 'POST':
+        form = AdminUserForm(request.POST, instance=admin_user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Admin user updated successfully!')
+            return redirect('manage_admins')
+    else:
+        form = AdminUserForm(instance=admin_user)
+    return render(request, 'edit_admin.html', {'form': form, 'admin_user': admin_user})
+
+@staff_member_required(login_url='/login/')
+def delete_admin(request, pk):
+    from django.shortcuts import get_object_or_404
+    admin_user = get_object_or_404(User, pk=pk, is_staff=True)
+    
+    if request.user.pk == admin_user.pk:
+        messages.error(request, 'You cannot delete yourself!')
+        return redirect('manage_admins')
+        
+    if request.method == 'POST':
+        admin_user.delete()
+        messages.success(request, 'Admin user deleted successfully!')
+        return redirect('manage_admins')
+    return render(request, 'confirm_delete.html', {'object_name': admin_user.username, 'cancel_url': 'manage_admins'})

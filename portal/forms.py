@@ -75,3 +75,30 @@ class GalleryForm(forms.ModelForm):
             'image': forms.FileInput(attrs={'class': 'form-control'}),
             'program': forms.Select(attrs={'class': 'form-control'}),
         }
+
+from django.contrib.auth.models import User
+
+class AdminUserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), required=False, help_text="Leave blank to keep the current password.")
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email']
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        password = self.cleaned_data.get('password')
+        if password:
+            user.set_password(password)
+        # Ensure the user is an admin
+        user.is_staff = True
+        user.is_superuser = True
+        if commit:
+            user.save()
+        return user
