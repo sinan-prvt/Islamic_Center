@@ -488,13 +488,18 @@
 
         .main-nav {
             display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
             width: 100%;
             flex-direction: column;
             gap: 0;
-            margin-top: 1rem;
-            background: #f8fafc;
-            border-radius: var(--radius-sm);
+            margin-top: 0;
+            background: #ffffff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 0 0 16px 16px;
             overflow: hidden;
+            border-top: 1px solid #e2e8f0;
         }
 
         .main-nav.active {
@@ -502,9 +507,11 @@
         }
 
         .main-nav a {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            text-align: center;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+            text-align: left;
+            font-size: 1.05rem;
+            color: #1e293b;
         }
 
         .main-nav a:last-child {
@@ -517,10 +524,12 @@
 
         .btn-donate.mobile-show {
             display: block;
-            width: 100%;
+            width: auto;
+            margin: 1rem 1.5rem;
             text-align: center;
-            margin-top: 10px;
-            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 1.1rem;
         }
         
         /* Global layout fixes for admin pages on mobile */
