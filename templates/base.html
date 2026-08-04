@@ -408,46 +408,57 @@
     }
 
     @media (max-width: 900px) {
+        body, html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
         .top-bar {
             flex-direction: column;
-            gap: 5px;
-            padding: 10px 5%;
+            gap: 4px;
+            padding: 8px 5%;
+            font-size: 0.75rem;
         }
 
         .top-contact {
             flex-direction: column;
-            gap: 5px;
+            gap: 2px;
             align-items: center;
         }
 
         .top-links {
             flex-wrap: wrap;
             justify-content: center;
+            gap: 0.25rem;
+        }
+
+        .top-links a {
+            padding: 0.1rem 0.5rem;
         }
         
         .main-header {
-            flex-wrap: wrap;
-            padding: 0.75rem 5%;
+            flex-wrap: nowrap; /* Prevent hamburger from dropping to next line */
+            padding: 0.5rem 5%;
         }
 
         .logo-area {
             flex: 1;
             min-width: 0; /* allows text truncation if necessary */
-            gap: 10px;
+            gap: 8px;
         }
 
         .logo-area img {
-            height: 40px;
+            height: 35px;
         }
 
         .logo-text h2 {
-            font-size: 13px;
-            line-height: 1.2;
+            font-size: 11px;
+            line-height: 1.1;
             white-space: normal;
         }
 
         .logo-text p {
-            font-size: 10px;
+            font-size: 9px;
         }
 
         .menu-toggle {
