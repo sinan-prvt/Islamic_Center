@@ -16,7 +16,7 @@
     .form-control { width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: inherit; }
     .form-control:focus { border-color: #10b981; outline: none; }
     .list-card { background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); overflow: hidden; }
-    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table { width: 100%; border-collapse: collapse; white-space: nowrap; }
     .data-table th, .data-table td { padding: 1rem 1.5rem; text-align: left; border-bottom: 1px solid #f1f5f9; }
     .data-table th { background: #f8fafc; font-weight: 700; color: var(--text-muted); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
     .data-table tr:hover { background: #fcfcfc; }
@@ -32,6 +32,19 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; animation: fadeIn 0.4s; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    
+    @media (max-width: 768px) {
+        .manage-header { flex-direction: column; align-items: stretch; gap: 1rem; text-align: center; }
+        .manage-header h1 { font-size: 1.5rem; justify-content: center; }
+        .tabs-nav { flex-direction: column; border-bottom: none; gap: 0.5rem; }
+        .tab-btn { border: 1px solid #e2e8f0; border-radius: 8px; text-align: center; padding: 0.8rem; border-bottom: 1px solid #e2e8f0; }
+        .tab-btn.active { border-color: #10b981; background: #ecfdf5; border-bottom: 2px solid #10b981; }
+        #tracker .manage-header { align-items: flex-start; text-align: left; }
+        #tracker .manage-header h2 { font-size: 1.25rem !important; align-items: flex-start; flex-wrap: wrap; }
+        #tracker .manage-header form { width: 100%; flex-direction: column; align-items: stretch !important; gap: 0.5rem; }
+        #tracker .manage-header form input { width: 100% !important; }
+        .layout-grid { grid-template-columns: 1fr !important; }
+    }
 </style>
 
 <div class="manage-section">
