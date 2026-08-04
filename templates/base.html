@@ -439,6 +439,7 @@
         .main-header {
             flex-wrap: nowrap; /* Prevent hamburger from dropping to next line */
             padding: 0.5rem 5%;
+            justify-content: space-between;
         }
 
         .logo-area {
@@ -449,16 +450,26 @@
 
         .logo-area img {
             height: 35px;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            flex: 1;
+            min-width: 0; /* CRITICAL: Allows the text block to shrink and wrap */
         }
 
         .logo-text h2 {
             font-size: 11px;
-            line-height: 1.1;
+            line-height: 1.2;
             white-space: normal;
+            word-wrap: break-word;
         }
 
         .logo-text p {
             font-size: 9px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .menu-toggle {
