@@ -3,113 +3,15 @@
 {% block title %}Admin Login - SKSSF Puthupparamba{% endblock %}
 
 {% block content %}
-<style>
-    .login-section {
-        padding: 6rem 0;
-        background: #f8fafc;
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .login-card {
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        padding: 3rem;
-        width: 100%;
-        max-width: 450px;
-    }
-
-    .login-header {
-        text-align: center;
-        margin-bottom: 2.5rem;
-    }
-
-    .login-header i {
-        font-size: 3rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-    }
-
-    .login-header h2 {
-        color: var(--text-main);
-        font-size: 1.4rem;
-        margin: 0;
-    }
-
-    .form-group {
-        margin-bottom: 1.5rem;
-    }
-
-    .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        color: var(--text-main);
-        font-weight: 600;
-    }
-
-    .form-control {
-        width: 100%;
-        padding: 0.8rem 1rem;
-        border: 1px solid #e2e8f0;
-        border-radius: 6px;
-        font-size: 1rem;
-        transition: border-color 0.3s ease;
-    }
-
-    .form-control:focus {
-        outline: none;
-        border-color: var(--primary);
-    }
-
-    .btn-login {
-        width: 100%;
-        padding: 1rem;
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 6px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        margin-top: 1rem;
-    }
-
-    .btn-login:hover {
-        background: #064e3b; /* A darker shade of primary */
-    }
-
-    .error-msg {
-        background: #fef2f2;
-        color: #ef4444;
-        padding: 1rem;
-        border-radius: 6px;
-        margin-bottom: 1.5rem;
-        font-size: 0.9rem;
-        text-align: center;
-    }
-
-    @media (max-width: 768px) {
-        .login-card {
-            padding: 2rem 1.5rem;
-            width: calc(100% - 2rem);
-            margin: 0 1rem;
-        }
-    }
-</style>
-
-<div class="login-section">
-    <div class="login-card">
-        <div class="login-header">
-            <i class="fas fa-lock"></i>
-            <h2>Admin Secure Login</h2>
+<div class="py-24 bg-slate-50 min-h-[70vh] flex items-center justify-center">
+    <div class="bg-white rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-8 md:p-12 w-full max-w-[450px] mx-4 md:mx-auto">
+        <div class="text-center mb-10">
+            <i class="fas fa-lock text-[3rem] text-primary mb-4 block"></i>
+            <h2 class="text-textmain text-[1.4rem] m-0 font-bold">Admin Secure Login</h2>
         </div>
 
         {% if form.errors %}
-        <div class="error-msg">
+        <div class="bg-red-50 text-red-500 p-4 rounded-md mb-6 text-[0.9rem] text-center font-semibold">
             Your username and password didn't match. Please try again.
         </div>
         {% endif %}
@@ -117,17 +19,17 @@
         <form method="post" action="{% url 'login' %}" id="loginForm">
             {% csrf_token %}
             
-            <div class="form-group">
-                <label for="id_username">Username</label>
-                <input type="text" name="username" class="form-control" id="id_username" required autofocus>
+            <div class="mb-6">
+                <label for="id_username" class="block mb-2 text-textmain font-bold">Username</label>
+                <input type="text" name="username" class="w-full px-4 py-3 border border-slate-200 rounded-md text-base transition-colors focus:outline-none focus:border-primary" id="id_username" required autofocus>
             </div>
             
-            <div class="form-group">
-                <label for="id_password">Password</label>
-                <input type="password" name="password" class="form-control" id="id_password" required>
+            <div class="mb-6">
+                <label for="id_password" class="block mb-2 text-textmain font-bold">Password</label>
+                <input type="password" name="password" class="w-full px-4 py-3 border border-slate-200 rounded-md text-base transition-colors focus:outline-none focus:border-primary" id="id_password" required>
             </div>
 
-            <button type="submit" class="btn-login" id="login-btn">Login to Dashboard</button>
+            <button type="submit" class="w-full p-4 bg-primary text-white border-none rounded-md text-[1.1rem] font-bold cursor-pointer transition-colors hover:bg-[#064e3b] mt-4" id="login-btn">Login to Dashboard</button>
             <input type="hidden" name="next" value="{{ next|default:'/dashboard/' }}">
         </form>
     </div>
@@ -136,7 +38,7 @@
 <script>
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     var btn = document.getElementById('login-btn');
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
     btn.style.opacity = '0.7';
     btn.style.pointerEvents = 'none';
 });

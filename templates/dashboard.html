@@ -7,275 +7,76 @@
 <!-- Include Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
-    .dashboard-header {
-        background: linear-gradient(135deg, #045a33, #064e3b);
-        color: white;
-        padding: 4rem 0 3rem 0;
-        text-align: center;
-        margin-bottom: -3rem;
-    }
-    
-    .dashboard-title {
-        font-size: 2.8rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-    }
-
-    .dashboard-subtitle {
-        font-size: 1.2rem;
-        opacity: 0.9;
-        max-width: 600px;
-        margin: 0 auto;
-    }
-
-    .dashboard-container {
-        padding: 0 1rem;
-        position: relative;
-        z-index: 2;
-    }
-
-    /* Stat Cards */
-    .stat-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-    }
-
-    .stat-card {
-        background: white;
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        display: flex;
-        align-items: center;
-        transition: transform 0.3s ease;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .stat-icon {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: #f0fdf4;
-        color: var(--primary);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.8rem;
-        margin-right: 1.5rem;
-    }
-
-    .stat-info h3 {
-        font-size: 0.95rem;
-        color: var(--text-muted);
-        margin-bottom: 0.3rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-
-    .stat-info p {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: var(--text-main);
-        margin: 0;
-    }
-
-    /* Dashboard Layout */
-    .dashboard-layout {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-        margin-bottom: 4rem;
-    }
-
-    .card {
-        background: white;
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-    }
-
-    .card-title {
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: var(--text-main);
-        margin-bottom: 1.5rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #f1f5f9;
-        display: flex;
-        align-items: center;
-    }
-
-    .card-title i {
-        color: var(--primary);
-        margin-right: 10px;
-    }
-
-    /* List Items */
-    .list-group {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .list-item {
-        display: flex;
-        align-items: center;
-        padding: 1rem 0;
-        border-bottom: 1px solid #f8fafc;
-    }
-
-    .list-item:last-child {
-        border-bottom: none;
-    }
-
-    .item-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 8px;
-        background: #f1f5f9;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 1rem;
-        color: var(--primary);
-    }
-
-    .item-details h4 {
-        margin: 0 0 0.2rem 0;
-        font-size: 1rem;
-        color: var(--text-main);
-    }
-
-    .item-details p {
-        margin: 0;
-        font-size: 0.85rem;
-        color: var(--text-muted);
-    }
-
-    .item-amount {
-        margin-left: auto;
-        font-weight: 700;
-        color: #10b981;
-    }
-    .item-amount.expense {
-        color: #ef4444;
-    }
-
-    @media (max-width: 992px) {
-        .dashboard-layout {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .dashboard-title {
-            font-size: 1.8rem;
-        }
-        .dashboard-subtitle {
-            font-size: 1rem;
-        }
-        .stat-card {
-            padding: 1.2rem;
-        }
-        .stat-icon {
-            width: 45px;
-            height: 45px;
-            font-size: 1.3rem;
-            margin-right: 1rem;
-        }
-        .stat-info p {
-            font-size: 1.4rem;
-        }
-        .stat-info h3 {
-            font-size: 0.8rem;
-        }
-        .card {
-            padding: 1.2rem;
-        }
-        .chart-container {
-            height: 220px !important;
-        }
-    }
-</style>
-
-<div class="dashboard-header">
-    <div class="container">
-
-        
-        <h1 class="dashboard-title">Public Transparency Dashboard</h1>
-        <p class="dashboard-subtitle">We believe in complete financial transparency. Here is a real-time overview of our community funds, programs, and member activities.</p>
+<div class="bg-gradient-to-br from-[#045a33] to-[#064e3b] text-white pt-16 pb-12 text-center -mb-12">
+    <div class="container mx-auto px-4">
+        <h1 class="text-[2rem] md:text-[2.8rem] font-extrabold mb-4">Public Transparency Dashboard</h1>
+        <p class="text-[1rem] md:text-[1.2rem] opacity-90 max-w-[600px] mx-auto">We believe in complete financial transparency. Here is a real-time overview of our community funds, programs, and member activities.</p>
     </div>
 </div>
 
-<div class="container dashboard-container">
+<div class="container mx-auto px-4 relative z-10 mb-16 max-w-[1200px]">
     
     <!-- KPI Stat Cards -->
-    <div class="stat-grid">
-        <div class="stat-card">
-            <div class="stat-icon" style="color: #10b981; background: #ecfdf5;"><i class="fas fa-hand-holding-usd"></i></div>
-            <div class="stat-info">
-                <h3>Total Raised</h3>
-                <p>₹{{ total_income|floatformat:2 }}</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
+            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#ecfdf5] text-[#10b981] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-hand-holding-usd"></i></div>
+            <div>
+                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Total Raised</h3>
+                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">₹{{ total_income|floatformat:2 }}</p>
             </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-icon" style="color: #ef4444; background: #fef2f2;"><i class="fas fa-file-invoice-dollar"></i></div>
-            <div class="stat-info">
-                <h3>Total Spent</h3>
-                <p>₹{{ total_expenses|floatformat:2 }}</p>
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
+            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#fef2f2] text-[#ef4444] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-file-invoice-dollar"></i></div>
+            <div>
+                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Total Spent</h3>
+                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">₹{{ total_expenses|floatformat:2 }}</p>
             </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-icon" style="color: #3b82f6; background: #eff6ff;"><i class="fas fa-users"></i></div>
-            <div class="stat-info">
-                <h3>Active Members</h3>
-                <p>{{ member_count }}</p>
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
+            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#eff6ff] text-[#3b82f6] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-users"></i></div>
+            <div>
+                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Active Members</h3>
+                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">{{ member_count }}</p>
             </div>
         </div>
-        <div class="stat-card">
-            <div class="stat-icon" style="color: #f59e0b; background: #fffbeb;"><i class="fas fa-calendar-check"></i></div>
-            <div class="stat-info">
-                <h3>Programs Held</h3>
-                <p>{{ program_count }}</p>
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
+            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#fffbeb] text-[#f59e0b] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-calendar-check"></i></div>
+            <div>
+                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Programs Held</h3>
+                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">{{ program_count }}</p>
             </div>
         </div>
     </div>
 
 
 
-    <div class="dashboard-layout">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
         
         <!-- Financial Chart -->
-        <div class="card">
-            <h2 class="card-title"><i class="fas fa-chart-pie"></i> Financial Overview</h2>
-            <div class="chart-container" style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center;">
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
+            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-chart-pie text-primary mr-2.5"></i> Financial Overview</h2>
+            <div class="relative h-[220px] md:h-[300px] w-full flex justify-center">
                 <canvas id="financeChart"></canvas>
             </div>
         </div>
 
         <!-- Recent Donations Feed -->
-        <div class="card">
-            <h2 class="card-title"><i class="fas fa-heart"></i> Recent Contributions</h2>
-            <ul class="list-group">
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
+            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-heart text-primary mr-2.5"></i> Recent Contributions</h2>
+            <ul class="list-none p-0 m-0">
                 {% for donation in recent_donations %}
-                <li class="list-item">
-                    <div class="item-icon"><i class="fas fa-user"></i></div>
-                    <div class="item-details">
-                        <h4>{{ donation.donor_name }}</h4>
-                        <p>{{ donation.get_donation_type_display }} • {{ donation.date }}</p>
+                <li class="flex items-center py-4 border-b border-slate-50 last:border-b-0">
+                    <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center mr-4 text-primary shrink-0"><i class="fas fa-user"></i></div>
+                    <div>
+                        <h4 class="m-0 mb-1 text-[1rem] text-textmain font-bold">{{ donation.donor_name }}</h4>
+                        <p class="m-0 text-[0.85rem] text-textmuted">{{ donation.get_donation_type_display }} • {{ donation.date }}</p>
                     </div>
-                    <div class="item-amount">
+                    <div class="ml-auto font-bold text-[#10b981]">
                         +₹{{ donation.amount|floatformat:2 }}
                     </div>
                 </li>
                 {% empty %}
-                <li class="list-item">
+                <li class="py-4 text-slate-500 italic">
                     <p>No recent public donations.</p>
                 </li>
                 {% endfor %}
@@ -283,19 +84,19 @@
         </div>
 
         <!-- Recent Programs -->
-        <div class="card">
-            <h2 class="card-title"><i class="fas fa-calendar-alt"></i> Recent Programs</h2>
-            <ul class="list-group">
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
+            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-calendar-alt text-primary mr-2.5"></i> Recent Programs</h2>
+            <ul class="list-none p-0 m-0">
                 {% for program in recent_programs %}
-                <li class="list-item">
-                    <div class="item-icon" style="background: #f0fdf4;"><i class="fas fa-check"></i></div>
-                    <div class="item-details">
-                        <h4>{{ program.title }}</h4>
-                        <p>{{ program.get_program_type_display }} • {{ program.date }}</p>
+                <li class="flex items-center py-4 border-b border-slate-50 last:border-b-0">
+                    <div class="w-10 h-10 rounded-lg bg-[#f0fdf4] flex items-center justify-center mr-4 text-primary shrink-0"><i class="fas fa-check"></i></div>
+                    <div>
+                        <h4 class="m-0 mb-1 text-[1rem] text-textmain font-bold">{{ program.title }}</h4>
+                        <p class="m-0 text-[0.85rem] text-textmuted">{{ program.get_program_type_display }} • {{ program.date }}</p>
                     </div>
                 </li>
                 {% empty %}
-                <li class="list-item">
+                <li class="py-4 text-slate-500 italic">
                     <p>No recent programs.</p>
                 </li>
                 {% endfor %}
@@ -303,19 +104,19 @@
         </div>
 
         <!-- Recent News -->
-        <div class="card">
-            <h2 class="card-title"><i class="fas fa-newspaper"></i> Latest Updates</h2>
-            <ul class="list-group">
+        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
+            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-newspaper text-primary mr-2.5"></i> Latest Updates</h2>
+            <ul class="list-none p-0 m-0">
                 {% for item in recent_news %}
-                <li class="list-item">
-                    <div class="item-icon" style="background: #eff6ff;"><i class="fas fa-bullhorn"></i></div>
-                    <div class="item-details">
-                        <h4>{{ item.title }}</h4>
-                        <p>{{ item.date_published|date:"M d, Y" }}</p>
+                <li class="flex items-center py-4 border-b border-slate-50 last:border-b-0">
+                    <div class="w-10 h-10 rounded-lg bg-[#eff6ff] flex items-center justify-center mr-4 text-primary shrink-0"><i class="fas fa-bullhorn"></i></div>
+                    <div>
+                        <h4 class="m-0 mb-1 text-[1rem] text-textmain font-bold">{{ item.title }}</h4>
+                        <p class="m-0 text-[0.85rem] text-textmuted">{{ item.date_published|date:"M d, Y" }}</p>
                     </div>
                 </li>
                 {% empty %}
-                <li class="list-item">
+                <li class="py-4 text-slate-500 italic">
                     <p>No recent updates.</p>
                 </li>
                 {% endfor %}
@@ -331,9 +132,9 @@
         const ctx = document.getElementById('financeChart').getContext('2d');
         
         // Pass data from Django securely using the context variable
-        const totalIncome = {{ chart_data.income|default:0 }};
-        const totalExpenses = {{ chart_data.expenses|default:0 }};
-        const currentBalance = {{ chart_data.balance|default:0 }};
+        const totalIncome = Number("{{ chart_data.income|default:0 }}");
+        const totalExpenses = Number("{{ chart_data.expenses|default:0 }}");
+        const currentBalance = Number("{{ chart_data.balance|default:0 }}");
 
         new Chart(ctx, {
             type: 'pie',
@@ -382,5 +183,4 @@
         });
     });
 </script>
-
 {% endblock %}
