@@ -766,33 +766,71 @@
     }
 </style>
     {% block extra_head %}{% endblock %}
+    <style>
+        /* Mobile Navigation Dropdown */
+        @media (max-width: 767px) {
+            #main-navigation.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                border-top: 1px solid #e2e8f0;
+                padding: 0;
+                gap: 0;
+                z-index: 40;
+            }
+            #main-navigation.active a {
+                width: 100%;
+                border-radius: 0 !important;
+                padding: 1.25rem 1.5rem !important;
+                border-bottom: 1px solid #f1f5f9;
+                text-align: left;
+                box-shadow: none !important;
+                transform: none !important;
+            }
+            #main-navigation.active a:last-child {
+                border-bottom: none;
+            }
+            
+            /* Admin Navigation Mobile Dropdown */
+            #admin-nav-links.active {
+                display: flex !important;
+            }
+        }
+    </style>
 </head>
 
 <body class="bg-background text-textmain antialiased flex flex-col min-h-screen font-sans">
     {% if '/manage/' not in request.path and '/dashboard/' not in request.path %}
-    <div class="bg-[#064e3b] text-slate-50 flex justify-between items-center px-[5%] py-2 text-sm border-b border-white/10 hidden md:flex">
-        <div class="flex gap-6">
-            <span>📧 info@skssfputhupparamba.com</span>
+    <div class="bg-[#064e3b] text-slate-50 flex flex-col md:flex-row justify-center md:justify-between items-center px-[5%] py-2 text-[0.85rem] md:text-sm border-b border-white/10 gap-1.5 md:gap-0">
+        <div class="flex gap-4 md:gap-6">
+            <span class="hidden md:inline">📧 info@skssfputhupparamba.com</span>
             <span>📞 +91 1234 567 890</span>
         </div>
-        <div class="flex gap-2">
-            <a href="{% url 'news' %}" class="text-slate-50 px-3 py-1 font-medium transition-colors duration-300 hover:text-amber-400">Announcements</a>
-            <a href="{% url 'monthly_fund' %}" class="text-slate-50 px-3 py-1 font-medium transition-colors duration-300 hover:text-amber-400">Monthly Fund</a>
+        <div class="flex gap-4 md:gap-2">
+            <a href="{% url 'news' %}" class="text-slate-50 px-2 md:px-3 py-0.5 font-medium transition-colors duration-300 hover:text-amber-400">Announcements</a>
+            <a href="{% url 'monthly_fund' %}" class="text-slate-50 px-2 md:px-3 py-0.5 font-medium transition-colors duration-300 hover:text-amber-400">Monthly Fund</a>
         </div>
     </div>
-    <header class="bg-white text-textmain px-[5%] py-4 flex justify-between items-center shadow-[0_4px_20px_rgba(0,0,0,0.08)] sticky top-0 z-50">
-        <button class="md:hidden text-2xl text-textmain bg-transparent border-none cursor-pointer" id="mobile-menu-btn">
+    <header class="bg-white text-textmain px-[5%] py-3 md:py-4 flex justify-between items-center shadow-[0_4px_20px_rgba(0,0,0,0.08)] sticky top-0 z-50 relative">
+        <button class="md:hidden text-2xl text-slate-800 bg-transparent border-none cursor-pointer w-8" id="mobile-menu-btn">
             <i class="fas fa-bars"></i>
         </button>
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-4 justify-center md:justify-start flex-1 md:flex-none">
             {% load static %}
-            <img src="{% static 'images/logo.jpg' %}" alt="SKSSF Logo" onerror="this.style.display='none'" loading="lazy" class="w-14 h-14 rounded-full object-cover border-2 border-[#10b981]">
-            <div>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/logo.jpg' %}" alt="SKSSF Logo" onerror="this.style.display='none'" loading="lazy" class="w-[3rem] h-[3rem] md:w-14 md:h-14 object-contain">
+            </a>
+            <div class="hidden md:block">
                 <h2 class="font-outfit text-xl md:text-[1.4rem] font-bold text-textmain tracking-[-0.5px] leading-tight m-0">Samastha Kerala Sunni Students Federation (SKSSF)</h2>
                 <p class="text-[0.85rem] text-textmuted m-0 mt-0.5 font-medium">Puthupparamba Unit &ndash; Kerala, India.</p>
             </div>
         </div>
-        <a href="{% url 'donate' %}" class="md:hidden text-[#10b981] text-2xl ml-auto">
+        <a href="{% url 'donate' %}" class="md:hidden text-[#045a33] text-[1.65rem] w-8 text-right">
             <i class="fas fa-hand-holding-heart"></i>
         </a>
         <nav class="hidden md:flex items-center gap-2" id="main-navigation">
