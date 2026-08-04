@@ -1,235 +1,60 @@
 {% extends 'base.html' %}
 {% block title %}Donate - SKSSF Puthupparamba{% endblock %}
 
-{% block extra_head %}
-<style>
-    .fund-card {
-        background: white;
-        padding: 4rem 3rem;
-        border-radius: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        text-align: center;
-        border: 1px solid rgba(0,0,0,0.05);
-        border-top: 5px solid var(--primary);
-        max-width: 600px;
-        margin: 0 auto;
-    }
-    .fund-card h2 {
-        font-size: 2.2rem;
-        color: var(--text-main);
-        margin-bottom: 1rem;
-    }
-    .fund-card p {
-        color: var(--text-muted);
-        margin-bottom: 2rem;
-        font-size: 1.1rem;
-    }
-    .btn-donate-alt {
-        display: inline-block;
-        background: #fbbf24;
-        color: #1e293b;
-        padding: 1.25rem 3rem;
-        font-size: 1.25rem;
-        font-weight: 700;
-        text-decoration: none;
-        border-radius: 50px;
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
-        margin-top: 1rem;
-    }
-    .btn-donate-alt:hover {
-        background: #f59e0b;
-        color: #1e293b;
-        box-shadow: 0 6px 15px rgba(251, 191, 36, 0.4);
-        transform: translateY(-2px);
-    }
-    .ledger-section {
-        margin-top: 4rem;
-        background: white;
-        border-radius: 20px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        border: 1px solid rgba(0,0,0,0.05);
-        padding: 3rem;
-    }
-    .ledger-stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-    }
-    .stat-box {
-        padding: 1.5rem;
-        border-radius: 12px;
-        text-align: center;
-    }
-    .stat-box.income { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
-    .stat-box.expense { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
-    .stat-box.balance { background: #334155; color: white; border: 1px solid #1e293b; }
-    
-    .stat-box h4 {
-        margin: 0 0 0.5rem 0;
-        font-size: 1rem;
-        opacity: 0.9;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .stat-box .amount {
-        font-size: 2rem;
-        font-weight: 700;
-        margin: 0;
-    }
-    .tables-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 3rem;
-    }
-    .ledger-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-    }
-    .ledger-table th, .ledger-table td {
-        padding: 0.75rem 0;
-        border-bottom: 1px solid #e2e8f0;
-        text-align: left;
-    }
-    .ledger-table th {
-        color: var(--text-muted);
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 0.5px;
-    }
-    .ledger-table tr:last-child td {
-        border-bottom: none;
-    }
-    .text-right {
-        text-align: right !important;
-    }
-    .amount-plus { color: #059669; font-weight: 600; }
-    .amount-minus { color: #dc2626; font-weight: 600; }
-    
-    @media (max-width: 768px) {
-        .ledger-section {
-            padding: 2rem 1.5rem;
-        }
-        .ledger-section h2 {
-            font-size: 1.5rem;
-        }
-        .ledger-section > p {
-            font-size: 0.95rem;
-            text-align: left !important;
-            line-height: 1.6;
-        }
-        .ledger-stats {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
-        .stat-box {
-            padding: 1rem;
-        }
-        .stat-box .amount {
-            font-size: 1.5rem;
-        }
-        .tables-grid {
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            width: 100%;
-        }
-        .tables-grid > div {
-            min-width: 0; /* Prevent grid blowout */
-            max-width: 100vw;
-        }
-        .table-responsive {
-            display: block;
-            width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 1rem; /* Space for scrollbar */
-        }
-        .ledger-table {
-            width: 100%;
-        }
-        .ledger-table th, .ledger-table td {
-            font-size: 0.85rem;
-            padding: 0.75rem 1rem;
-        }
-        .fund-card {
-            padding: 2.5rem 1.5rem;
-            margin-bottom: 3rem;
-        }
-        .fund-card h2 {
-            font-size: 1.5rem;
-        }
-        .fund-card p {
-            font-size: 0.95rem;
-        }
-        .fund-card-icon {
-            margin: 1.5rem 0 !important;
-            font-size: 4rem !important;
-        }
-        .btn-donate-alt {
-            padding: 1rem 2rem;
-            font-size: 1.1rem;
-        }
-    }
-</style>
-{% endblock %}
-
 {% block content %}
-<div class="page-banner">
+<div class="bg-primary text-white py-[3rem] md:py-[4rem] px-[5%] text-center relative">
     <div class="banner-content">
-        <h1>General Donation</h1>
-        <div class="breadcrumbs">
-            <a href="{% url 'home' %}">Home</a> | Donate
+        <h1 class="text-[2rem] md:text-[2.8rem] mb-2 font-outfit font-bold">General Donation</h1>
+        <div class="text-[0.95rem] opacity-90">
+            <a href="{% url 'home' %}" class="text-white no-underline mr-[5px] hover:underline">Home</a> | Donate
         </div>
     </div>
 </div>
 
-<div class="container">
-    <div class="ledger-section" style="margin-top: 0; margin-bottom: 4rem;">
-        <h2 style="text-align: center; margin-bottom: 1rem; color: var(--text-main);">Unit Fund Ledger & Transparency</h2>
-        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">We believe in complete transparency. Here is the public ledger of our unit's income and expenses.</p>
+<div class="container mx-auto px-4 mt-0 mb-16 max-w-[1100px]">
+    
+    <div class="bg-white rounded-[20px] shadow-[0_4px_15px_rgba(0,0,0,0.05)] border border-[rgba(0,0,0,0.05)] p-8 md:p-12 mb-16 mt-8">
+        <h2 class="text-center mb-4 text-textmain text-2xl md:text-3xl font-bold">Unit Fund Ledger & Transparency</h2>
+        <p class="text-center text-textmuted mb-12 text-[0.95rem] md:text-[1.1rem] max-w-[700px] mx-auto leading-relaxed">We believe in complete transparency. Here is the public ledger of our unit's income and expenses.</p>
         
-        <div class="ledger-stats">
-            <div class="stat-box income">
-                <h4>Total Income</h4>
-                <p class="amount">₹{{ total_income|floatformat:0 }}</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12">
+            <div class="bg-[#d1fae5] text-[#065f46] border border-[#a7f3d0] p-4 md:p-6 rounded-xl text-center">
+                <h4 class="m-0 mb-2 text-[1rem] opacity-90 uppercase tracking-[0.5px] font-bold">Total Income</h4>
+                <p class="m-0 text-[1.5rem] md:text-[2rem] font-bold">₹{{ total_income|floatformat:0 }}</p>
             </div>
-            <div class="stat-box expense">
-                <h4>Total Expenses</h4>
-                <p class="amount">₹{{ total_expenses|floatformat:0 }}</p>
+            <div class="bg-[#fee2e2] text-[#991b1b] border border-[#fecaca] p-4 md:p-6 rounded-xl text-center">
+                <h4 class="m-0 mb-2 text-[1rem] opacity-90 uppercase tracking-[0.5px] font-bold">Total Expenses</h4>
+                <p class="m-0 text-[1.5rem] md:text-[2rem] font-bold">₹{{ total_expenses|floatformat:0 }}</p>
             </div>
-            <div class="stat-box balance">
-                <h4>Current Balance</h4>
-                <p class="amount">₹{{ balance|floatformat:0 }}</p>
+            <div class="bg-[#334155] text-white border border-[#1e293b] p-4 md:p-6 rounded-xl text-center">
+                <h4 class="m-0 mb-2 text-[1rem] opacity-90 uppercase tracking-[0.5px] font-bold">Current Balance</h4>
+                <p class="m-0 text-[1.5rem] md:text-[2rem] font-bold">₹{{ balance|floatformat:0 }}</p>
             </div>
         </div>
         
-        <div class="tables-grid">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 w-full">
             <!-- Recent Donations -->
-            <div>
-                <h3 style="color: var(--text-main); border-bottom: 2px solid var(--primary); padding-bottom: 0.5rem; display: inline-block;">Recent Contributions</h3>
-                <div class="table-responsive">
-                    <table class="ledger-table">
+            <div class="min-w-0 max-w-full">
+                <h3 class="text-textmain border-b-2 border-primary pb-2 inline-block text-xl font-bold mb-4">Recent Contributions</h3>
+                <div class="block w-full overflow-x-auto whitespace-nowrap pb-4">
+                    <table class="w-full border-collapse mt-4 min-w-[400px]">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Donor Name</th>
-                                <th class="text-right">Amount</th>
+                                <th class="py-3 px-4 md:px-0 border-b border-slate-200 text-left text-textmuted font-semibold uppercase text-[0.85rem] tracking-[0.5px]">Date</th>
+                                <th class="py-3 px-4 md:px-0 border-b border-slate-200 text-left text-textmuted font-semibold uppercase text-[0.85rem] tracking-[0.5px]">Donor Name</th>
+                                <th class="py-3 px-4 md:px-0 border-b border-slate-200 text-right text-textmuted font-semibold uppercase text-[0.85rem] tracking-[0.5px]">Amount</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for donation in recent_donations %}
                             <tr>
-                                <td style="color: var(--text-muted); font-size: 0.9rem;">{{ donation.date|date:"M d, Y" }}</td>
-                                <td>{{ donation.donor_name }} <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">{{ donation.get_donation_type_display }}</span></td>
-                                <td class="text-right amount-plus">+₹{{ donation.amount|floatformat:0 }}</td>
+                                <td class="py-3 px-4 md:px-0 border-b border-slate-200 text-textmuted text-[0.85rem] md:text-[0.9rem]">{{ donation.date|date:"M d, Y" }}</td>
+                                <td class="py-3 px-4 md:px-0 border-b border-slate-200 text-[0.85rem] md:text-[0.95rem] text-textmain font-medium">{{ donation.donor_name }} <span class="text-[0.75rem] text-textmuted block">{{ donation.get_donation_type_display }}</span></td>
+                                <td class="py-3 px-4 md:px-0 border-b border-slate-200 text-right text-[#059669] font-bold text-[0.85rem] md:text-[1rem]">+₹{{ donation.amount|floatformat:0 }}</td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">No recent contributions found.</td>
+                                <td colspan="3" class="text-center text-textmuted p-8 border-b border-slate-200">No recent contributions found.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -238,27 +63,27 @@
             </div>
             
             <!-- Recent Expenses -->
-            <div>
-                <h3 style="color: var(--text-main); border-bottom: 2px solid #dc2626; padding-bottom: 0.5rem; display: inline-block;">Recent Expenses</h3>
-                <div class="table-responsive">
-                    <table class="ledger-table">
+            <div class="min-w-0 max-w-full">
+                <h3 class="text-textmain border-b-2 border-red-600 pb-2 inline-block text-xl font-bold mb-4">Recent Expenses</h3>
+                <div class="block w-full overflow-x-auto whitespace-nowrap pb-4">
+                    <table class="w-full border-collapse mt-4 min-w-[400px]">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Expense Title</th>
-                                <th class="text-right">Amount</th>
+                                <th class="py-3 px-4 md:px-0 border-b border-slate-200 text-left text-textmuted font-semibold uppercase text-[0.85rem] tracking-[0.5px]">Date</th>
+                                <th class="py-3 px-4 md:px-0 border-b border-slate-200 text-left text-textmuted font-semibold uppercase text-[0.85rem] tracking-[0.5px]">Expense Title</th>
+                                <th class="py-3 px-4 md:px-0 border-b border-slate-200 text-right text-textmuted font-semibold uppercase text-[0.85rem] tracking-[0.5px]">Amount</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for expense in recent_expenses %}
                             <tr>
-                                <td style="color: var(--text-muted); font-size: 0.9rem;">{{ expense.date|date:"M d, Y" }}</td>
-                                <td>{{ expense.title }} <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">{{ expense.get_category_display }}</span></td>
-                                <td class="text-right amount-minus">-₹{{ expense.amount|floatformat:0 }}</td>
+                                <td class="py-3 px-4 md:px-0 border-b border-slate-200 text-textmuted text-[0.85rem] md:text-[0.9rem]">{{ expense.date|date:"M d, Y" }}</td>
+                                <td class="py-3 px-4 md:px-0 border-b border-slate-200 text-[0.85rem] md:text-[0.95rem] text-textmain font-medium">{{ expense.title }} <span class="text-[0.75rem] text-textmuted block">{{ expense.get_category_display }}</span></td>
+                                <td class="py-3 px-4 md:px-0 border-b border-slate-200 text-right text-red-600 font-bold text-[0.85rem] md:text-[1rem]">-₹{{ expense.amount|floatformat:0 }}</td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="3" style="text-align: center; color: var(--text-muted); padding: 2rem;">No recent expenses recorded.</td>
+                                <td colspan="3" class="text-center text-textmuted p-8 border-b border-slate-200">No recent expenses recorded.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -268,13 +93,13 @@
         </div>
     </div>
 
-    <div class="fund-card">
-        <h2>Support Our Cause</h2>
-        <p>Make a one-time contribution to support our community initiatives, medical aid, and special events.</p>
-        <div class="fund-card-icon" style="margin: 3rem 0; color: var(--primary); font-size: 6rem;">
+    <div class="bg-white p-10 md:p-16 rounded-[20px] shadow-[0_4px_15px_rgba(0,0,0,0.05)] text-center border border-[rgba(0,0,0,0.05)] border-t-[5px] border-t-primary max-w-[600px] mx-auto mb-12">
+        <h2 class="text-[1.5rem] md:text-[2.2rem] text-textmain mb-4 font-bold">Support Our Cause</h2>
+        <p class="text-textmuted mb-8 text-[0.95rem] md:text-[1.1rem]">Make a one-time contribution to support our community initiatives, medical aid, and special events.</p>
+        <div class="my-6 md:my-12 text-primary text-[4rem] md:text-[6rem]">
             <i class="fas fa-hand-holding-heart"></i>
         </div>
-        <a href="#" class="btn-donate-alt" onclick="alert('Payment Gateway Integration Pending')">Donate Now</a>
+        <a href="#" class="inline-block bg-amber-400 text-slate-800 px-8 md:px-12 py-4 md:py-5 text-[1.1rem] md:text-[1.25rem] font-bold no-underline rounded-full transition-all duration-200 shadow-[0_4px_10px_rgba(251,191,36,0.3)] mt-4 hover:bg-amber-500 hover:shadow-[0_6px_15px_rgba(251,191,36,0.4)] hover:-translate-y-1" onclick="alert('Payment Gateway Integration Pending')">Donate Now</a>
     </div>
 </div>
 {% endblock %}
