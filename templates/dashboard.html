@@ -195,6 +195,12 @@
         .stat-info h3 {
             font-size: 0.8rem;
         }
+        .card {
+            padding: 1.2rem;
+        }
+        .chart-container {
+            height: 220px !important;
+        }
     }
 </style>
 
@@ -248,7 +254,7 @@
         <!-- Financial Chart -->
         <div class="card">
             <h2 class="card-title"><i class="fas fa-chart-pie"></i> Financial Overview</h2>
-            <div style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center;">
+            <div class="chart-container" style="position: relative; height: 300px; width: 100%; display: flex; justify-content: center;">
                 <canvas id="financeChart"></canvas>
             </div>
         </div>
