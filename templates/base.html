@@ -553,18 +553,7 @@
             font-size: 1.25rem;
         }
 
-        /* Reduce footer size on mobile */
-        {% if not '/manage/' in request.path and not '/dashboard/' in request.path %}
-        footer {
-            padding: 1.5rem 1.5rem 5rem 1.5rem !important; /* Extra bottom padding for floating nav */
-            font-size: 0.75rem !important;
-        }
-        {% else %}
-        footer {
-            padding: 1.5rem !important;
-            font-size: 0.75rem !important;
-        }
-        {% endif %}
+        /* Footer styles migrated to Tailwind */
         
         footer p {
             font-size: 0.75rem !important;
@@ -704,12 +693,7 @@
             padding-bottom: 5px;
         }
 
-        /* Bottom App Navigation */
-        {% if not '/manage/' in request.path and not '/dashboard/' in request.path %}
-        body {
-            padding-bottom: 70px; /* Space for bottom nav */
-        }
-        {% endif %}
+        /* Bottom Nav spacing handled by Tailwind */
         
         .bottom-nav {
             display: flex;
@@ -997,7 +981,7 @@
         {% if messages %}
             {% for message in messages %}
             <div class="modern-toast bg-white text-textmain py-3 px-5 rounded-lg shadow-lg flex items-center gap-3 font-medium text-[0.95rem] border-l-4 max-w-[350px] transition-all duration-400 ease-[cubic-bezier(0.68,-0.55,0.265,1.55)] translate-x-[120%] opacity-0 {% if message.tags == 'error' %}border-red-500{% elif message.tags == 'warning' %}border-amber-500{% elif message.tags == 'info' %}border-blue-500{% else %}border-[#10b981]{% endif %}">
-                <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle{% elif message.tags == 'warning' %}fa-exclamation-triangle{% elif message.tags == 'info' %}fa-info-circle{% else %}fa-check-circle{% endif %}" style="font-size: 1.2rem; {% if message.tags == 'error' %}color: #ef4444;{% elif message.tags == 'warning' %}color: #f59e0b;{% elif message.tags == 'info' %}color: #3b82f6;{% else %}color: #10b981;{% endif %}"></i>
+                <i class="fas {% if message.tags == 'error' %}fa-exclamation-circle text-red-500{% elif message.tags == 'warning' %}fa-exclamation-triangle text-amber-500{% elif message.tags == 'info' %}fa-info-circle text-blue-500{% else %}fa-check-circle text-[#10b981]{% endif %} text-[1.2rem]"></i>
                 <span>{{ message }}</span>
             </div>
             {% endfor %}
