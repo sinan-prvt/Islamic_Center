@@ -23,6 +23,21 @@
     .btn-submit { width: 100%; padding: 1rem; background: #64748b; color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 1rem; }
     .btn-submit:hover { background: #475569; }
     .alert { padding: 1rem; background: #dcfce7; color: #166534; border-radius: 8px; margin-bottom: 2rem; }
+
+    @media (max-width: 768px) {
+        .layout-grid {
+            grid-template-columns: 1fr;
+        }
+        .data-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .manage-header h1 {
+            font-size: 1.5rem;
+        }
+    }
 </style>
 
 <div class="manage-section">

@@ -132,6 +132,21 @@
         border-radius: 8px;
         margin-bottom: 2rem;
     }
+
+    @media (max-width: 768px) {
+        .layout-grid {
+            grid-template-columns: 1fr;
+        }
+        .data-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        .manage-header h1 {
+            font-size: 1.5rem;
+        }
+    }
 </style>
 
 <div class="manage-section">
