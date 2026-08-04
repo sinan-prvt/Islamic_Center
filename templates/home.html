@@ -379,14 +379,30 @@
             padding: 2.5rem 0 !important;
         }
 
-        /* Instagram Grid Mobile */
+        /* Instagram Swipeable Carousel for Mobile */
         .instagram-grid {
-            grid-template-columns: 1fr 1fr !important;
+            display: flex !important;
+            flex-direction: row;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
             gap: 1rem !important;
+            padding-bottom: 1.5rem; /* Space for scrollbar */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+
+        .instagram-grid::-webkit-scrollbar {
+            display: none; /* Hide scrollbar Chrome/Safari */
+        }
+
+        .instagram-grid > div {
+            flex: 0 0 85% !important; /* Each item takes 85% width so next item peeks in */
+            max-width: none !important;
+            scroll-snap-align: center;
         }
 
         .instagram-grid > div:nth-child(n+3) {
-            display: none !important;
+            display: block !important; /* Allow all reels to be swiped */
         }
     }
 
