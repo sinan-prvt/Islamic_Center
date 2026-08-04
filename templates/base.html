@@ -410,26 +410,49 @@
     @media (max-width: 900px) {
         .top-bar {
             flex-direction: column;
-            gap: 10px;
-            text-align: center;
+            gap: 5px;
+            padding: 10px 5%;
+        }
+
+        .top-contact {
+            flex-direction: column;
+            gap: 5px;
+            align-items: center;
+        }
+
+        .top-links {
+            flex-wrap: wrap;
+            justify-content: center;
         }
         
         .main-header {
             flex-wrap: wrap;
-            padding: 1rem 5%;
+            padding: 0.75rem 5%;
+        }
+
+        .logo-area {
+            flex: 1;
+            min-width: 0; /* allows text truncation if necessary */
+            gap: 10px;
+        }
+
+        .logo-area img {
+            height: 40px;
         }
 
         .logo-text h2 {
-            font-size: 15px;
+            font-size: 13px;
             line-height: 1.2;
+            white-space: normal;
         }
 
         .logo-text p {
-            font-size: 11px;
+            font-size: 10px;
         }
 
         .menu-toggle {
             display: block;
+            margin-left: 10px;
         }
 
         .main-nav {
