@@ -108,6 +108,30 @@
     }
     .amount-plus { color: #059669; font-weight: 600; }
     .amount-minus { color: #dc2626; font-weight: 600; }
+    
+    @media (max-width: 768px) {
+        .ledger-section {
+            padding: 2rem 1.5rem;
+        }
+        .ledger-section h2 {
+            font-size: 1.5rem;
+        }
+        .ledger-section p {
+            font-size: 0.95rem;
+            text-align: left !important;
+            line-height: 1.6;
+        }
+        .ledger-stats {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .stat-box {
+            padding: 1rem;
+        }
+        .stat-box .amount {
+            font-size: 1.5rem;
+        }
+    }
 </style>
 {% endblock %}
 
