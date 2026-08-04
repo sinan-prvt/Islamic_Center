@@ -397,6 +397,11 @@
     .icon-gallery { color: #ddd6fe; }
     .icon-members { color: #e2e8f0; }
 
+    .header-action-icon {
+        display: none;
+        text-decoration: none;
+    }
+
     /* Mobile Responsiveness */
     .menu-toggle {
         display: none;
@@ -414,38 +419,40 @@
         }
 
         .top-bar {
-            flex-direction: column;
-            gap: 4px;
+            text-align: center;
             padding: 8px 5%;
             font-size: 0.75rem;
+            display: block; /* Overrides flex */
         }
 
-        .top-contact {
-            flex-direction: column;
-            gap: 2px;
-            align-items: center;
+        .top-contact, .top-links {
+            display: none; /* Hide complex elements on mobile */
         }
-
-        .top-links {
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.25rem;
-        }
-
-        .top-links a {
-            padding: 0.1rem 0.5rem;
+        
+        .top-bar::after {
+            content: "SUPPORT OUR COMMUNITY PROGRAMS! DONATE NOW";
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         
         .main-header {
-            flex-wrap: nowrap; /* Prevent hamburger from dropping to next line */
-            padding: 0.5rem 5%;
+            flex-wrap: nowrap;
+            padding: 0.75rem 5%;
             justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-action-icon {
+            display: block;
+            color: var(--primary);
+            font-size: 1.25rem;
         }
 
         .logo-area {
             flex: 1;
-            min-width: 0; /* allows text truncation if necessary */
+            min-width: 0;
             gap: 8px;
+            justify-content: center; /* Center logo on mobile */
         }
 
         .logo-area img {
@@ -454,27 +461,13 @@
         }
 
         .logo-text {
-            flex: 1;
-            min-width: 0; /* CRITICAL: Allows the text block to shrink and wrap */
-        }
-
-        .logo-text h2 {
-            font-size: 11px;
-            line-height: 1.2;
-            white-space: normal;
-            word-wrap: break-word;
-        }
-
-        .logo-text p {
-            font-size: 9px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            display: none; /* Hide text on mobile for cleaner app look */
         }
 
         .menu-toggle {
             display: block;
-            margin-left: 10px;
+            margin-left: 0;
+            margin-right: 10px;
         }
 
         .main-nav {
@@ -526,6 +519,64 @@
         .admin-nav-container {
             padding-bottom: 5px;
         }
+
+        /* Bottom App Navigation */
+        body {
+            padding-bottom: 70px; /* Space for bottom nav */
+        }
+        
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 10px 0;
+            padding-bottom: calc(10px + env(safe-area-inset-bottom));
+        }
+
+        .bottom-nav a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 10px;
+            font-weight: 500;
+            gap: 4px;
+        }
+
+        .bottom-nav a i {
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .bottom-nav a.active {
+            color: var(--primary);
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 1001;
+            text-decoration: none;
+        }
     }
 </style>
     {% block extra_head %}{% endblock %}
@@ -544,6 +595,9 @@
         </div>
     </div>
     <header class="main-header">
+        <button class="menu-toggle" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
         <div class="logo-area">
             {% load static %}
             <img src="{% static 'images/logo.jpg' %}" alt="SKSSF Logo" onerror="this.style.display='none'">
@@ -552,9 +606,9 @@
                 <p>Puthupparamba Unit &ndash; Kerala, India.</p>
             </div>
         </div>
-        <button class="menu-toggle" id="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
+        <a href="{% url 'donate' %}" class="header-action-icon">
+            <i class="fas fa-hand-holding-heart"></i>
+        </a>
         <nav class="main-nav" id="main-navigation">
             <a href="{% url 'home' %}">Home</a>
             <a href="{% url 'about' %}">About</a>
@@ -616,7 +670,38 @@
             <a href="{% url 'dashboard' %}" style="color: rgba(255,255,255,0.7); text-decoration: none;">Admin Dashboard</a>
         </p>
     </footer>
+    <!-- Bottom App Navigation (Mobile Only) -->
+    <nav class="bottom-nav" style="display: none;">
+        <a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="{% url 'news' %}" class="{% if '/news/' in request.path %}active{% endif %}">
+            <i class="fas fa-newspaper"></i>
+            <span>NEWS</span>
+        </a>
+        <a href="{% url 'gallery' %}" class="{% if '/gallery/' in request.path %}active{% endif %}">
+            <i class="fas fa-images"></i>
+            <span>GALLERY</span>
+        </a>
+        <a href="{% url 'donate' %}" class="{% if '/donate/' in request.path %}active{% endif %}">
+            <i class="fas fa-hand-holding-heart"></i>
+            <span>DONATE</span>
+        </a>
+    </nav>
+
+    <!-- Floating WhatsApp Button (Mobile Only) -->
+    <a href="https://wa.me/911234567890" target="_blank" class="floating-whatsapp" style="display: none;">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script>
+        // Ensure bottom nav only displays on mobile
+        if (window.innerWidth <= 900) {
+            document.querySelector('.bottom-nav').style.display = 'flex';
+            document.querySelector('.floating-whatsapp').style.display = 'flex';
+        }
+
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mainNav = document.getElementById('main-navigation');
         if(menuBtn && mainNav) {
