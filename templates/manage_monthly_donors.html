@@ -49,11 +49,11 @@
         {% endif %}
 
         <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('registry', this)"><i class="fas fa-user-plus"></i> Donor Registry</button>
-            <button class="tab-btn" onclick="switchTab('tracker', this)"><i class="fas fa-calendar-check"></i> Monthly Payment Details</button>
+            <button class="tab-btn {% if not request.GET.month %}active{% endif %}" onclick="switchTab('registry', this)"><i class="fas fa-user-plus"></i> Donor Registry</button>
+            <button class="tab-btn {% if request.GET.month %}active{% endif %}" onclick="switchTab('tracker', this)"><i class="fas fa-calendar-check"></i> Monthly Payment Details</button>
         </div>
 
-        <div id="registry" class="tab-content active">
+        <div id="registry" class="tab-content {% if not request.GET.month %}active{% endif %}">
             <div class="layout-grid">
                 <div class="form-card">
                 <h2>Register New Donor</h2>
@@ -113,11 +113,15 @@
             </div>
         </div>
 
-        <div id="tracker" class="tab-content">
-            <div class="manage-header">
-                <h2 style="font-size: 1.5rem; color: var(--text-main); display: flex; align-items: center; gap: 10px;">
+        <div id="tracker" class="tab-content {% if request.GET.month %}active{% endif %}">
+            <div class="manage-header" style="justify-content: space-between;">
+                <h2 style="font-size: 1.5rem; color: var(--text-main); display: flex; align-items: center; gap: 10px; margin: 0;">
                     <i class="fas fa-calendar-check" style="color: #3b82f6;"></i> Payment Tracker - {{ month_name }}
                 </h2>
+                <form method="GET" style="display: flex; gap: 10px; align-items: center;">
+                    <label for="month" style="font-weight: 600; color: var(--text-muted);">Select Month:</label>
+                    <input type="month" id="month" name="month" value="{{ selected_month }}" class="form-control" style="width: auto;" onchange="this.form.submit()">
+                </form>
             </div>
             
             <div class="layout-grid" style="grid-template-columns: 1fr 1fr;">
@@ -132,6 +136,7 @@
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Expected Amt</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,6 +145,11 @@
                                 <td style="font-weight: 600;">{{ donor.name }}</td>
                                 <td>{{ donor.phone }}</td>
                                 <td style="font-weight: 600; color: var(--text-muted);">₹{{ donor.monthly_commitment }}</td>
+                                <td>
+                                    <a href="https://wa.me/{{ donor.whatsapp_phone }}?text={{ donor.whatsapp_msg }}" target="_blank" style="background: #25D366; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
+                                        <i class="fab fa-whatsapp"></i> Remind
+                                    </a>
+                                </td>
                             </tr>
                             {% empty %}
                             <tr><td colspan="3" style="text-align: center; padding: 1.5rem;">All active donors have paid this month!</td></tr>
@@ -159,6 +169,7 @@
                                 <th>Name</th>
                                 <th>Date Paid</th>
                                 <th>Amount</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -167,6 +178,11 @@
                                 <td style="font-weight: 600;">{{ donor.name }}</td>
                                 <td>{{ donor.payment_date|date:"M d, Y" }}</td>
                                 <td style="font-weight: 600; color: #10b981;">₹{{ donor.paid_amount }}</td>
+                                <td>
+                                    <a href="https://wa.me/{{ donor.whatsapp_phone }}?text={{ donor.whatsapp_msg }}" target="_blank" style="background: #10b981; color: white; padding: 6px 12px; border-radius: 6px; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px;">
+                                        <i class="fab fa-whatsapp"></i> Thank You
+                                    </a>
+                                </td>
                             </tr>
                             {% empty %}
                             <tr><td colspan="3" style="text-align: center; padding: 1.5rem;">No payments received yet this month.</td></tr>

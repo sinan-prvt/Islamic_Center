@@ -231,16 +231,34 @@ def manage_monthly_donors(request):
     paid_donors = []
     unpaid_donors = []
     
+    import urllib.parse
+
     for donor in donors:
         if not donor.is_active:
             continue
+            
+        # Clean phone number for WhatsApp
+        cleaned_phone = ''.join(filter(str.isdigit, str(donor.phone)))
+        if len(cleaned_phone) == 10:
+            cleaned_phone = '91' + cleaned_phone
+        elif cleaned_phone.startswith('0') and len(cleaned_phone) == 11:
+            cleaned_phone = '91' + cleaned_phone[1:]
+            
+        donor.whatsapp_phone = cleaned_phone
             
         if donor.id in paid_donor_ids:
             donation = monthly_donations.filter(monthly_donor=donor).first()
             donor.paid_amount = donation.amount if donation else 0
             donor.payment_date = donation.date if donation else None
+            
+            msg = f"Assalamu Alaikum {donor.name}, jazakallah khair for your monthly contribution of ₹{donor.paid_amount} for {month_name}. May Allah reward you abundantly."
+            donor.whatsapp_msg = urllib.parse.quote(msg)
+            
             paid_donors.append(donor)
         else:
+            msg = f"Assalamu Alaikum {donor.name}, this is a gentle reminder that your monthly contribution of ₹{donor.monthly_commitment} for {month_name} is pending. Please contribute when possible."
+            donor.whatsapp_msg = urllib.parse.quote(msg)
+            
             unpaid_donors.append(donor)
             
     context = {

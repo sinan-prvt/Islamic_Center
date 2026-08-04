@@ -429,6 +429,7 @@
     {% endif %}
 
     {% if request.user.is_staff %}
+    {% if '/manage/' in request.path or '/dashboard/' in request.path %}
     <!-- Admin Navigation Bar -->
     <div class="admin-navbar">
         <div class="container admin-nav-container">
@@ -456,11 +457,15 @@
             <a href="{% url 'manage_members' %}" class="admin-nav-link {% if '/manage/members/' in request.path %}active{% endif %}">
                 <i class="fas fa-users icon-members"></i> Members
             </a>
-            <a href="{% url 'logout' %}" class="admin-logout">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
+            <form action="{% url 'logout' %}" method="post" style="margin: 0; padding: 0;">
+                {% csrf_token %}
+                <button type="submit" class="admin-logout" style="border: none; cursor: pointer; font-family: inherit; width: 100%;">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
         </div>
     </div>
+    {% endif %}
     {% endif %}
 
     <main>

@@ -129,3 +129,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Session timeout: 1 day
+SESSION_COOKIE_AGE = 86400
