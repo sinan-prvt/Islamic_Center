@@ -77,7 +77,7 @@
                     <tbody>
                         {% for img in images %}
                         <tr>
-                            <td><img src="{{ img.image.url }}" class="gallery-img" alt="{{ img.title }}"></td>
+                            <td><img src="{{ img.image.url }}" class="gallery-img" alt="{{ img.title }}" loading="lazy"></td>
                             <td>
                                 <div style="font-weight: 600; color: var(--text-main);">{{ img.title }}</div>
                                 {% if img.program %}<div style="font-size: 0.8rem; color: var(--text-muted);">Linked: {{ img.program.title }}</div>{% endif %}

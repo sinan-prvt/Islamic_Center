@@ -195,7 +195,7 @@
         {% for news in news_items %}
         <div class="news-card" style="cursor: pointer;" onclick="openModal(`{{ news.title|escapejs }}`, 'News', `{{ news.date|date:'F d, Y'|escapejs }}`, '', '', `{% if news.banner %}{{ news.banner.url }}{% endif %}`, `desc-news-{{ news.pk }}`)">
             {% if news.banner %}
-            <img src="{{ news.banner.url }}" alt="{{ news.title }}" class="news-image">
+            <img src="{{ news.banner.url }}" alt="{{ news.title }}" class="news-image" loading="lazy">
             {% endif %}
             <div class="news-content">
                 <span class="news-badge">News</span>
@@ -224,7 +224,7 @@
 <div class="modal-overlay" id="detailModal" onclick="closeModal(event)">
     <div class="modal-content-box" onclick="event.stopPropagation()">
         <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
-        <img id="modalImg" src="" alt="Banner" style="width: 100%; max-height: 400px; object-fit: cover; display: none;">
+        <img id="modalImg" src="" alt="Banner" style="width: 100%; max-height: 400px; object-fit: cover; display: none;" loading="lazy">
         <div style="padding: 2.5rem;">
             <span id="modalBadge" class="news-badge" style="display:none;"></span>
             <h2 id="modalTitle" style="font-size: 2rem; color: var(--text-main); margin-bottom: 1rem; font-weight: 800;"></h2>
