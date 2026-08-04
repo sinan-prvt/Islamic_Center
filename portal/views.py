@@ -4,11 +4,7 @@ from .models import Member, Program, Gallery, Donation, Expense, MonthlyDonor
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 
-def create_secret_admin(request):
-    if not User.objects.filter(username='admin').exists():
-        User.objects.create_superuser('admin', 'admin@example.com', 'admin12345')
-        return HttpResponse('<h1>Success!</h1><p>Admin user created.</p><p>Username: <b>admin</b></p><p>Password: <b>admin12345</b></p><p>You can now go to <a href="/login/">Login Page</a> and log in. Once done, you should remove this route.</p>')
-    return HttpResponse('<h1>Already Exists!</h1><p>The admin user already exists.</p><p>Username: admin</p><p>Password: admin12345</p><p>Go to <a href="/login/">Login Page</a></p>')
+
 
 def home(request):
     latest_news = Program.objects.filter(program_type='news').first()
@@ -148,7 +144,9 @@ def transparency(request):
     }
     return render(request, 'transparency.html', context)
 
-@login_required(login_url='/login/')
+from django.contrib.admin.views.decorators import staff_member_required
+
+@staff_member_required(login_url='/login/')
 def dashboard(request):
     # Financial Stats
     monthly_income = sum(d.amount for d in Donation.objects.filter(donation_type='monthly'))
