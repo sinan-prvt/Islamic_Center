@@ -114,7 +114,7 @@
         </div>
         {% endif %}
 
-        <form method="post" action="{% url 'login' %}" onsubmit="document.getElementById('login-btn').innerHTML = '<i class=\'fas fa-spinner fa-spin\'></i> Processing...'; document.getElementById('login-btn').style.opacity = '0.7'; document.getElementById('login-btn').style.pointerEvents = 'none';">
+        <form method="post" action="{% url 'login' %}" id="loginForm">
             {% csrf_token %}
             
             <div class="form-group">
@@ -132,4 +132,13 @@
         </form>
     </div>
 </div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    var btn = document.getElementById('login-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+});
+</script>
 {% endblock %}
