@@ -119,15 +119,23 @@
     .modal-close:hover { background: rgba(0,0,0,0.8); }
 
     @media (max-width: 600px) {
-        .event-card { flex-direction: column; }
-        .event-date-block { padding: 0.75rem 1rem; flex-direction: row; gap: 10px; }
-        .event-day { font-size: 1.5rem; margin: 0; }
-        .event-month { font-size: 1rem; }
-        .event-year { font-size: 0.85rem; }
-        .event-details { padding: 1.25rem; }
-        .event-details h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
-        .event-meta { gap: 10px; font-size: 0.85rem; margin-bottom: 0.5rem; }
+        /* Event Card Mobile - Left Date Square */
+        .event-card { flex-direction: row; }
+        .event-date-block { 
+            min-width: 85px; 
+            padding: 1rem 0.5rem; 
+            flex-direction: column; 
+            gap: 0;
+        }
+        .event-month { font-size: 0.85rem; }
+        .event-day { font-size: 1.75rem; margin: 2px 0; }
+        .event-year { font-size: 0.75rem; }
         
+        .event-details { padding: 1rem; }
+        .event-details h3 { font-size: 1.15rem; margin-bottom: 0.5rem; line-height: 1.3; }
+        .event-meta { gap: 8px; font-size: 0.8rem; margin-bottom: 0.5rem; flex-direction: column; }
+        
+        /* News Card Mobile */
         .news-image { height: 200px; }
         .news-content { padding: 1.5rem; }
         .news-title { font-size: 1.35rem; }
