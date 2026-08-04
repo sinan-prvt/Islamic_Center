@@ -321,6 +321,10 @@
         justify-content: flex-end;
     }
 
+    .mobile-logout {
+        display: none;
+    }
+
     .admin-brand {
         color: #94a3b8;
         font-weight: 800;
@@ -473,9 +477,18 @@
             padding: 12px 15px;
         }
         
+        .desktop-logout {
+            display: none !important;
+        }
+        
+        .mobile-logout {
+            display: block;
+            margin-top: 10px;
+        }
+
         .admin-logout {
-            margin: 0 15px;
-            width: calc(100% - 30px) !important;
+            margin: 0;
+            width: 100% !important;
             justify-content: center;
         }
 
@@ -804,8 +817,16 @@
                 <a href="{% url 'manage_admins' %}" class="admin-nav-link {% if '/manage/admins/' in request.path %}active{% endif %}">
                     <i class="fas fa-user-shield" style="color: #6366f1;"></i> Admin Users
                 </a>
+                <div class="mobile-logout" style="padding: 10px 15px;">
+                    <form action="{% url 'logout' %}" method="post" style="margin: 0; padding: 0;">
+                        {% csrf_token %}
+                        <button type="submit" class="admin-logout" style="border: none; cursor: pointer; font-family: inherit;">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </form>
+                </div>
             </div>
-            <div class="admin-logout-container">
+            <div class="admin-logout-container desktop-logout">
                 <form action="{% url 'logout' %}" method="post" style="margin: 0; padding: 0;">
                     {% csrf_token %}
                     <button type="submit" class="admin-logout" style="border: none; cursor: pointer; font-family: inherit;">
