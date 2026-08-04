@@ -84,9 +84,7 @@
                             <td>{{ admin.email }}</td>
                             <td style="display: flex; gap: 10px;">
                                 <a href="{% url 'edit_admin' admin.id %}" class="admin-quick-action-btn" style="background: #3b82f6; color: white;"><i class="fas fa-edit"></i></a>
-                                {% if request.user.pk != admin.pk %}
                                 <a href="{% url 'delete_admin' admin.id %}" class="admin-quick-action-btn" style="background: #ef4444; color: white;"><i class="fas fa-trash"></i></a>
-                                {% endif %}
                             </td>
                         </tr>
                         {% empty %}
