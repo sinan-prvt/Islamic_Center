@@ -509,10 +509,17 @@
         }
 
         /* Reduce footer size on mobile */
+        {% if not '/manage/' in request.path and not '/dashboard/' in request.path %}
         footer {
             padding: 1.5rem 1.5rem 5rem 1.5rem !important; /* Extra bottom padding for floating nav */
             font-size: 0.75rem !important;
         }
+        {% else %}
+        footer {
+            padding: 1.5rem !important;
+            font-size: 0.75rem !important;
+        }
+        {% endif %}
         
         footer p {
             font-size: 0.75rem !important;
@@ -617,9 +624,11 @@
         }
 
         /* Bottom App Navigation */
+        {% if not '/manage/' in request.path and not '/dashboard/' in request.path %}
         body {
             padding-bottom: 70px; /* Space for bottom nav */
         }
+        {% endif %}
         
         .bottom-nav {
             display: flex;
