@@ -132,8 +132,13 @@
             font-size: 1.5rem;
         }
         .tables-grid {
+            grid-template-columns: 1fr;
             gap: 2rem;
             width: 100%;
+        }
+        .tables-grid > div {
+            min-width: 0; /* Prevent grid blowout */
+            max-width: 100vw;
         }
         .table-responsive {
             display: block;
