@@ -2,6 +2,7 @@ services:
   - type: web
     name: skssf-portal
     env: python
+    plan: free
     buildCommand: "./build.sh"
     startCommand: "gunicorn skssf_portal.wsgi:application"
     envVars:
