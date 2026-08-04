@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: skssf-portal
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn skssf_portal.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: DEBUG
+        value: "False"
+      - key: DATABASE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
