@@ -134,11 +134,17 @@
         .tables-grid {
             gap: 2rem;
             width: 100%;
-            overflow-x: hidden;
+        }
+        .ledger-table {
+            display: block;
+            width: 100%;
+            overflow-x: auto;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
         }
         .ledger-table th, .ledger-table td {
             font-size: 0.85rem;
-            padding: 0.5rem 0;
+            padding: 0.75rem 1rem;
         }
         .fund-card {
             padding: 2.5rem 1.5rem;
