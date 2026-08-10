@@ -93,13 +93,23 @@
         </div>
     </div>
 
-    <div class="bg-white p-10 md:p-16 rounded-[20px] shadow-[0_4px_15px_rgba(0,0,0,0.05)] text-center border border-[rgba(0,0,0,0.05)] border-t-[5px] border-t-primary max-w-[600px] mx-auto mb-12">
-        <h2 class="text-[1.5rem] md:text-[2.2rem] text-textmain mb-4 font-bold">Support Our Cause</h2>
-        <p class="text-textmuted mb-8 text-[0.95rem] md:text-[1.1rem]">Make a one-time contribution to support our community initiatives, medical aid, and special events.</p>
-        <div class="my-6 md:my-12 text-primary text-[4rem] md:text-[6rem]">
+    <div class="bg-white p-8 md:p-10 rounded-2xl shadow-lg border border-slate-100 text-center max-w-[500px] mx-auto mb-16 relative overflow-hidden">
+        <!-- Accent bar -->
+        <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-[#10b981] to-[#059669]"></div>
+        
+        <!-- Icon -->
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-50 text-[#10b981] text-3xl mb-5 shadow-sm">
             <i class="fas fa-hand-holding-heart"></i>
         </div>
-        <a href="#" class="inline-block bg-amber-400 text-slate-800 px-8 md:px-12 py-4 md:py-5 text-[1.1rem] md:text-[1.25rem] font-bold no-underline rounded-full transition-all duration-200 shadow-[0_4px_10px_rgba(251,191,36,0.3)] mt-4 hover:bg-amber-500 hover:shadow-[0_6px_15px_rgba(251,191,36,0.4)] hover:-translate-y-1" onclick="alert('Payment Gateway Integration Pending')">Donate Now</a>
+        
+        <!-- Content -->
+        <h2 class="text-2xl md:text-3xl text-slate-800 mb-3 font-bold font-outfit">Support Our Cause</h2>
+        <p class="text-slate-500 mb-8 text-sm md:text-base leading-relaxed px-2 md:px-4">Make a one-time contribution to support our community initiatives, medical aid, and special events.</p>
+        
+        <!-- Button -->
+        <a href="#" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-slate-900 px-8 py-3.5 text-base font-bold rounded-full transition-all duration-300 shadow-[0_4px_10px_rgba(251,191,36,0.25)] hover:shadow-[0_6px_15px_rgba(251,191,36,0.4)] hover:-translate-y-0.5 w-full md:w-auto" onclick="alert('Payment Gateway Integration Pending')">
+            Donate Now <i class="fas fa-arrow-right text-sm"></i>
+        </a>
     </div>
 </div>
 {% endblock %}
