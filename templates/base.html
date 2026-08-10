@@ -58,6 +58,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -376,6 +377,54 @@
         {% endfor %}
         {% endif %}
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+    </script>
+
+    <!-- Modern Custom Cursor -->
+    <div class="custom-cursor hidden md:block"></div>
+    <style>
+        @media (min-width: 768px) {
+            body, a, button, input, textarea, select {
+                cursor: none !important;
+            }
+            .custom-cursor {
+                width: 24px;
+                height: 24px;
+                border: 2px solid #10b981;
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 999999;
+                transform: translate(-50%, -50%);
+                transition: width 0.2s, height 0.2s, background-color 0.2s;
+            }
+            .custom-cursor.hover {
+                width: 45px;
+                height: 45px;
+                background-color: rgba(16, 185, 129, 0.2);
+                border-color: rgba(16, 185, 129, 0.5);
+            }
+        }
+    </style>
+    <script>
+        if (window.innerWidth >= 768) {
+            const cursor = document.querySelector('.custom-cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            document.querySelectorAll('a, button, input, textarea, select').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+        }
+    </script>
 </body>
 
 </html>
