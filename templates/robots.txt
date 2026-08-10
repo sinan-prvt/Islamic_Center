@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: {{ request.scheme }}://{{ request.get_host }}/sitemap.xml
