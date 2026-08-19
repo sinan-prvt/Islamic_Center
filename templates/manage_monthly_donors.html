@@ -1,133 +1,176 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Monthly Donor Register - SKSSF Administration{% endblock %}
 
 {% block content %}
-<div class="py-16 bg-slate-50 min-h-[80vh]">
-    <div class="container mx-auto px-4 max-w-[1200px]">
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-12 md:py-16 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <a href="{% url 'dashboard' %}" class="hover:text-amber-300 no-underline text-emerald-200 transition-colors">Admin Dashboard</a>
+            <span>&bull;</span>
+            <span class="text-amber-400">Monthly Donors</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 text-white">Monthly Donor Register</h1>
+        <p class="font-malayalam text-base text-emerald-100 max-w-xl mx-auto font-medium">
+            സഹചാരി മാസാന്ത സംഭാവനക്കാരുടെ വിവരങ്ങൾ
+        </p>
+    </div>
+</section>
+
+<!-- Main Manage Content -->
+<section class="bg-[#fafaf9] py-10 md:py-16 min-h-[80vh]">
+    <div class="container mx-auto px-4 md:px-8 max-w-6xl">
         
-        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8 pb-4 border-b-2 border-slate-200 gap-4">
-            <h1 class="text-[1.5rem] md:text-[2rem] text-textmain flex items-center gap-3 m-0 font-bold"><i class="fas fa-handshake text-[#10b981]"></i> Monthly Donor Register</h1>
-            <a href="{% url 'dashboard' %}" class="inline-block bg-slate-500 text-white px-6 py-2.5 rounded-full font-bold no-underline transition-colors hover:bg-slate-600 text-center">Back to Dashboard</a>
+        <!-- Tab Switcher Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 pb-4 border-b border-slate-200">
+            <div class="flex gap-2">
+                <button class="tab-btn {% if not request.GET.month %}active{% endif %} px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm cursor-pointer transition-all border border-slate-200" onclick="switchTab('registry', this)">
+                    <i class="fas fa-user-plus mr-1.5"></i> Donor Registry
+                </button>
+                <button class="tab-btn {% if request.GET.month %}active{% endif %} px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm cursor-pointer transition-all border border-slate-200" onclick="switchTab('tracker', this)">
+                    <i class="fas fa-calendar-check mr-1.5"></i> Payment Tracker
+                </button>
+            </div>
+            <a href="{% url 'dashboard' %}" class="bg-slate-800 hover:bg-slate-900 text-white px-5 py-2 rounded-full font-bold text-xs no-underline transition-colors shadow-sm">
+                &larr; Back to Dashboard
+            </a>
         </div>
 
-        <div class="flex flex-col md:flex-row gap-2 md:gap-4 border-b-0 md:border-b-2 md:border-slate-200 mb-8">
-            <button class="tab-btn {% if not request.GET.month %}active{% endif %} md:bg-transparent md:border-none p-3 md:p-4 md:px-8 text-center text-[1.1rem] font-bold text-textmuted cursor-pointer md:border-b-4 border-transparent transition-all hover:text-primary rounded-lg md:rounded-none border border-slate-200" onclick="switchTab('registry', this)"><i class="fas fa-user-plus mr-2"></i> Donor Registry</button>
-            <button class="tab-btn {% if request.GET.month %}active{% endif %} md:bg-transparent md:border-none p-3 md:p-4 md:px-8 text-center text-[1.1rem] font-bold text-textmuted cursor-pointer md:border-b-4 border-transparent transition-all hover:text-primary rounded-lg md:rounded-none border border-slate-200" onclick="switchTab('tracker', this)"><i class="fas fa-calendar-check mr-2"></i> Monthly Payment Details</button>
-        </div>
-
+        <!-- TAB 1: DONOR REGISTRY -->
         <div id="registry" class="tab-content {% if not request.GET.month %}block{% else %}hidden{% endif %} animate-[fadeIn_0.4s]">
-            <div class="grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-8 items-start">
-                <div class="bg-white p-6 md:p-8 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] md:sticky md:top-8">
-                <h2 class="text-[1.2rem] text-textmain mb-6 font-bold">Register New Donor</h2>
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="mb-5">
-                        <label class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Full Name</label>
-                        {{ form.name }}
-                    </div>
-                    <div class="mb-5">
-                        <label class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Phone Number (Used for Login)</label>
-                        {{ form.phone }}
-                    </div>
-                    <div class="mb-5">
-                        <label class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Monthly Commitment (₹)</label>
-                        {{ form.monthly_commitment }}
-                        <small class="text-slate-500 mt-1 block">How much they agree to pay each month.</small>
-                    </div>
-                    <div class="mb-5 flex items-center gap-2.5">
-                        {{ form.is_active }} <label class="m-0 font-semibold text-textmuted text-[0.9rem]">Active Donor</label>
-                    </div>
-                    <button type="submit" class="w-full p-3 bg-primary text-white border-none rounded-lg font-bold cursor-pointer mt-4 transition-colors hover:bg-[#059669]">Register Donor</button>
-                </form>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] overflow-hidden">
-                <div class="block w-full overflow-x-auto whitespace-nowrap">
-                    <table class="w-full border-collapse">
-                        <thead>
-                            <tr>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Name</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Phone</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Monthly Amt</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Join Date</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Status</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for donor in donors %}
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-semibold text-textmain">{{ donor.name }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">{{ donor.phone }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-bold text-primary">₹{{ donor.monthly_commitment }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">{{ donor.join_date|date:"M d, Y" }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">
-                                    {% if donor.is_active %}
-                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-[0.8rem] font-bold">Active</span>
-                                    {% else %}
-                                    <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-[0.8rem] font-bold">Inactive</span>
-                                    {% endif %}
-                                </td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 flex gap-2.5">
-                                    <a href="{% url 'edit_monthly_donor' donor.pk %}" class="text-blue-500 transition-colors hover:text-blue-700" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="{% url 'delete_monthly_donor' donor.pk %}" class="text-red-500 transition-colors hover:text-red-700" title="Delete"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="6" class="text-center text-textmuted p-8 border-b border-slate-100">No monthly donors registered yet.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left 4 Cols: Registration Form Card -->
+                <div class="lg:col-span-4 bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-100 lg:sticky lg:top-8">
+                    <h3 class="font-serif text-xl font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
+                        <i class="fas fa-user-plus text-[#045a33]"></i> Register New Donor
+                    </h3>
+                    <form method="POST" class="form-card space-y-4">
+                        {% csrf_token %}
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Full Name</label>
+                            {{ form.name }}
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Phone Number (For Login)</label>
+                            {{ form.phone }}
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Monthly Commitment (₹)</label>
+                            {{ form.monthly_commitment }}
+                            <small class="text-slate-400 text-[11px] mt-1 block">Agreed monthly donation amount.</small>
+                        </div>
+                        <div class="flex items-center gap-2.5 pt-1">
+                            {{ form.is_active }} <label class="m-0 font-bold text-xs text-slate-700">Active Status</label>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-[#045a33] hover:bg-[#064e3b] text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-md transition-all hover:scale-[1.01] cursor-pointer mt-2">
+                            Register Donor
+                        </button>
+                    </form>
                 </div>
-            </div>
+
+                <!-- Right 8 Cols: Registered Donors Table Card -->
+                <div class="lg:col-span-8 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                        <h3 class="font-serif text-lg font-bold text-slate-900 m-0">Registered Donors List</h3>
+                        <span class="bg-emerald-100 text-[#045a33] text-xs font-bold px-3 py-1 rounded-full">{{ donors|length }} Donors</span>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs md:text-sm">
+                            <thead>
+                                <tr class="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[11px] border-b border-slate-100">
+                                    <th class="p-4 text-left font-semibold">Name</th>
+                                    <th class="p-4 text-left font-semibold">Phone</th>
+                                    <th class="p-4 text-left font-semibold">Monthly Commitment</th>
+                                    <th class="p-4 text-left font-semibold">Join Date</th>
+                                    <th class="p-4 text-left font-semibold">Status</th>
+                                    <th class="p-4 text-center font-semibold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                {% for donor in donors %}
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{{ donor.name }}</td>
+                                    <td class="p-4 text-slate-600 font-medium whitespace-nowrap">{{ donor.phone }}</td>
+                                    <td class="p-4 font-sans font-bold text-[#045a33] whitespace-nowrap">₹{{ donor.monthly_commitment }}</td>
+                                    <td class="p-4 text-slate-500 whitespace-nowrap">{{ donor.join_date|date:"M d, Y" }}</td>
+                                    <td class="p-4 whitespace-nowrap">
+                                        {% if donor.is_active %}
+                                        <span class="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-[11px] font-bold">Active</span>
+                                        {% else %}
+                                        <span class="bg-rose-100 text-rose-800 px-3 py-1 rounded-full text-[11px] font-bold">Inactive</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="p-4 text-center whitespace-nowrap">
+                                        <div class="flex items-center justify-center gap-3">
+                                            <a href="{% url 'edit_monthly_donor' donor.pk %}" class="text-blue-600 hover:text-blue-800 transition-colors" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <a href="{% url 'delete_monthly_donor' donor.pk %}" class="text-rose-600 hover:text-rose-800 transition-colors" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center text-slate-400 p-8">No monthly donors registered yet.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
             </div>
         </div>
 
+        <!-- TAB 2: PAYMENT TRACKER -->
         <div id="tracker" class="tab-content {% if request.GET.month %}block{% else %}hidden{% endif %} animate-[fadeIn_0.4s]">
-            <div class="flex flex-col md:flex-row md:justify-between items-start md:items-center mb-8 gap-4">
-                <h2 class="text-[1.25rem] md:text-[1.5rem] text-textmain flex items-center gap-2.5 m-0 font-bold">
-                    <i class="fas fa-calendar-check text-blue-500"></i> Payment Tracker - {{ month_name }}
-                </h2>
-                <form method="GET" class="flex flex-col md:flex-row gap-2.5 items-stretch md:items-center w-full md:w-auto">
-                    <label for="month" class="font-bold text-textmuted">Select Month:</label>
-                    <input type="month" id="month" name="month" value="{{ selected_month }}" class="p-2 border border-slate-300 rounded-md outline-none focus:border-primary w-full md:w-auto" onchange="this.form.submit()">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4 bg-white p-6 rounded-3xl shadow-lg border border-slate-100">
+                <h3 class="font-serif text-xl font-bold text-slate-900 flex items-center gap-2 m-0">
+                    <i class="fas fa-calendar-check text-blue-600"></i> Payment Tracker &bull; <span class="text-[#045a33]">{{ month_name }}</span>
+                </h3>
+                <form method="GET" class="flex items-center gap-3 w-full sm:w-auto">
+                    <label for="month" class="text-xs font-bold uppercase tracking-wider text-slate-600 shrink-0">Select Month:</label>
+                    <input type="month" id="month" name="month" value="{{ selected_month }}" class="p-2 border border-slate-200 rounded-xl text-xs font-bold text-slate-900 bg-slate-50 focus:outline-none focus:border-[#045a33]" onchange="this.form.submit()">
                 </form>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <!-- Unpaid Donors -->
-                <div class="bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] overflow-hidden border-t-[4px] border-t-red-500">
-                    <div class="p-6 bg-red-50 border-b border-red-200">
-                        <h3 class="m-0 text-red-800 text-[1.1rem] md:text-[1.2rem] font-bold"><i class="fas fa-exclamation-circle mr-2"></i> Pending Payments ({{ unpaid_donors|length }})</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                
+                <!-- Pending Payments -->
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border-t-4 border-t-rose-500 border border-slate-100">
+                    <div class="p-5 bg-rose-50/70 border-b border-rose-100 flex justify-between items-center">
+                        <h4 class="font-serif text-base font-bold text-rose-900 m-0 flex items-center gap-2">
+                            <i class="fas fa-exclamation-circle text-rose-600"></i> Pending Payments ({{ unpaid_donors|length }})
+                        </h4>
                     </div>
-                    <div class="block w-full overflow-x-auto whitespace-nowrap">
-                        <table class="w-full border-collapse">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs md:text-sm">
                             <thead>
-                                <tr>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Name</th>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Phone</th>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Expected Amt</th>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Action</th>
+                                <tr class="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[11px] border-b border-slate-100">
+                                    <th class="p-4 text-left font-semibold">Name</th>
+                                    <th class="p-4 text-left font-semibold">Phone</th>
+                                    <th class="p-4 text-left font-semibold">Expected Amt</th>
+                                    <th class="p-4 text-center font-semibold">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="divide-y divide-slate-100">
                                 {% for donor in unpaid_donors %}
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-semibold">{{ donor.name }}</td>
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">{{ donor.phone }}</td>
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-bold text-textmuted">₹{{ donor.monthly_commitment }}</td>
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">
-                                        <a href="https://wa.me/{{ donor.whatsapp_phone }}?text={{ donor.whatsapp_msg }}" target="_blank" class="inline-flex items-center gap-1.5 bg-[#25D366] text-white px-3 py-1.5 rounded-md no-underline text-[0.85rem] font-bold transition-opacity hover:opacity-90">
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{{ donor.name }}</td>
+                                    <td class="p-4 text-slate-600 font-medium whitespace-nowrap">{{ donor.phone }}</td>
+                                    <td class="p-4 font-sans font-bold text-rose-600 whitespace-nowrap">₹{{ donor.monthly_commitment }}</td>
+                                    <td class="p-4 text-center whitespace-nowrap">
+                                        <a href="https://wa.me/{{ donor.whatsapp_phone }}?text={{ donor.whatsapp_msg }}" target="_blank" class="inline-flex items-center gap-1.5 bg-[#25D366] hover:bg-emerald-600 text-white px-3.5 py-1.5 rounded-full text-xs font-bold no-underline shadow-sm transition-colors">
                                             <i class="fab fa-whatsapp"></i> Remind
                                         </a>
                                     </td>
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="4" class="text-center p-6 border-b border-slate-100 text-slate-500">All active donors have paid this month!</td>
+                                    <td colspan="4" class="text-center p-8 text-slate-400 text-xs">All active donors have paid this month!</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -135,71 +178,79 @@
                     </div>
                 </div>
 
-                <!-- Paid Donors -->
-                <div class="bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] overflow-hidden border-t-[4px] border-t-primary">
-                    <div class="p-6 bg-green-50 border-b border-green-200">
-                        <h3 class="m-0 text-green-800 text-[1.1rem] md:text-[1.2rem] font-bold"><i class="fas fa-check-circle mr-2"></i> Received Payments ({{ paid_donors|length }})</h3>
+                <!-- Received Payments -->
+                <div class="bg-white rounded-3xl shadow-xl overflow-hidden border-t-4 border-t-emerald-600 border border-slate-100">
+                    <div class="p-5 bg-emerald-50/70 border-b border-emerald-100 flex justify-between items-center">
+                        <h4 class="font-serif text-base font-bold text-emerald-950 m-0 flex items-center gap-2">
+                            <i class="fas fa-check-circle text-emerald-600"></i> Received Payments ({{ paid_donors|length }})
+                        </h4>
                     </div>
-                    <div class="block w-full overflow-x-auto whitespace-nowrap">
-                        <table class="w-full border-collapse">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs md:text-sm">
                             <thead>
-                                <tr>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Name</th>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Date Paid</th>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Amount</th>
-                                    <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Action</th>
+                                <tr class="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[11px] border-b border-slate-100">
+                                    <th class="p-4 text-left font-semibold">Name</th>
+                                    <th class="p-4 text-left font-semibold">Date Paid</th>
+                                    <th class="p-4 text-left font-semibold">Amount</th>
+                                    <th class="p-4 text-center font-semibold">Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="divide-y divide-slate-100">
                                 {% for donor in paid_donors %}
-                                <tr class="hover:bg-slate-50 transition-colors">
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-semibold">{{ donor.name }}</td>
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">{{ donor.payment_date|date:"M d, Y" }}</td>
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-bold text-primary">₹{{ donor.paid_amount }}</td>
-                                    <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">
-                                        <a href="https://wa.me/{{ donor.whatsapp_phone }}?text={{ donor.whatsapp_msg }}" target="_blank" class="inline-flex items-center gap-1.5 bg-primary text-white px-3 py-1.5 rounded-md no-underline text-[0.85rem] font-bold transition-opacity hover:opacity-90">
+                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                    <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{{ donor.name }}</td>
+                                    <td class="p-4 text-slate-500 whitespace-nowrap">{{ donor.payment_date|date:"M d, Y" }}</td>
+                                    <td class="p-4 font-sans font-bold text-[#045a33] whitespace-nowrap">₹{{ donor.paid_amount }}</td>
+                                    <td class="p-4 text-center whitespace-nowrap">
+                                        <a href="https://wa.me/{{ donor.whatsapp_phone }}?text={{ donor.whatsapp_msg }}" target="_blank" class="inline-flex items-center gap-1.5 bg-[#045a33] hover:bg-[#064e3b] text-white px-3.5 py-1.5 rounded-full text-xs font-bold no-underline shadow-sm transition-colors">
                                             <i class="fab fa-whatsapp"></i> Thank You
                                         </a>
                                     </td>
                                 </tr>
                                 {% empty %}
                                 <tr>
-                                    <td colspan="4" class="text-center p-6 border-b border-slate-100 text-slate-500">No payments received yet this month.</td>
+                                    <td colspan="4" class="text-center p-8 text-slate-400 text-xs">No payments received yet this month.</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
 
     </div>
-</div>
+</section>
 
 <style>
-    /* Styling for Django generated forms in this page */
     .form-card input, .form-card select, .form-card textarea {
         width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
         font-family: inherit;
+        font-size: 0.875rem;
+        color: #0f172a;
         outline: none;
-        transition: border-color 0.2s;
+        transition: all 0.2s ease;
     }
     .form-card input:focus, .form-card select:focus, .form-card textarea:focus {
-        border-color: #10b981;
+        border-color: #045a33;
+        background-color: #ffffff;
     }
     
-    .tab-btn.active {
-        color: #10b981 !important;
-        border-bottom-color: #10b981 !important;
+    .tab-btn {
+        background-color: #ffffff;
+        color: #64748b;
     }
-    @media (max-width: 768px) {
-        .tab-btn.active {
-            background-color: #ecfdf5 !important;
-        }
+
+    .tab-btn.active {
+        background-color: #045a33 !important;
+        color: #ffffff !important;
+        border-color: #045a33 !important;
+        box-shadow: 0 4px 10px rgba(4, 90, 51, 0.25);
     }
 </style>
 
