@@ -1,130 +1,176 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Manage Donations - SKSSF Administration{% endblock %}
 
 {% block content %}
-<div class="py-16 bg-slate-50 min-h-[80vh]">
-    <div class="container mx-auto px-4 max-w-[1200px]">
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-12 md:py-16 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <a href="{% url 'dashboard' %}" class="hover:text-amber-300 no-underline text-emerald-200 transition-colors">Admin Dashboard</a>
+            <span>&bull;</span>
+            <span class="text-amber-400">Donations</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 text-white">Manage General Donations</h1>
+        <p class="font-malayalam text-base text-emerald-100 max-w-xl mx-auto font-medium">
+            പൊതു സംഭാവനകളുടെ നിയന്ത്രണം
+        </p>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="bg-[#fafaf9] py-10 md:py-16 min-h-[80vh]">
+    <div class="container mx-auto px-4 md:px-8 max-w-6xl">
         
-        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8 pb-4 border-b-2 border-slate-200 gap-4">
-            <h1 class="text-[1.5rem] md:text-[2rem] text-textmain flex items-center gap-3 m-0 font-bold"><i class="fas fa-hand-holding-usd text-[#10b981]"></i> Manage Donations</h1>
-            <a href="{% url 'dashboard' %}" class="inline-block bg-slate-500 text-white px-6 py-2.5 rounded-full font-bold no-underline transition-colors hover:bg-slate-600 text-center">Back to Dashboard</a>
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-slate-200">
+            <h3 class="font-serif text-xl font-bold text-slate-900 m-0">Donation Entry & Public Ledger</h3>
+            <a href="{% url 'dashboard' %}" class="bg-slate-800 hover:bg-slate-900 text-white px-5 py-2 rounded-full font-bold text-xs no-underline transition-colors shadow-sm">
+                &larr; Back to Dashboard
+            </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-8 items-start">
-            <!-- Form Column -->
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] md:sticky md:top-8">
-                <h2 class="text-[1.2rem] text-textmain mb-6 font-bold">Add New Donation</h2>
-                <form method="POST">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left 4 Cols: Add Form -->
+            <div class="lg:col-span-4 bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-100 lg:sticky lg:top-8">
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-hand-holding-heart text-[#045a33]"></i> Record New Donation
+                </h3>
+                
+                <form method="POST" class="form-card space-y-4">
                     {% csrf_token %}
 
-                    <div class="mb-5">
-                        <label for="{{ form.donor_name.id_for_label }}" class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Donor Name</label>
+                    <div>
+                        <label for="{{ form.donor_name.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Donor Name</label>
                         {{ form.donor_name }}
                     </div>
 
-                    <div class="mb-5">
-                        <label for="{{ form.donation_type.id_for_label }}" class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Fund Type</label>
+                    <div>
+                        <label for="{{ form.donation_type.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Fund Type</label>
                         {{ form.donation_type }}
                     </div>
 
-                    <div class="mb-5">
-                        <label for="{{ form.amount.id_for_label }}" class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Amount (₹)</label>
+                    <div>
+                        <label for="{{ form.amount.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Amount (₹)</label>
                         {{ form.amount }}
                     </div>
 
-                    <div class="mb-5">
-                        <label for="{{ form.date.id_for_label }}" class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Date</label>
+                    <div>
+                        <label for="{{ form.date.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Date</label>
                         {{ form.date }}
                     </div>
 
-                    <div class="mb-5">
-                        <label for="{{ form.monthly_donor.id_for_label }}" class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Link to Monthly Donor (Optional)</label>
+                    <div>
+                        <label for="{{ form.monthly_donor.id_for_label }}" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Link to Monthly Donor (Optional)</label>
                         {{ form.monthly_donor }}
                     </div>
 
-                    <div class="mb-5 flex items-center gap-2.5">
+                    <div class="flex items-center gap-2.5 pt-1">
                         {{ form.is_public }}
-                        <label for="{{ form.is_public.id_for_label }}" class="m-0 font-semibold text-textmuted text-[0.9rem]">Show publicly on website?</label>
+                        <label for="{{ form.is_public.id_for_label }}" class="m-0 font-bold text-xs text-slate-700">Show publicly on website?</label>
                     </div>
 
-                    <button type="submit" class="w-full p-3 bg-primary text-white border-none rounded-lg font-bold cursor-pointer mt-4 transition-colors hover:bg-[#059669]">Add Donation</button>
+                    <button type="submit" class="w-full py-3.5 bg-[#045a33] hover:bg-[#064e3b] text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-md transition-all hover:scale-[1.01] cursor-pointer mt-2">
+                        Add Donation Record
+                    </button>
                 </form>
             </div>
 
-            <!-- List Column -->
-            <div class="bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] overflow-hidden">
-                <div class="block w-full overflow-x-auto whitespace-nowrap">
-                    <table class="w-full border-collapse">
+            <!-- Right 8 Cols: List Table -->
+            <div class="lg:col-span-8 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 m-0">Donation Records</h3>
+                    <span class="bg-emerald-100 text-[#045a33] text-xs font-bold px-3 py-1 rounded-full">{{ donations|length }} Records</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs md:text-sm">
                         <thead>
-                            <tr>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Date</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Donor Name</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Type</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Amount</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Public</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Actions</th>
+                            <tr class="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[11px] border-b border-slate-100">
+                                <th class="p-4 text-left font-semibold">Date</th>
+                                <th class="p-4 text-left font-semibold">Donor Name</th>
+                                <th class="p-4 text-left font-semibold">Type</th>
+                                <th class="p-4 text-left font-semibold">Amount</th>
+                                <th class="p-4 text-center font-semibold">Public</th>
+                                <th class="p-4 text-center font-semibold">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-slate-100">
                             {% for donation in donations %}
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">{{ donation.date }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-semibold text-textmain">{{ donation.donor_name }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100"><span class="bg-slate-200 text-slate-800 px-2 py-1 rounded-full text-[0.8rem]">{{ donation.get_donation_type_display }}</span></td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-bold text-primary">₹{{ donation.amount }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">
+                            <tr class="hover:bg-slate-50/80 transition-colors">
+                                <td class="p-4 text-slate-500 whitespace-nowrap">{{ donation.date|date:"M d, Y" }}</td>
+                                <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{{ donation.donor_name }}</td>
+                                <td class="p-4 whitespace-nowrap">
+                                    <span class="bg-emerald-100 text-emerald-900 font-bold px-3 py-1 rounded-full text-[11px]">{{ donation.get_donation_type_display }}</span>
+                                </td>
+                                <td class="p-4 font-sans font-bold text-[#045a33] whitespace-nowrap">₹{{ donation.amount }}</td>
+                                <td class="p-4 text-center whitespace-nowrap">
                                     {% if donation.is_public %}
-                                    <i class="fas fa-check text-primary"></i>
+                                    <span class="text-emerald-600 font-bold"><i class="fas fa-check-circle text-sm"></i></span>
                                     {% else %}
-                                    <i class="fas fa-times text-red-500"></i>
+                                    <span class="text-slate-400"><i class="fas fa-times-circle text-sm"></i></span>
                                     {% endif %}
                                 </td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 flex gap-2.5">
-                                    <a href="{% url 'edit_donation' donation.pk %}" class="text-blue-500 transition-colors hover:text-blue-700" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="{% url 'delete_donation' donation.pk %}" class="text-red-500 transition-colors hover:text-red-700" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                <td class="p-4 text-center whitespace-nowrap">
+                                    <div class="flex items-center justify-center gap-3">
+                                        <a href="{% url 'edit_donation' donation.pk %}" class="text-blue-600 hover:text-blue-800 transition-colors" title="Edit"><i class="fas fa-edit"></i></a>
+                                        <a href="{% url 'delete_donation' donation.pk %}" class="text-rose-600 hover:text-rose-800 transition-colors" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="6" class="text-center text-textmuted p-8 border-b border-slate-100">No donations recorded yet.</td>
+                                <td colspan="6" class="text-center text-slate-400 p-8">No donations recorded yet.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
-</div>
+</section>
 
 <style>
-    /* Styling for Django generated forms in this page */
-    .form-card input, .form-card select, .form-card textarea {
+    .form-card input:not([type="checkbox"]), .form-card select, .form-card textarea {
         width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
         font-family: inherit;
+        font-size: 0.875rem;
+        color: #0f172a;
         outline: none;
-        transition: border-color 0.2s;
+        transition: all 0.2s ease;
     }
-    .form-card input:focus, .form-card select:focus, .form-card textarea:focus {
-        border-color: #10b981;
+    .form-card input[type="checkbox"] {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+        padding: 0 !important;
+        accent-color: #045a33;
+        cursor: pointer;
+    }
+    .form-card input:not([type="checkbox"]):focus, .form-card select:focus, .form-card textarea:focus {
+        border-color: #045a33;
+        background-color: #ffffff;
     }
 </style>
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        const memberSelect = document.getElementById("id_member_select");
+        const memberSelect = document.getElementById("id_monthly_donor");
         const donorNameInput = document.getElementById("id_donor_name");
 
         if (memberSelect && donorNameInput) {
             memberSelect.addEventListener("change", function() {
                 if (this.value) {
                     const selectedText = this.options[this.selectedIndex].text;
-                    const nameOnly = selectedText.split(' (')[0]; // Extract just the name before the phone number
-                    
-                    if (donorNameInput.value === "" || donorNameInput.value === "Anubhavi") {
+                    const nameOnly = selectedText.split(' (')[0];
+                    if (donorNameInput.value === "") {
                         donorNameInput.value = nameOnly;
                     }
                 }
