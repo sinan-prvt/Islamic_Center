@@ -91,11 +91,17 @@
 
 <!-- Announcement Ticker Bar (Below Landing Hero) -->
 <div class="bg-[#045a33] text-white py-3 px-4 md:px-8 border-y border-emerald-800 flex items-center gap-3 overflow-hidden shadow-sm relative z-20">
-    <div class="flex items-center gap-1.5 bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded-full text-xs shrink-0 tracking-wide uppercase shadow-sm">
+    <div class="flex items-center gap-1.5 bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded-full text-xs shrink-0 tracking-wide uppercase shadow-sm z-10">
         <i class="fas fa-bell text-xs animate-bounce"></i> NOTICE
     </div>
-    <div class="overflow-hidden whitespace-nowrap w-full">
-        <div class="inline-block animate-marquee text-xs md:text-sm font-medium text-slate-100 tracking-wide">
+    <div class="overflow-hidden whitespace-nowrap w-full flex">
+        <div class="inline-flex animate-marquee shrink-0 items-center text-xs md:text-sm font-medium text-slate-100 tracking-wide">
+            <span class="mx-6">&bull; Sahachari Fund Collection Drive &ndash; Active Unit Campaign</span>
+            <span class="mx-6">&bull; Weekly Majlis & Islamic Classes every Thursday evening after Maghrib</span>
+            <span class="mx-6">&bull; SKSSF Puthupparamba Unit Annual Membership Drive</span>
+            <span class="mx-6">&bull; Educational & Relief Fund applications open for eligible students</span>
+        </div>
+        <div class="inline-flex animate-marquee shrink-0 items-center text-xs md:text-sm font-medium text-slate-100 tracking-wide" aria-hidden="true">
             <span class="mx-6">&bull; Sahachari Fund Collection Drive &ndash; Active Unit Campaign</span>
             <span class="mx-6">&bull; Weekly Majlis & Islamic Classes every Thursday evening after Maghrib</span>
             <span class="mx-6">&bull; SKSSF Puthupparamba Unit Annual Membership Drive</span>
@@ -127,12 +133,11 @@
     }
 
     @keyframes marquee {
-        0% { transform: translateX(100%); }
+        0% { transform: translateX(0%); }
         100% { transform: translateX(-100%); }
     }
     .animate-marquee {
-        display: inline-block;
-        animation: marquee 45s linear infinite;
+        animation: marquee 35s linear infinite;
     }
     .animate-marquee:hover {
         animation-play-state: paused;
