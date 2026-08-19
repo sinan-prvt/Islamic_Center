@@ -217,7 +217,7 @@
             <a href="{% url 'committee' %}" class="font-outfit font-semibold text-[0.95rem] px-4 py-2 rounded-full transition-all duration-300 {% if '/committee/' in request.path %}bg-[#10b981]/10 text-[#059669] font-bold{% else %}text-slate-700 hover:bg-slate-100 hover:text-[#10b981]{% endif %}">Committee</a>
             <a href="{% url 'gallery' %}" class="font-outfit font-semibold text-[0.95rem] px-4 py-2 rounded-full transition-all duration-300 {% if '/gallery/' in request.path %}bg-[#10b981]/10 text-[#059669] font-bold{% else %}text-slate-700 hover:bg-slate-100 hover:text-[#10b981]{% endif %}">Gallery</a>
         </nav>
-        <a href="{% url 'donate' %}" class="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-[#10b981] to-[#059669] !text-white font-outfit font-bold px-6 py-2.5 rounded-full shadow-[0_4px_14px_rgba(16,185,129,0.35)] transition-all duration-300 hover:scale-105 hover:shadow-[0_6px_20px_rgba(16,185,129,0.5)]">
+        <a href="{% url 'donate' %}" class="hidden md:inline-flex items-center gap-2 bg-[#10b981] hover:bg-[#059669] !text-white font-outfit font-bold px-6 py-2.5 rounded-full transition-all duration-300 hover:scale-105 shadow-none">
             <i class="fas fa-heart text-sm"></i> Donate Funds
         </a>
     </header>
