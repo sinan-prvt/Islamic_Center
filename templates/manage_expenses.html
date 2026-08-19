@@ -1,27 +1,52 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Manage Expenses - SKSSF Administration{% endblock %}
 
 {% block content %}
-<div class="py-16 bg-slate-50 min-h-[80vh]">
-    <div class="container mx-auto px-4 max-w-[1200px]">
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-12 md:py-16 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <a href="{% url 'dashboard' %}" class="hover:text-amber-300 no-underline text-emerald-200 transition-colors">Admin Dashboard</a>
+            <span>&bull;</span>
+            <span class="text-amber-400">Expenses</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 text-white">Manage Unit Expenses</h1>
+        <p class="font-malayalam text-base text-emerald-100 max-w-xl mx-auto font-medium">
+            യൂണിറ്റ് ചിലവുകളുടെ നിയന്ത്രണം
+        </p>
+    </div>
+</section>
+
+<!-- Main Content -->
+<section class="bg-[#fafaf9] py-10 md:py-16 min-h-[80vh]">
+    <div class="container mx-auto px-4 md:px-8 max-w-6xl">
         
-        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-8 pb-4 border-b-2 border-slate-200 gap-4">
-            <h1 class="text-[1.5rem] md:text-[2rem] text-textmain flex items-center gap-3 m-0 font-bold"><i class="fas fa-file-invoice-dollar text-red-500"></i> Manage Expenses</h1>
-            <a href="{% url 'dashboard' %}" class="inline-block bg-slate-500 text-white px-6 py-2.5 rounded-full font-bold no-underline transition-colors hover:bg-slate-600 text-center">Back to Dashboard</a>
+        <div class="flex justify-between items-center mb-8 pb-4 border-b border-slate-200">
+            <h3 class="font-serif text-xl font-bold text-slate-900 m-0">Expenditure Tracking & Records</h3>
+            <a href="{% url 'dashboard' %}" class="bg-slate-800 hover:bg-slate-900 text-white px-5 py-2 rounded-full font-bold text-xs no-underline transition-colors shadow-sm">
+                &larr; Back to Dashboard
+            </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_2.5fr] gap-8 items-start">
-            <div class="bg-white p-6 md:p-8 rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] md:sticky md:top-8">
-                <h2 class="text-[1.2rem] text-textmain mb-6 font-bold">Log New Expense</h2>
-                <form method="POST">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left 4 Cols: Add Expense Form -->
+            <div class="lg:col-span-4 bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-100 lg:sticky lg:top-8">
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-4 pb-3 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-file-invoice-dollar text-rose-600"></i> Log New Expense
+                </h3>
+                
+                <form method="POST" class="form-card space-y-4">
                     {% csrf_token %}
-                    <div class="mb-5">
-                        <label class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Title / Name</label>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Title / Name</label>
                         {{ form.title }}
                     </div>
-                    <div class="mb-5">
-                        <label class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Category</label>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Category</label>
                         {{ form.category }}
                         <datalist id="categoryOptions">
                             <option value="Educational Program">
@@ -31,68 +56,91 @@
                             <option value="Other">
                         </datalist>
                     </div>
-                    <div class="mb-5">
-                        <label class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Amount (₹)</label>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Amount (₹)</label>
                         {{ form.amount }}
                     </div>
-                    <div class="mb-5">
-                        <label class="block mb-2 font-semibold text-textmuted text-[0.9rem]">Description (Optional)</label>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Description (Optional)</label>
                         {{ form.description }}
                     </div>
-                    <button type="submit" class="w-full p-3 bg-red-500 text-white border-none rounded-lg font-bold cursor-pointer mt-4 transition-colors hover:bg-red-600">Log Expense</button>
+                    <button type="submit" class="w-full py-3.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs uppercase tracking-wider shadow-md transition-all hover:scale-[1.01] cursor-pointer mt-2">
+                        Log Expense Record
+                    </button>
                 </form>
             </div>
 
-            <div class="bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.05)] overflow-hidden">
-                <div class="block w-full overflow-x-auto whitespace-nowrap">
-                    <table class="w-full border-collapse">
+            <!-- Right 8 Cols: Expenses Table Card -->
+            <div class="lg:col-span-8 bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 m-0">Logged Expenditure List</h3>
+                    <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full">{{ expenses|length }} Expenses</span>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs md:text-sm">
                         <thead>
-                            <tr>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Date</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Title</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Category</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Amount</th>
-                                <th class="p-4 md:px-6 md:py-4 text-left bg-slate-50 font-bold text-textmuted uppercase text-[0.85rem] tracking-[0.5px] border-b border-slate-100">Actions</th>
+                            <tr class="bg-slate-50 text-slate-400 font-bold uppercase tracking-wider text-[11px] border-b border-slate-100">
+                                <th class="p-4 text-left font-semibold">Date</th>
+                                <th class="p-4 text-left font-semibold">Title</th>
+                                <th class="p-4 text-left font-semibold">Category</th>
+                                <th class="p-4 text-left font-semibold">Amount</th>
+                                <th class="p-4 text-center font-semibold">Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="divide-y divide-slate-100">
                             {% for exp in expenses %}
-                            <tr class="hover:bg-slate-50 transition-colors">
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100">{{ exp.date }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-semibold text-textmain">{{ exp.title }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100"><span class="bg-slate-200 text-slate-800 px-2 py-1 rounded-full text-[0.8rem]">{{ exp.category }}</span></td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 font-bold text-red-500">₹{{ exp.amount }}</td>
-                                <td class="p-4 md:px-6 md:py-4 text-left border-b border-slate-100 flex gap-2.5">
-                                    <a href="{% url 'edit_expense' exp.pk %}" class="text-blue-500 transition-colors hover:text-blue-700" title="Edit"><i class="fas fa-edit"></i></a>
-                                    <a href="{% url 'delete_expense' exp.pk %}" class="text-red-500 transition-colors hover:text-red-700" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                            <tr class="hover:bg-slate-50/80 transition-colors">
+                                <td class="p-4 text-slate-500 whitespace-nowrap">{{ exp.date|date:"M d, Y" }}</td>
+                                <td class="p-4 font-bold text-slate-900 whitespace-nowrap">{{ exp.title }}</td>
+                                <td class="p-4 whitespace-nowrap">
+                                    <span class="bg-slate-100 text-slate-800 font-bold px-3 py-1 rounded-full text-[11px]">{{ exp.category }}</span>
+                                </td>
+                                <td class="p-4 font-sans font-bold text-rose-600 whitespace-nowrap">-₹{{ exp.amount }}</td>
+                                <td class="p-4 text-center whitespace-nowrap">
+                                    <div class="flex items-center justify-center gap-3">
+                                        <a href="{% url 'edit_expense' exp.pk %}" class="text-blue-600 hover:text-blue-800 transition-colors" title="Edit"><i class="fas fa-edit"></i></a>
+                                        <a href="{% url 'delete_expense' exp.pk %}" class="text-rose-600 hover:text-rose-800 transition-colors" title="Delete"><i class="fas fa-trash-alt"></i></a>
+                                    </div>
                                 </td>
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="5" class="text-center text-textmuted p-8 border-b border-slate-100">No expenses logged yet.</td>
+                                <td colspan="5" class="text-center text-slate-400 p-8">No expenses logged yet.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
+
         </div>
     </div>
-</div>
+</section>
 
 <style>
-    /* Styling for Django generated forms in this page */
-    .form-card input, .form-card select, .form-card textarea {
+    .form-card input:not([type="checkbox"]), .form-card select, .form-card textarea {
         width: 100%;
-        padding: 0.8rem;
-        border: 1px solid #cbd5e1;
-        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
         font-family: inherit;
+        font-size: 0.875rem;
+        color: #0f172a;
         outline: none;
-        transition: border-color 0.2s;
+        transition: all 0.2s ease;
     }
-    .form-card input:focus, .form-card select:focus, .form-card textarea:focus {
+    .form-card input[type="checkbox"] {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+        padding: 0 !important;
+        accent-color: #045a33;
+        cursor: pointer;
+    }
+    .form-card input:not([type="checkbox"]):focus, .form-card select:focus, .form-card textarea:focus {
         border-color: #ef4444;
+        background-color: #ffffff;
     }
 </style>
 {% endblock %}
