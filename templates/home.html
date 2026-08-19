@@ -154,22 +154,86 @@
 
 
 <!-- About Section -->
-<section class="bg-white py-10 md:py-20 overflow-hidden">
-    <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+<section class="bg-[#fafaf9] py-12 md:py-24 overflow-hidden relative">
+    <div class="container mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left Column Content -->
         <div data-aos="fade-right">
-            <h2 class="font-outfit text-[1.75rem] md:text-4xl font-bold text-textmain mb-6 leading-snug md:leading-tight">Welcome to SKSSF Puthupparamba Unit Official Website</h2>
-            <p class="text-[0.9rem] md:text-lg text-textmuted mb-6">Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit is a vibrant community organization
-                dedicated to the holistic development of students and the wider society.</p>
-            <p class="text-[0.9rem] md:text-lg text-textmuted mb-6">Through our continuous efforts in religious education, social relief activities, and youth empowerment
-                programs, we strive to uphold the rich Islamic traditions while equipping our youth for the modern
-                world.</p>
-            <a href="{% url 'about' %}"
-                class="inline-block mt-4 text-primary font-bold no-underline border-b-2 border-primary pb-0.5 transition-colors hover:text-primary-light hover:border-primary-light">Read
-                Our Full Story <i class="fas fa-arrow-right ml-1"></i></a>
+            <!-- Label -->
+            <div class="flex items-center gap-2 mb-4">
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+                <span class="text-xs md:text-sm font-bold text-amber-700 uppercase tracking-widest">ABOUT US</span>
+            </div>
+            
+            <!-- Heading -->
+            <h2 class="font-outfit text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-3">
+                A movement of faith, <span class="text-amber-700">knowledge</span> and service.
+            </h2>
+            
+            <!-- Malayalam Subtitle -->
+            <p class="text-sm md:text-base text-slate-600 font-medium mb-6">
+                പുതുപ്പറമ്പ് യൂണിറ്റിലെ എസ്.കെ.എസ്.എസ്.എഫ്.
+            </p>
+            
+            <!-- Paragraph -->
+            <p class="text-sm md:text-base text-slate-600 leading-relaxed mb-8">
+                Founded in <strong class="text-slate-900 font-bold">1989</strong> as the student wing of Samastha Kerala Jam'iyyaathul Ulama, SKSSF has grown into one of the largest Islamic student movements in South India. The <strong class="text-slate-900 font-bold">Puthupparamba</strong> unit continues this proud legacy at the roots.
+            </p>
+            
+            <!-- Feature Check List -->
+            <div class="space-y-4 mb-8">
+                <!-- Feature 1 -->
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">Faith-Driven</h4>
+                        <p class="text-xs md:text-sm text-slate-600">Rooted in the Ahlus Sunnah wal Jama'ah tradition passed down for generations.</p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">Knowledge-First</h4>
+                        <p class="text-xs md:text-sm text-slate-600">From madrasas to universities &ndash; empowering minds with authentic learning.</p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-base">Service-Oriented</h4>
+                        <p class="text-xs md:text-sm text-slate-600">Standing with the community through relief, education and mentorship.</p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{% url 'about' %}" class="inline-flex items-center gap-2 font-bold text-[#045a33] hover:text-[#10b981] transition-colors group text-sm md:text-base border-b-2 border-[#045a33] hover:border-[#10b981] pb-1">
+                Read Our Full Story <i class="fas fa-arrow-right text-xs transition-transform group-hover:translate-x-1"></i>
+            </a>
         </div>
-        <div data-aos="fade-left">
-            <img src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80" loading="lazy"
-                alt="Islamic Architecture" class="w-full rounded-[20px] shadow-[0_20px_40px_rgba(0,0,0,0.1)]">
+
+        <!-- Right Column Image & Floating Legacy Badge -->
+        <div class="relative pt-4 pb-8 pl-4 pr-2" data-aos="fade-left">
+            <div class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] md:aspect-[5/4] bg-slate-900">
+                <img src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1000&q=80" alt="Building leaders of tomorrow" class="w-full h-full object-cover">
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
+                    <span class="text-xs uppercase tracking-widest font-semibold text-emerald-400">OUR PEOPLE</span>
+                    <h3 class="font-outfit text-xl md:text-2xl font-bold">Building leaders of tomorrow</h3>
+                </div>
+            </div>
+            
+            <!-- Floating Badge: 35+ YEARS OF LEGACY -->
+            <div class="absolute bottom-2 left-0 bg-[#045a33] text-white p-4 md:p-6 rounded-2xl shadow-2xl flex flex-col justify-center border-2 border-emerald-600/30">
+                <span class="font-outfit text-2xl md:text-4xl font-extrabold text-amber-400 leading-none">35+</span>
+                <span class="text-[9px] md:text-xs font-bold tracking-widest uppercase text-emerald-100 mt-1">YEARS OF<br>LEGACY</span>
+            </div>
         </div>
     </div>
 </section>
