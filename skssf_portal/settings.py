@@ -84,15 +84,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'skssf_portal.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
-
 import os
+import shutil
 import dj_database_url
+
+# Handle Vercel / Serverless read-only filesystem by using /tmp/db.sqlite3
+IS_SERVERLESS = os.environ.get('VERCEL') or os.environ.get('AWS_LAMBDA_FUNCTION_NAME') or '/var/task' in str(BASE_DIR)
+
+if IS_SERVERLESS:
+    tmp_db = Path('/tmp') / 'db.sqlite3'
+    orig_db = BASE_DIR / 'db.sqlite3'
+    if orig_db.exists() and (not tmp_db.exists() or tmp_db.stat().st_size == 0):
+        try:
+            shutil.copy2(orig_db, tmp_db)
+            os.chmod(tmp_db, 0o666)
+        except Exception as e:
+            print(f"Error copying SQLite DB to /tmp: {e}")
+    default_db_url = f"sqlite:///{tmp_db}"
+else:
+    default_db_url = f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        default=default_db_url,
         conn_max_age=600,
     )
 }
