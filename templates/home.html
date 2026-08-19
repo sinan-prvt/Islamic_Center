@@ -2,11 +2,14 @@
 {% load static %}
 
 {% block meta_title %}Home | SKSSF Puthupparamba - Official Website{% endblock %}
-{% block meta_description %}Official website of Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit. Discover our community programs, news, and charity initiatives.{% endblock %}
+{% block meta_description %}Official website of Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit.
+Discover our community programs, news, and charity initiatives.{% endblock %}
 {% block og_title %}Home | SKSSF Puthupparamba - Official Website{% endblock %}
-{% block og_description %}Official website of Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit.{% endblock %}
+{% block og_description %}Official website of Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit.{%
+endblock %}
 {% block twitter_title %}Home | SKSSF Puthupparamba - Official Website{% endblock %}
-{% block twitter_description %}Official website of Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit.{% endblock %}
+{% block twitter_description %}Official website of Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba
+Unit.{% endblock %}
 
 {% block extra_head %}
 {% endblock %}
@@ -14,16 +17,21 @@
 {% block content %}
 <!-- Hero Section with Zooming Ken Burns Effect & Dynamic Overlay -->
 <div class="relative overflow-hidden w-full h-[260px] sm:h-[400px] md:h-[650px] bg-slate-950" id="heroSlider">
-    <div class="flex w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]" id="sliderTrack">
+    <div class="flex w-full h-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+        id="sliderTrack">
         <!-- Slide 1: Clean Graphic Banner -->
         <div class="min-w-full h-full relative overflow-hidden slide active">
-            <div class="absolute inset-0 bg-cover bg-center slide-bg transition-transform duration-[8000ms] ease-out scale-105" data-bg="{% static 'images/hero_image.png' %}"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end justify-center pb-8 sm:pb-12 md:pb-14 px-4 md:px-6">
+            <div class="absolute inset-0 bg-cover bg-center slide-bg transition-transform duration-[8000ms] ease-out scale-105"
+                data-bg="{% static 'images/hero_image.png' %}"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end justify-center pb-8 sm:pb-12 md:pb-14 px-4 md:px-6">
                 <div class="flex flex-row justify-center gap-2.5 md:gap-4 z-10">
-                    <a href="{% url 'donate' %}" class="bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full shadow-[0_6px_18px_rgba(16,185,129,0.4)] transition-all duration-300 hover:scale-105">
+                    <a href="{% url 'donate' %}"
+                        class="bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full shadow-[0_6px_18px_rgba(16,185,129,0.4)] transition-all duration-300 hover:scale-105">
                         <i class="fas fa-heart mr-1.5 md:mr-2"></i> Donate Funds
                     </a>
-                    <a href="{% url 'about' %}" class="bg-black/50 hover:bg-black/70 text-white border border-white/30 font-semibold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full backdrop-blur-md transition-all duration-300 hover:scale-105">
+                    <a href="{% url 'about' %}"
+                        class="bg-black/50 hover:bg-black/70 text-white border border-white/30 font-semibold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full backdrop-blur-md transition-all duration-300 hover:scale-105">
                         Learn More <i class="fas fa-arrow-right ml-1.5 md:ml-2 text-xs"></i>
                     </a>
                 </div>
@@ -31,18 +39,25 @@
         </div>
         <!-- Slide 2 -->
         <div class="min-w-full h-full relative overflow-hidden slide">
-            <div class="absolute inset-0 bg-cover bg-center slide-bg transition-transform duration-[8000ms] ease-out scale-100" data-bg="{% static 'images/slide2.jpg' %}"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-black/30 flex items-center justify-center text-center px-4 md:px-6">
+            <div class="absolute inset-0 bg-cover bg-center slide-bg transition-transform duration-[8000ms] ease-out scale-100"
+                data-bg="{% static 'images/slide2.jpg' %}"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-black/30 flex items-center justify-center text-center px-4 md:px-6">
                 <div class="max-w-4xl text-white pt-6 md:pt-16">
-                    <span class="inline-block bg-amber-400/20 border border-amber-400/40 text-amber-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-sm font-semibold tracking-wider uppercase mb-2 md:mb-4 backdrop-blur-md">Educational & Spiritual Excellence</span>
-                    <h2 class="font-outfit text-xl sm:text-3xl md:text-6xl font-extrabold tracking-tight text-white mb-2 md:mb-4 leading-tight">
+                    <span
+                        class="inline-block bg-amber-400/20 border border-amber-400/40 text-amber-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-sm font-semibold tracking-wider uppercase mb-2 md:mb-4 backdrop-blur-md">Educational
+                        & Spiritual Excellence</span>
+                    <h2
+                        class="font-outfit text-xl sm:text-3xl md:text-6xl font-extrabold tracking-tight text-white mb-2 md:mb-4 leading-tight">
                         Empowering Youth for Tomorrow
                     </h2>
-                    <p class="text-xs sm:text-sm md:text-xl text-slate-200 font-medium max-w-2xl mx-auto mb-4 md:mb-8 opacity-95">
+                    <p
+                        class="text-xs sm:text-sm md:text-xl text-slate-200 font-medium max-w-2xl mx-auto mb-4 md:mb-8 opacity-95">
                         Building moral leadership, authentic knowledge, and social harmony.
                     </p>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <a href="{% url 'monthly_fund' %}" class="bg-amber-400 text-slate-900 font-bold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full shadow-[0_6px_18px_rgba(251,191,36,0.4)] transition-all duration-300 hover:scale-105">
+                        <a href="{% url 'monthly_fund' %}"
+                            class="bg-amber-400 text-slate-900 font-bold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full shadow-[0_6px_18px_rgba(251,191,36,0.4)] transition-all duration-300 hover:scale-105">
                             <i class="fas fa-hand-holding-heart mr-1.5 md:mr-2"></i> Monthly Unit Fund
                         </a>
                     </div>
@@ -51,18 +66,25 @@
         </div>
         <!-- Slide 3 -->
         <div class="min-w-full h-full relative overflow-hidden slide">
-            <div class="absolute inset-0 bg-cover bg-center slide-bg transition-transform duration-[8000ms] ease-out scale-100" data-bg="{% static 'images/slide3.jpg' %}"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-black/30 flex items-center justify-center text-center px-4 md:px-6">
+            <div class="absolute inset-0 bg-cover bg-center slide-bg transition-transform duration-[8000ms] ease-out scale-100"
+                data-bg="{% static 'images/slide3.jpg' %}"></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-black/30 flex items-center justify-center text-center px-4 md:px-6">
                 <div class="max-w-4xl text-white pt-6 md:pt-16">
-                    <span class="inline-block bg-emerald-400/20 border border-emerald-400/40 text-emerald-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-sm font-semibold tracking-wider uppercase mb-2 md:mb-4 backdrop-blur-md">Charity & Social Relief</span>
-                    <h2 class="font-outfit text-xl sm:text-3xl md:text-6xl font-extrabold tracking-tight text-white mb-2 md:mb-4 leading-tight">
+                    <span
+                        class="inline-block bg-emerald-400/20 border border-emerald-400/40 text-emerald-300 px-3 py-1 md:px-4 md:py-1.5 rounded-full text-[10px] md:text-sm font-semibold tracking-wider uppercase mb-2 md:mb-4 backdrop-blur-md">Charity
+                        & Social Relief</span>
+                    <h2
+                        class="font-outfit text-xl sm:text-3xl md:text-6xl font-extrabold tracking-tight text-white mb-2 md:mb-4 leading-tight">
                         Serving Humanity with Compassion
                     </h2>
-                    <p class="text-xs sm:text-sm md:text-xl text-slate-200 font-medium max-w-2xl mx-auto mb-4 md:mb-8 opacity-95">
+                    <p
+                        class="text-xs sm:text-sm md:text-xl text-slate-200 font-medium max-w-2xl mx-auto mb-4 md:mb-8 opacity-95">
                         Extending support, healthcare, and educational aid to those in need.
                     </p>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <a href="{% url 'donate' %}" class="bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full shadow-[0_6px_18px_rgba(16,185,129,0.4)] transition-all duration-300 hover:scale-105">
+                        <a href="{% url 'donate' %}"
+                            class="bg-gradient-to-r from-[#10b981] to-[#059669] text-white font-bold px-4 py-2 md:px-8 md:py-3.5 text-xs md:text-base rounded-full shadow-[0_6px_18px_rgba(16,185,129,0.4)] transition-all duration-300 hover:scale-105">
                             <i class="fas fa-heart mr-1.5 md:mr-2"></i> Support Relief Work
                         </a>
                     </div>
@@ -72,34 +94,46 @@
     </div>
 
     <!-- Navigation Buttons -->
-    <button class="absolute top-1/2 -translate-y-1/2 left-2 md:left-8 bg-black/40 hover:bg-[#10b981] text-white border border-white/20 w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md transition-all duration-300 z-20 flex items-center justify-center hover:scale-110 shadow-lg text-xs md:text-lg" onclick="moveSlide(-1)">
+    <button
+        class="absolute top-1/2 -translate-y-1/2 left-2 md:left-8 bg-black/40 hover:bg-[#10b981] text-white border border-white/20 w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md transition-all duration-300 z-20 flex items-center justify-center hover:scale-110 shadow-lg text-xs md:text-lg"
+        onclick="moveSlide(-1)">
         <i class="fas fa-chevron-left"></i>
     </button>
-    <button class="absolute top-1/2 -translate-y-1/2 right-2 md:right-8 bg-black/40 hover:bg-[#10b981] text-white border border-white/20 w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md transition-all duration-300 z-20 flex items-center justify-center hover:scale-110 shadow-lg text-xs md:text-lg" onclick="moveSlide(1)">
+    <button
+        class="absolute top-1/2 -translate-y-1/2 right-2 md:right-8 bg-black/40 hover:bg-[#10b981] text-white border border-white/20 w-8 h-8 md:w-12 md:h-12 rounded-full backdrop-blur-md transition-all duration-300 z-20 flex items-center justify-center hover:scale-110 shadow-lg text-xs md:text-lg"
+        onclick="moveSlide(1)">
         <i class="fas fa-chevron-right"></i>
     </button>
 
     <!-- Slide Indicators -->
-    <div class="absolute bottom-2.5 md:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-2.5 z-20" id="sliderDots">
-        <button class="w-6 md:w-8 h-2 md:h-2.5 rounded-full bg-white/40 transition-all duration-500 dot active" onclick="goToSlide(0)"></button>
-        <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-white/40 transition-all duration-500 dot" onclick="goToSlide(1)"></button>
-        <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-white/40 transition-all duration-500 dot" onclick="goToSlide(2)"></button>
+    <div class="absolute bottom-2.5 md:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 md:gap-2.5 z-20"
+        id="sliderDots">
+        <button class="w-6 md:w-8 h-2 md:h-2.5 rounded-full bg-white/40 transition-all duration-500 dot active"
+            onclick="goToSlide(0)"></button>
+        <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-white/40 transition-all duration-500 dot"
+            onclick="goToSlide(1)"></button>
+        <button class="w-2 md:w-2.5 h-2 md:h-2.5 rounded-full bg-white/40 transition-all duration-500 dot"
+            onclick="goToSlide(2)"></button>
     </div>
 </div>
 
 <!-- Announcement Ticker Bar (Below Landing Hero) -->
-<div class="bg-[#045a33] text-white py-3 px-4 md:px-8 border-y border-emerald-800 flex items-center gap-3 overflow-hidden shadow-sm relative z-20">
-    <div class="flex items-center gap-1.5 bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded-full text-xs shrink-0 tracking-wide uppercase shadow-sm z-10">
+<div
+    class="bg-[#045a33] text-white py-3 px-4 md:px-8 border-y border-emerald-800 flex items-center gap-3 overflow-hidden shadow-sm relative z-20">
+    <div
+        class="flex items-center gap-1.5 bg-amber-400 text-slate-900 font-bold px-3 py-1 rounded-full text-xs shrink-0 tracking-wide uppercase shadow-sm z-10">
         <i class="fas fa-bell text-xs animate-bounce"></i> NOTICE
     </div>
     <div class="overflow-hidden whitespace-nowrap w-full flex">
-        <div class="inline-flex animate-marquee shrink-0 items-center text-xs md:text-sm font-medium text-slate-100 tracking-wide font-malayalam">
+        <div
+            class="inline-flex animate-marquee shrink-0 items-center text-xs md:text-sm font-medium text-slate-100 tracking-wide font-malayalam">
             <span class="mx-6">&bull; Sahachari Fund Collection Drive &ndash; Active Unit Campaign</span>
             <span class="mx-6">&bull; Weekly Majlis & Islamic Classes every Thursday evening after Maghrib</span>
             <span class="mx-6">&bull; SKSSF Puthupparamba Unit Annual Membership Drive</span>
             <span class="mx-6">&bull; Educational & Relief Fund applications open for eligible students</span>
         </div>
-        <div class="inline-flex animate-marquee shrink-0 items-center text-xs md:text-sm font-medium text-slate-100 tracking-wide font-malayalam" aria-hidden="true">
+        <div class="inline-flex animate-marquee shrink-0 items-center text-xs md:text-sm font-medium text-slate-100 tracking-wide font-malayalam"
+            aria-hidden="true">
             <span class="mx-6">&bull; Sahachari Fund Collection Drive &ndash; Active Unit Campaign</span>
             <span class="mx-6">&bull; Weekly Majlis & Islamic Classes every Thursday evening after Maghrib</span>
             <span class="mx-6">&bull; SKSSF Puthupparamba Unit Annual Membership Drive</span>
@@ -118,76 +152,92 @@
                 <span class="w-8 h-[2px] bg-amber-600"></span>
                 <span class="text-xs md:text-sm font-bold text-amber-700 uppercase tracking-widest">ABOUT US</span>
             </div>
-            
+
             <!-- Heading -->
             <h2 class="font-serif text-2xl sm:text-3xl md:text-[2.25rem] font-bold text-slate-900 leading-tight mb-2.5">
-                A movement of faith, <span class="text-amber-700 font-serif italic font-normal">knowledge</span> and service.
+                A movement of faith, <span class="text-amber-700 font-serif italic font-normal">knowledge</span> and
+                service.
             </h2>
-            
+
             <!-- Malayalam Subtitle with Noto Sans Malayalam Google Font -->
             <p class="font-malayalam text-sm md:text-base text-emerald-800 font-semibold mb-4 leading-normal">
                 പുതുപ്പറമ്പ് യൂണിറ്റിലെ എസ്.കെ.എസ്.എസ്.എഫ്.
             </p>
-            
+
             <!-- Paragraph -->
             <p class="text-xs md:text-sm text-slate-600 leading-relaxed mb-6">
-                Founded in <strong class="text-slate-900 font-bold">1989</strong> as the student wing of Samastha Kerala Jam'iyyaathul Ulama, SKSSF has grown into one of the largest Islamic student movements in South India. The <strong class="text-slate-900 font-bold">Puthupparamba</strong> unit continues this proud legacy at the roots.
+                Founded in <strong class="text-slate-900 font-bold">1989</strong> as the student wing of Samastha Kerala
+                Jam'iyyaathul Ulama, SKSSF has grown into one of the largest Islamic student movements in South India.
+                The <strong class="text-slate-900 font-bold">Puthupparamba</strong> unit continues this proud legacy at
+                the roots.
             </p>
-            
+
             <!-- Feature Check List -->
             <div class="space-y-3.5 mb-6">
                 <!-- Feature 1 -->
                 <div class="flex items-start gap-2.5">
-                    <div class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">
+                    <div
+                        class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">
                         <i class="fas fa-check"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 text-sm md:text-base">Faith-Driven</h4>
-                        <p class="text-xs text-slate-500">Rooted in the Ahlus Sunnah wal Jama'ah tradition passed down for generations.</p>
+                        <p class="text-xs text-slate-500">Rooted in the Ahlus Sunnah wal Jama'ah tradition passed down
+                            for generations.</p>
                     </div>
                 </div>
                 <!-- Feature 2 -->
                 <div class="flex items-start gap-2.5">
-                    <div class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                    <div
+                        class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
                         <i class="fas fa-check"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 text-sm md:text-base">Knowledge-First</h4>
-                        <p class="text-xs text-slate-500">From madrasas to universities &ndash; empowering minds with authentic learning.</p>
+                        <p class="text-xs text-slate-500">From madrasas to universities &ndash; empowering minds with
+                            authentic learning.</p>
                     </div>
                 </div>
                 <!-- Feature 3 -->
                 <div class="flex items-start gap-2.5">
-                    <div class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                    <div
+                        class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
                         <i class="fas fa-check"></i>
                     </div>
                     <div>
                         <h4 class="font-bold text-slate-900 text-sm md:text-base">Service-Oriented</h4>
-                        <p class="text-xs text-slate-500">Standing with the community through relief, education and mentorship.</p>
+                        <p class="text-xs text-slate-500">Standing with the community through relief, education and
+                            mentorship.</p>
                     </div>
                 </div>
             </div>
 
-            <a href="{% url 'about' %}" class="inline-flex items-center gap-2 font-bold text-[#045a33] hover:text-[#10b981] transition-colors group text-xs md:text-sm border-b-2 border-[#045a33] hover:border-[#10b981] pb-0.5">
-                Read Our Full Story <i class="fas fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i>
+            <a href="{% url 'about' %}"
+                class="inline-flex items-center gap-2 font-bold text-[#045a33] hover:text-[#10b981] transition-colors group text-xs md:text-sm border-b-2 border-[#045a33] hover:border-[#10b981] pb-0.5">
+                Read Our Full Story <i
+                    class="fas fa-arrow-right text-[10px] transition-transform group-hover:translate-x-1"></i>
             </a>
         </div>
 
         <!-- Right Column Image & Floating Legacy Badge -->
         <div class="relative pt-4 pb-8 pl-4 pr-2" data-aos="fade-left">
             <div class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] md:aspect-[5/4] bg-slate-900">
-                <img src="{% static 'images/skssf_community.png' %}" alt="Building leaders of tomorrow" class="w-full h-full object-cover">
+                <img src="{% static 'images/skssf_community.png' %}" alt="Building leaders of tomorrow"
+                    class="w-full h-full object-cover">
                 <!-- Gradient Overlay -->
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
+                <div
+                    class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
                     <span class="text-xs uppercase tracking-widest font-semibold text-emerald-400">OUR PEOPLE</span>
                     <h3 class="font-outfit text-xl md:text-2xl font-bold">Building leaders of tomorrow</h3>
                 </div>
             </div>
-            
+
             <!-- Floating Badge: 35+ YEARS OF LEGACY -->
-            <div class="absolute bottom-2 left-0 bg-[#045a33] text-white p-4 md:p-6 rounded-2xl shadow-2xl flex flex-col justify-center border-2 border-emerald-600/30">
+            <div
+                class="absolute bottom-2 left-0 bg-[#045a33] text-white p-4 md:p-6 rounded-2xl shadow-2xl flex flex-col justify-center border-2 border-emerald-600/30">
                 <span class="font-outfit text-2xl md:text-4xl font-extrabold text-amber-400 leading-none">35+</span>
-                <span class="text-[9px] md:text-xs font-bold tracking-widest uppercase text-emerald-100 mt-1">YEARS OF<br>LEGACY</span>
+                <span class="text-[9px] md:text-xs font-bold tracking-widest uppercase text-emerald-100 mt-1">YEARS
+                    OF<br>LEGACY</span>
             </div>
         </div>
     </div>
@@ -196,67 +246,85 @@
 <!-- Pillars Section -->
 <section class="bg-background py-10 md:py-20">
     <div class="container mx-auto px-4">
-        <h2 class="text-center font-outfit text-[1.75rem] md:text-4xl font-bold text-textmain mb-6 md:mb-12">Our Core Focus Areas</h2>
+        <h2 class="text-center font-outfit text-[1.75rem] md:text-4xl font-bold text-textmain mb-6 md:mb-12">Our Core
+            Focus Areas</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div data-aos="fade-up" data-aos-delay="100" class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
+            <div data-aos="fade-up" data-aos-delay="100"
+                class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
                 <i class="fas fa-book-open text-[2.2rem] md:text-5xl text-primary mb-4 md:mb-6"></i>
                 <h3 class="text-[1.15rem] md:text-2xl font-bold text-textmain mb-4">Education</h3>
-                <p class="text-[0.85rem] md:text-base text-textmuted">Providing religious and secular education support to build a knowledgeable generation.</p>
+                <p class="text-[0.85rem] md:text-base text-textmuted">Providing religious and secular education support
+                    to build a knowledgeable generation.</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="200" class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
+            <div data-aos="fade-up" data-aos-delay="200"
+                class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
                 <i class="fas fa-hand-holding-heart text-[2.2rem] md:text-5xl text-primary mb-4 md:mb-6"></i>
                 <h3 class="text-[1.15rem] md:text-2xl font-bold text-textmain mb-4">Relief</h3>
-                <p class="text-[0.85rem] md:text-base text-textmuted">Offering timely medical aid, financial support, and disaster relief to the needy.</p>
+                <p class="text-[0.85rem] md:text-base text-textmuted">Offering timely medical aid, financial support,
+                    and disaster relief to the needy.</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="300" class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
+            <div data-aos="fade-up" data-aos-delay="300"
+                class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
                 <i class="fas fa-users text-[2.2rem] md:text-5xl text-primary mb-4 md:mb-6"></i>
                 <h3 class="text-[1.15rem] md:text-2xl font-bold text-textmain mb-4">Unity</h3>
-                <p class="text-[0.85rem] md:text-base text-textmuted">Fostering brotherhood and community harmony through collaborative social programs.</p>
+                <p class="text-[0.85rem] md:text-base text-textmuted">Fostering brotherhood and community harmony
+                    through collaborative social programs.</p>
             </div>
-            <div data-aos="fade-up" data-aos-delay="400" class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
+            <div data-aos="fade-up" data-aos-delay="400"
+                class="bg-white p-10 rounded-[20px] text-center transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:-translate-y-2.5 hover:shadow-[0_20px_40px_rgba(16,185,129,0.1)]">
                 <i class="fas fa-mosque text-[2.2rem] md:text-5xl text-primary mb-4 md:mb-6"></i>
                 <h3 class="text-[1.15rem] md:text-2xl font-bold text-textmain mb-4">Islamic Values</h3>
-                <p class="text-[0.85rem] md:text-base text-textmuted">Promoting authentic traditional Islamic teachings and moral values among youth.</p>
+                <p class="text-[0.85rem] md:text-base text-textmuted">Promoting authentic traditional Islamic teachings
+                    and moral values among youth.</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Instagram Highlights -->
-<section class="py-12 md:py-24 pb-16 md:pb-28 bg-white">
+<section class="py-12 md:py-24 pb-20 md:pb-36 bg-white">
     <div class="container mx-auto px-4">
-        <h2 data-aos="zoom-in" class="text-center font-serif text-[1.75rem] md:text-4xl font-bold text-slate-900 mb-4 md:mb-6">Latest on Instagram</h2>
-        <p class="text-center text-slate-500 mb-8 md:mb-12 text-sm md:text-base max-w-2xl mx-auto">Catch up on our latest events, inspiring reels, and community highlights directly from our feed.</p>
+        <h2 data-aos="zoom-in"
+            class="text-center font-serif text-[1.75rem] md:text-4xl font-bold text-slate-900 mb-4 md:mb-6">Latest on
+            Instagram</h2>
+        <p class="text-center text-slate-500 mb-8 md:mb-12 text-sm md:text-base max-w-2xl mx-auto">Catch up on our
+            latest events, inspiring reels, and community highlights directly from our feed.</p>
 
-        <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 md:grid md:grid-cols-[repeat(auto-fit,minmax(260px,1fr))] md:gap-6 md:pb-0 md:justify-items-center md:flex-none" style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 pb-6 md:grid md:grid-cols-[repeat(auto-fit,minmax(260px,1fr))] md:pb-0 md:justify-items-center md:flex-none"
+            style="-webkit-overflow-scrolling: touch; scrollbar-width: none;">
             <!-- Reel 1 -->
-            <div class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center">
-                <iframe src="https://www.instagram.com/reel/DK6eU2oIjWh/embed" width="100%" height="600" frameborder="0"
-                    scrolling="no" allowtransparency="true" class="block"></iframe>
+            <div
+                class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-2xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-slate-100 transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center p-1">
+                <iframe src="https://www.instagram.com/reel/DK6eU2oIjWh/embed" width="100%" height="480" frameborder="0"
+                    scrolling="no" allowtransparency="true" class="block w-full min-h-[480px] rounded-xl"></iframe>
             </div>
 
             <!-- Reel 2 -->
-            <div class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center">
-                <iframe src="https://www.instagram.com/reel/DH3DjlNT0Z6/embed" width="100%" height="600" frameborder="0"
-                    scrolling="no" allowtransparency="true" class="block"></iframe>
+            <div
+                class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-2xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-slate-100 transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center p-1">
+                <iframe src="https://www.instagram.com/reel/DH3DjlNT0Z6/embed" width="100%" height="480" frameborder="0"
+                    scrolling="no" allowtransparency="true" class="block w-full min-h-[480px] rounded-xl"></iframe>
             </div>
 
             <!-- Reel 3 -->
-            <div class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center block">
-                <iframe src="https://www.instagram.com/reel/DEIODJsTyWE/embed" width="100%" height="600" frameborder="0"
-                    scrolling="no" allowtransparency="true" class="block"></iframe>
+            <div
+                class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-2xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-slate-100 transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center p-1">
+                <iframe src="https://www.instagram.com/reel/DEIODJsTyWE/embed" width="100%" height="480" frameborder="0"
+                    scrolling="no" allowtransparency="true" class="block w-full min-h-[480px] rounded-xl"></iframe>
             </div>
 
             <!-- Reel 4 -->
-            <div class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.1)] transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center block">
-                <iframe src="https://www.instagram.com/reel/C5lbOz0SCHV/embed" width="100%" height="600" frameborder="0"
-                    scrolling="no" allowtransparency="true" class="block"></iframe>
+            <div
+                class="w-full max-w-[none] md:max-w-[320px] bg-white rounded-2xl overflow-hidden shadow-[0_10px_25px_rgba(0,0,0,0.08)] border border-slate-100 transition-transform duration-300 hover:-translate-y-1 flex-[0_0_85%] md:flex-auto snap-center p-1">
+                <iframe src="https://www.instagram.com/reel/C5lbOz0SCHV/embed" width="100%" height="480" frameborder="0"
+                    scrolling="no" allowtransparency="true" class="block w-full min-h-[480px] rounded-xl"></iframe>
             </div>
         </div>
 
-        <div class="text-center mt-8 md:mt-12 mb-4 md:mb-8">
+        <div class="text-center mt-12 md:mt-16 mb-8 md:mb-12">
             <a href="https://www.instagram.com/skssf_puthupparamba" target="_blank"
-                class="inline-flex items-center text-white border-none py-3 px-8 md:py-4 md:px-10 text-sm md:text-base font-bold rounded-full shadow-[0_10px_20px_rgba(220,39,67,0.3)] transition-transform duration-300 hover:-translate-y-1" style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
+                class="inline-flex items-center text-white border-none py-3.5 px-8 md:py-4 md:px-10 text-sm md:text-base font-bold rounded-full shadow-[0_10px_25px_rgba(220,39,67,0.35)] transition-transform duration-300 hover:-translate-y-1"
+                style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);">
                 <i class="fab fa-instagram mr-2 text-xl"></i> Follow SKSSF on Instagram
             </a>
         </div>
@@ -266,8 +334,12 @@
 <!-- Call To Action -->
 <section class="bg-primary py-10 md:py-20 text-center text-white relative overflow-hidden">
     <!-- Decorative background elements -->
-    <div class="absolute top-[-50%] left-[-10%] w-1/2 h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_60%)] rotate-[30deg] pointer-events-none"></div>
-    <div class="absolute bottom-[-50%] right-[-10%] w-1/2 h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_60%)] -rotate-[30deg] pointer-events-none"></div>
+    <div
+        class="absolute top-[-50%] left-[-10%] w-1/2 h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.1)_0%,transparent_60%)] rotate-[30deg] pointer-events-none">
+    </div>
+    <div
+        class="absolute bottom-[-50%] right-[-10%] w-1/2 h-[200%] bg-[radial-gradient(circle,rgba(255,255,255,0.05)_0%,transparent_60%)] -rotate-[30deg] pointer-events-none">
+    </div>
 
     <div class="container mx-auto px-4 relative z-10">
         <h2 class="text-[2rem] md:text-5xl font-extrabold mb-4 tracking-tight">Support Our Vision</h2>
@@ -276,10 +348,12 @@
             lasting difference in the community.
         </p>
         <div class="flex flex-col md:flex-row justify-center gap-4 flex-wrap px-4 md:px-0">
-            <a href="{% url 'monthly_fund' %}" class="inline-block px-6 md:px-10 py-4 md:py-5 font-bold rounded-full no-underline transition-all duration-300 uppercase tracking-wide text-[0.95rem] w-full md:w-auto bg-amber-400 text-slate-800 shadow-[0_10px_20px_rgba(251,191,36,0.3)] hover:bg-amber-500 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(251,191,36,0.4)]">
+            <a href="{% url 'monthly_fund' %}"
+                class="inline-block px-6 md:px-10 py-4 md:py-5 font-bold rounded-full no-underline transition-all duration-300 uppercase tracking-wide text-[0.95rem] w-full md:w-auto bg-amber-400 text-slate-800 shadow-[0_10px_20px_rgba(251,191,36,0.3)] hover:bg-amber-500 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(251,191,36,0.4)]">
                 <i class="fas fa-hand-holding-heart mr-2"></i> Monthly Unit Fund
             </a>
-            <a href="{% url 'donate' %}" class="inline-block px-6 md:px-10 py-4 md:py-5 font-bold rounded-full no-underline transition-all duration-300 uppercase tracking-wide text-[0.95rem] w-full md:w-auto bg-transparent text-white border-2 border-white/50 hover:border-white hover:bg-white/10 hover:-translate-y-1 mt-2 md:mt-0">
+            <a href="{% url 'donate' %}"
+                class="inline-block px-6 md:px-10 py-4 md:py-5 font-bold rounded-full no-underline transition-all duration-300 uppercase tracking-wide text-[0.95rem] w-full md:w-auto bg-transparent text-white border-2 border-white/50 hover:border-white hover:bg-white/10 hover:-translate-y-1 mt-2 md:mt-0">
                 <i class="fas fa-globe mr-2"></i> General Donation
             </a>
         </div>
@@ -291,9 +365,11 @@
         0% {
             transform: scale(1.02);
         }
+
         50% {
             transform: scale(1.16);
         }
+
         100% {
             transform: scale(1.02);
         }
@@ -303,18 +379,25 @@
         transform-origin: center center;
         will-change: transform;
     }
-    
+
     .slide.active .slide-bg {
         animation: kenBurnsContinuous 12s ease-in-out infinite alternate;
     }
 
     @keyframes marquee {
-        0% { transform: translateX(0%); }
-        100% { transform: translateX(-100%); }
+        0% {
+            transform: translateX(0%);
+        }
+
+        100% {
+            transform: translateX(-100%);
+        }
     }
+
     .animate-marquee {
         animation: marquee 35s linear infinite;
     }
+
     .animate-marquee:hover {
         animation-play-state: paused;
     }
