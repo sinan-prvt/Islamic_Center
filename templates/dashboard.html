@@ -2,136 +2,214 @@
 {% load static %}
 
 {% block title %}Public Dashboard - SKSSF Puthupparamba{% endblock %}
+{% block meta_title %}Public Transparency Dashboard - SKSSF Puthupparamba Unit{% endblock %}
 
 {% block content %}
 <!-- Include Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="bg-gradient-to-br from-[#045a33] to-[#064e3b] text-white pt-16 pb-12 text-center -mb-12">
-    <div class="container mx-auto px-4">
-        <h1 class="text-[2rem] md:text-[2.8rem] font-extrabold mb-4">Public Transparency Dashboard</h1>
-        <p class="text-[1rem] md:text-[1.2rem] opacity-90 max-w-[600px] mx-auto">We believe in complete financial transparency. Here is a real-time overview of our community funds, programs, and member activities.</p>
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-14 md:py-20 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <span class="bg-emerald-800/80 border border-emerald-600/60 px-3 py-1 rounded-full text-amber-300 font-bold uppercase tracking-wider text-[11px]"><i class="fas fa-shield-alt mr-1"></i> Admin Portal</span>
+            <span>&bull;</span>
+            <span class="text-amber-400">Dashboard</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">Public Transparency Dashboard</h1>
+        <p class="font-malayalam text-base md:text-lg text-emerald-100 max-w-xl mx-auto font-medium">
+            യൂണിറ്റ് പൊതു സുതാര്യത വിവരണം
+        </p>
     </div>
-</div>
+</section>
 
-<div class="container mx-auto px-4 relative z-10 mb-16 max-w-[1200px]">
-    
-    <!-- KPI Stat Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
-            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#ecfdf5] text-[#10b981] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-hand-holding-usd"></i></div>
-            <div>
-                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Total Raised</h3>
-                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">₹{{ total_income|floatformat:2 }}</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
-            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#fef2f2] text-[#ef4444] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-file-invoice-dollar"></i></div>
-            <div>
-                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Total Spent</h3>
-                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">₹{{ total_expenses|floatformat:2 }}</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
-            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#eff6ff] text-[#3b82f6] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-users"></i></div>
-            <div>
-                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Active Members</h3>
-                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">{{ member_count }}</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] flex items-center transition-transform duration-300 hover:-translate-y-1">
-            <div class="w-[45px] h-[45px] md:w-[60px] md:h-[60px] rounded-full bg-[#fffbeb] text-[#f59e0b] flex items-center justify-center text-[1.3rem] md:text-[1.8rem] mr-4 md:mr-6 shrink-0"><i class="fas fa-calendar-check"></i></div>
-            <div>
-                <h3 class="text-[0.8rem] md:text-[0.95rem] text-textmuted mb-1 uppercase tracking-[0.5px] font-bold">Programs Held</h3>
-                <p class="text-[1.4rem] md:text-[1.8rem] font-extrabold text-textmain m-0">{{ program_count }}</p>
-            </div>
-        </div>
-    </div>
-
-
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+<!-- Main Dashboard Container -->
+<section class="bg-[#fafaf9] py-10 md:py-16 overflow-hidden relative">
+    <div class="container mx-auto px-4 md:px-8 max-w-6xl">
         
-        <!-- Financial Chart -->
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
-            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-chart-pie text-primary mr-2.5"></i> Financial Overview</h2>
-            <div class="relative h-[220px] md:h-[300px] w-full flex justify-center">
-                <canvas id="financeChart"></canvas>
+        {% if request.user.is_staff %}
+        <!-- Admin Quick Actions Bar -->
+        <div class="bg-slate-900 text-white rounded-3xl p-5 md:p-6 mb-10 shadow-xl border border-slate-800 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-400 text-slate-950 flex items-center justify-center font-bold text-lg shrink-0">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div>
+                    <h4 class="font-serif text-base font-bold text-white m-0">Quick Admin Controls</h4>
+                    <p class="text-xs text-slate-400 m-0">Manage unit records, funds, and events in one click.</p>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+                <a href="/manage/donations/add/" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2 rounded-xl transition-all no-underline flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-plus text-[10px]"></i> Donation
+                </a>
+                <a href="/manage/expenses/add/" class="bg-rose-600 hover:bg-rose-500 text-white font-bold px-3.5 py-2 rounded-xl transition-all no-underline flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-plus text-[10px]"></i> Expense
+                </a>
+                <a href="/manage/monthly-donors/add/" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3.5 py-2 rounded-xl transition-all no-underline flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-plus text-[10px]"></i> Donor
+                </a>
+                <a href="/manage/programs/add/" class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-3.5 py-2 rounded-xl transition-all no-underline flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-plus text-[10px]"></i> Event/News
+                </a>
+                <a href="/manage/gallery/add/" class="bg-purple-600 hover:bg-purple-500 text-white font-bold px-3.5 py-2 rounded-xl transition-all no-underline flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-plus text-[10px]"></i> Photo
+                </a>
+                <a href="/manage/members/add/" class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-3.5 py-2 rounded-xl transition-all no-underline flex items-center gap-1.5 shadow-sm">
+                    <i class="fas fa-plus text-[10px]"></i> Member
+                </a>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- KPI Stat Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <!-- Stat 1: Total Raised -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg border border-slate-100 flex items-center transition-transform duration-300 hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-2xl bg-emerald-50 text-emerald-700 flex items-center justify-center text-2xl mr-4 shrink-0 border border-emerald-100">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Total Raised</h4>
+                    <p class="font-outfit text-2xl md:text-3xl font-extrabold text-[#045a33] m-0 tracking-tight">₹{{ total_income|floatformat:2 }}</p>
+                </div>
+            </div>
+
+            <!-- Stat 2: Total Spent -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg border border-slate-100 flex items-center transition-transform duration-300 hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center text-2xl mr-4 shrink-0 border border-rose-100">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Total Spent</h4>
+                    <p class="font-outfit text-2xl md:text-3xl font-extrabold text-rose-700 m-0 tracking-tight">₹{{ total_expenses|floatformat:2 }}</p>
+                </div>
+            </div>
+
+            <!-- Stat 3: Active Members -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg border border-slate-100 flex items-center transition-transform duration-300 hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl mr-4 shrink-0 border border-blue-100">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Active Members</h4>
+                    <p class="font-outfit text-2xl md:text-3xl font-extrabold text-slate-900 m-0 tracking-tight">{{ member_count }}</p>
+                </div>
+            </div>
+
+            <!-- Stat 4: Programs Held -->
+            <div class="bg-white rounded-3xl p-6 shadow-lg border border-slate-100 flex items-center transition-transform duration-300 hover:-translate-y-1">
+                <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mr-4 shrink-0 border border-amber-100">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div>
+                    <h4 class="text-xs text-slate-400 uppercase tracking-wider font-bold mb-1">Programs Held</h4>
+                    <p class="font-outfit text-2xl md:text-3xl font-extrabold text-slate-900 m-0 tracking-tight">{{ program_count }}</p>
+                </div>
             </div>
         </div>
 
-        <!-- Recent Donations Feed -->
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
-            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-heart text-primary mr-2.5"></i> Recent Contributions</h2>
-            <ul class="list-none p-0 m-0">
-                {% for donation in recent_donations %}
-                <li class="flex items-center py-4 border-b border-slate-50 last:border-b-0">
-                    <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center mr-4 text-primary shrink-0"><i class="fas fa-user"></i></div>
-                    <div>
-                        <h4 class="m-0 mb-1 text-[1rem] text-textmain font-bold">{{ donation.donor_name }}</h4>
-                        <p class="m-0 text-[0.85rem] text-textmuted">{{ donation.get_donation_type_display }} • {{ donation.date }}</p>
-                    </div>
-                    <div class="ml-auto font-bold text-[#10b981]">
-                        +₹{{ donation.amount|floatformat:2 }}
-                    </div>
-                </li>
-                {% empty %}
-                <li class="py-4 text-slate-500 italic">
-                    <p>No recent public donations.</p>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+        <!-- Charts & Recent Feeds Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+            
+            <!-- Financial Chart -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-6 pb-4 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-chart-pie text-[#045a33]"></i> Financial Overview
+                </h3>
+                <div class="relative h-[240px] md:h-[280px] w-full flex justify-center">
+                    <canvas id="financeChart"></canvas>
+                </div>
+            </div>
 
-        <!-- Recent Programs -->
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
-            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-calendar-alt text-primary mr-2.5"></i> Recent Programs</h2>
-            <ul class="list-none p-0 m-0">
-                {% for program in recent_programs %}
-                <li class="flex items-center py-4 border-b border-slate-50 last:border-b-0">
-                    <div class="w-10 h-10 rounded-lg bg-[#f0fdf4] flex items-center justify-center mr-4 text-primary shrink-0"><i class="fas fa-check"></i></div>
-                    <div>
-                        <h4 class="m-0 mb-1 text-[1rem] text-textmain font-bold">{{ program.title }}</h4>
-                        <p class="m-0 text-[0.85rem] text-textmuted">{{ program.get_program_type_display }} • {{ program.date }}</p>
-                    </div>
-                </li>
-                {% empty %}
-                <li class="py-4 text-slate-500 italic">
-                    <p>No recent programs.</p>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+            <!-- Recent Contributions Feed -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-6 pb-4 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-heart text-amber-500"></i> Recent Contributions
+                </h3>
+                <ul class="space-y-4 p-0 m-0 list-none">
+                    {% for donation in recent_donations %}
+                    <li class="flex items-center justify-between p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 font-bold">
+                                <i class="fas fa-user text-xs"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-sm font-bold text-slate-900 m-0 mb-0.5">{{ donation.donor_name }}</h4>
+                                <p class="text-[11px] text-slate-500 font-medium m-0">{{ donation.get_donation_type_display }} &bull; {{ donation.date }}</p>
+                            </div>
+                        </div>
+                        <div class="font-outfit font-bold text-emerald-700 text-sm md:text-base">
+                            +₹{{ donation.amount|floatformat:2 }}
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="py-8 text-center text-slate-400 text-xs italic">
+                        No recent public donations recorded.
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
-        <!-- Recent News -->
-        <div class="bg-white rounded-xl p-5 md:p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
-            <h2 class="text-[1.4rem] font-bold text-textmain mb-6 pb-4 border-b border-slate-100 flex items-center"><i class="fas fa-newspaper text-primary mr-2.5"></i> Latest Updates</h2>
-            <ul class="list-none p-0 m-0">
-                {% for item in recent_news %}
-                <li class="flex items-center py-4 border-b border-slate-50 last:border-b-0">
-                    <div class="w-10 h-10 rounded-lg bg-[#eff6ff] flex items-center justify-center mr-4 text-primary shrink-0"><i class="fas fa-bullhorn"></i></div>
-                    <div>
-                        <h4 class="m-0 mb-1 text-[1rem] text-textmain font-bold">{{ item.title }}</h4>
-                        <p class="m-0 text-[0.85rem] text-textmuted">{{ item.date_published|date:"M d, Y" }}</p>
-                    </div>
-                </li>
-                {% empty %}
-                <li class="py-4 text-slate-500 italic">
-                    <p>No recent updates.</p>
-                </li>
-                {% endfor %}
-            </ul>
+            <!-- Recent Programs -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-6 pb-4 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-calendar-alt text-[#045a33]"></i> Recent Programs
+                </h3>
+                <ul class="space-y-4 p-0 m-0 list-none">
+                    {% for program in recent_programs %}
+                    <li class="flex items-center p-3.5 rounded-2xl bg-slate-50 border border-slate-100 gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 font-bold">
+                            <i class="fas fa-check text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-sm font-bold text-slate-900 m-0 mb-0.5">{{ program.title }}</h4>
+                            <p class="text-[11px] text-slate-500 font-medium m-0">{{ program.get_program_type_display }} &bull; {{ program.date }}</p>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="py-8 text-center text-slate-400 text-xs italic">
+                        No recent programs recorded.
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Recent News -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl border border-slate-100">
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-6 pb-4 border-b border-slate-100 flex items-center gap-2">
+                    <i class="fas fa-bullhorn text-amber-500"></i> Latest Updates
+                </h3>
+                <ul class="space-y-4 p-0 m-0 list-none">
+                    {% for item in recent_news %}
+                    <li class="flex items-center p-3.5 rounded-2xl bg-slate-50 border border-slate-100 gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 font-bold">
+                            <i class="fas fa-newspaper text-xs"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-serif text-sm font-bold text-slate-900 m-0 mb-0.5">{{ item.title }}</h4>
+                            <p class="text-[11px] text-slate-500 font-medium m-0">{{ item.date_published|date:"M d, Y" }}</p>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="py-8 text-center text-slate-400 text-xs italic">
+                        No recent updates published.
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
         </div>
 
     </div>
-</div>
+</section>
 
 <script>
-    // Initialize Chart.js Donut Chart
     document.addEventListener("DOMContentLoaded", function() {
         const ctx = document.getElementById('financeChart').getContext('2d');
         
-        // Pass data from Django securely using the context variable
         const totalIncome = Number("{{ chart_data.income|default:0 }}");
         const totalExpenses = Number("{{ chart_data.expenses|default:0 }}");
         const currentBalance = Number("{{ chart_data.balance|default:0 }}");
@@ -143,8 +221,8 @@
                 datasets: [{
                     data: [totalExpenses, currentBalance],
                     backgroundColor: [
-                        '#ef4444', // Red for expenses
-                        '#10b981'  // Green for balance
+                        '#ef4444',
+                        '#10b981'
                     ],
                     borderWidth: 0,
                     hoverOffset: 4
@@ -159,8 +237,8 @@
                         labels: {
                             padding: 20,
                             font: {
-                                family: "'Inter', sans-serif",
-                                size: 14
+                                family: "'Plus Jakarta Sans', sans-serif",
+                                size: 13
                             }
                         }
                     },
