@@ -29,4 +29,16 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skssf_portal.settings')
 application = get_wsgi_application()
 app = application
 
+# Automatically migrate & seed default superuser when production DATABASE_URL is set
+if os.environ.get('DATABASE_URL'):
+    try:
+        from django.core.management import call_command
+        from django.contrib.auth.models import User
+        call_command('migrate', interactive=False)
+        if not User.objects.filter(is_staff=True).exists():
+            User.objects.create_superuser('admin', 'admin@gmail.com', 'admin123')
+    except Exception as e:
+        print(f"Error initializing production database: {e}")
+
+
 
