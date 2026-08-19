@@ -1,57 +1,127 @@
 {% extends 'base.html' %}
-{% block title %}Monthly Fund - SKSSF Puthupparamba{% endblock %}
+{% load static %}
+
+{% block title %}Monthly Unit Fund - SKSSF Puthupparamba{% endblock %}
+{% block meta_title %}Monthly Unit Fund - SKSSF Puthupparamba Unit{% endblock %}
+{% block meta_description %}Contribute to the SKSSF Puthupparamba Monthly Unit Fund. Support our ongoing educational scholarships, medical relief drives, and youth programs.{% endblock %}
 
 {% block content %}
-<div class="bg-primary text-white py-[3rem] md:py-[4rem] px-[5%] text-center relative">
-    <div class="banner-content">
-        <h1 class="text-[2rem] md:text-[2.8rem] mb-2 font-outfit font-bold">Support Our Cause</h1>
-        <div class="text-[0.95rem] opacity-90">
-            <a href="{% url 'home' %}" class="text-white no-underline mr-[5px] hover:underline">Home</a> | Donate
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-14 md:py-20 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <a href="{% url 'home' %}" class="hover:text-amber-300 no-underline text-emerald-200 transition-colors">Home</a>
+            <span>&bull;</span>
+            <span class="text-amber-400">Monthly Unit Fund</span>
         </div>
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">Sahachari Monthly Unit Fund</h1>
+        <p class="font-malayalam text-base md:text-lg text-emerald-100 max-w-xl mx-auto font-medium">
+            സഹചാരി മാസാന്ത നിധി സംഭാവന
+        </p>
     </div>
-</div>
+</section>
 
-<div class="container mx-auto px-4 mt-12 mb-16 max-w-[800px]">
-    <!-- Card 1: Monthly Fund -->
-    <div class="bg-white p-8 md:p-12 rounded-[20px] shadow-[0_4px_15px_rgba(0,0,0,0.05)] text-center border border-[rgba(0,0,0,0.05)] border-t-[5px] border-t-primary w-full mx-auto">
-        <div>
-            <h2 class="text-[1.5rem] md:text-[1.8rem] text-textmain mb-4 font-bold">Monthly Unit Fund</h2>
-            <p class="text-textmuted mb-8 text-[0.95rem] md:text-[1.05rem]">Contribute to our regular educational and relief programs.</p>
+<!-- Main Fund Section -->
+<section class="bg-[#fafaf9] py-12 md:py-24 overflow-hidden relative">
+    <div class="container mx-auto px-4 md:px-8 max-w-4xl">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+                <span class="text-xs md:text-sm font-bold text-amber-700 uppercase tracking-widest">MONTHLY COMMUNITY DRIVE</span>
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-3">
+                Sustain our community <span class="text-amber-700 font-serif italic font-normal">relief & education</span> initiatives.
+            </h2>
+            <p class="text-xs md:text-sm text-slate-500 leading-relaxed m-0">
+                Your monthly contribution empowers underprivileged students, provides medical aid, and supports regular spiritual gatherings.
+            </p>
+        </div>
+
+        <!-- Monthly Fund Form Card -->
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-slate-100 relative overflow-hidden">
             
-            <!-- Step 1: Identification -->
-            <div id="step-identify" class="text-left bg-slate-50 p-6 md:p-8 rounded-xl border border-slate-200">
-                <div class="mb-4">
-                    <label class="block mb-2 font-semibold text-textmain">Full Name</label>
-                    <input type="text" id="donorName" class="w-full p-3 border border-slate-300 rounded-lg outline-none font-inherit focus:border-primary focus:shadow-[0_0_0_3px_rgba(15,81,50,0.1)]" placeholder="Enter your name">
+            <!-- Top Decorative Bar -->
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-amber-400 via-[#045a33] to-emerald-600"></div>
+
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 rounded-2xl bg-emerald-50 text-[#045a33] border border-emerald-100 flex items-center justify-center text-2xl mx-auto mb-4 shadow-sm">
+                    <i class="fas fa-hand-holding-heart text-amber-500"></i>
                 </div>
-                <div class="mb-6">
-                    <label class="block mb-2 font-semibold text-textmain">Phone Number</label>
-                    <input type="text" id="donorPhone" class="w-full p-3 border border-slate-300 rounded-lg outline-none font-inherit focus:border-primary focus:shadow-[0_0_0_3px_rgba(15,81,50,0.1)]" placeholder="Enter your phone number">
-                </div>
-                <button onclick="checkAndProceed()" class="w-full bg-primary text-white border-none p-4 rounded-lg cursor-pointer font-semibold transition-colors duration-200 hover:bg-[#044324] text-[1.1rem]">Check Details & Pay</button>
-                <div id="identify-error" class="hidden mt-4 p-3 rounded-md bg-red-100 text-red-800 border border-red-200"></div>
+                <h3 class="font-serif text-2xl font-bold text-slate-900 mb-1">Monthly Unit Fund</h3>
+                <p class="text-xs md:text-sm text-slate-500 m-0">Enter your details to check your contribution history or make a new payment.</p>
             </div>
 
-            <!-- Step 2: Payment Section (Hidden Initially) -->
-            <div id="step-pay" class="hidden text-left mt-8">
-                <div id="contribution-status" class="bg-[#d1fae5] border border-[#a7f3d0] p-6 rounded-xl mb-8">
-                    <!-- Status text injected via JS -->
+            <!-- Step 1: Donor Identification Form -->
+            <div id="step-identify" class="bg-slate-50 p-6 md:p-8 rounded-2xl border border-slate-200/80">
+                <div class="mb-5">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Full Name</label>
+                    <div class="relative">
+                        <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="text" id="donorName" class="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#045a33] transition-colors" placeholder="Enter your full name">
+                    </div>
                 </div>
 
-                <h3 class="text-[1.2rem] text-textmain mb-4 text-center font-bold">Select Payment Amount</h3>
-                <div class="grid grid-cols-3 gap-2 md:gap-3 mb-6">
-                    <button class="bg-slate-100 text-textmain border border-slate-300 p-2 md:p-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary text-[0.85rem] md:text-[1rem]" onclick="alert('Payment Gateway Integration Pending')">₹30</button>
-                    <button class="bg-slate-100 text-textmain border border-slate-300 p-2 md:p-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary text-[0.85rem] md:text-[1rem]" onclick="alert('Payment Gateway Integration Pending')">₹50</button>
-                    <button class="bg-slate-100 text-textmain border border-slate-300 p-2 md:p-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary text-[0.85rem] md:text-[1rem]" onclick="alert('Payment Gateway Integration Pending')">₹100</button>
-                    <button class="bg-slate-100 text-textmain border border-slate-300 p-2 md:p-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary text-[0.85rem] md:text-[1rem]" onclick="alert('Payment Gateway Integration Pending')">₹200</button>
-                    <button class="bg-slate-100 text-textmain border border-slate-300 p-2 md:p-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary text-[0.85rem] md:text-[1rem]" onclick="alert('Payment Gateway Integration Pending')">₹500</button>
-                    <button class="bg-slate-100 text-textmain border border-slate-300 p-2 md:p-3 rounded-lg font-semibold cursor-pointer transition-all duration-200 hover:bg-primary hover:text-white hover:border-primary text-[0.85rem] md:text-[1rem]" onclick="alert('Payment Gateway Integration Pending')">Custom</button>
+                <div class="mb-6">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone Number</label>
+                    <div class="relative">
+                        <i class="fas fa-phone-alt absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                        <input type="tel" id="donorPhone" class="w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#045a33] transition-colors" placeholder="Enter your 10-digit phone number">
+                    </div>
+                </div>
+
+                <button onclick="checkAndProceed()" class="w-full bg-[#045a33] hover:bg-[#064e3b] text-white font-bold py-4 rounded-xl text-sm uppercase tracking-wider shadow-lg transition-all hover:scale-[1.01] cursor-pointer flex items-center justify-center gap-2">
+                    <span>Check Details & Pay</span> <i class="fas fa-arrow-right text-amber-400 text-xs"></i>
+                </button>
+
+                <div id="identify-error" class="hidden mt-4 p-3 rounded-xl bg-red-50 text-red-600 text-xs font-semibold text-center border border-red-200"></div>
+            </div>
+
+            <!-- Step 2: Payment Selector (Hidden Initially) -->
+            <div id="step-pay" class="hidden mt-8">
+                <div id="contribution-status" class="bg-emerald-50 border border-emerald-200 p-6 rounded-2xl mb-8">
+                    <!-- Dynamic status text via JS -->
+                </div>
+
+                <h4 class="font-serif text-lg font-bold text-slate-900 mb-4 text-center">Select Payment Amount</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4 mb-6">
+                    <button class="bg-slate-50 hover:bg-[#045a33] hover:text-white border border-slate-200 text-slate-900 py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-sm" onclick="alert('Payment gateway integration pending. Thank you!')">₹30 / Month</button>
+                    <button class="bg-slate-50 hover:bg-[#045a33] hover:text-white border border-slate-200 text-slate-900 py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-sm" onclick="alert('Payment gateway integration pending. Thank you!')">₹50 / Month</button>
+                    <button class="bg-slate-50 hover:bg-[#045a33] hover:text-white border border-slate-200 text-slate-900 py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-sm" onclick="alert('Payment gateway integration pending. Thank you!')">₹100 / Month</button>
+                    <button class="bg-slate-50 hover:bg-[#045a33] hover:text-white border border-slate-200 text-slate-900 py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-sm" onclick="alert('Payment gateway integration pending. Thank you!')">₹200 / Month</button>
+                    <button class="bg-slate-50 hover:bg-[#045a33] hover:text-white border border-slate-200 text-slate-900 py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-sm" onclick="alert('Payment gateway integration pending. Thank you!')">₹500 / Month</button>
+                    <button class="bg-slate-50 hover:bg-[#045a33] hover:text-white border border-slate-200 text-slate-900 py-3.5 px-4 rounded-xl font-bold transition-all text-sm shadow-sm" onclick="alert('Payment gateway integration pending. Thank you!')">Custom Amount</button>
                 </div>
             </div>
 
         </div>
+
+        <!-- 3 Impact Pillars -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
+                <div class="text-3xl mb-2">🎓</div>
+                <h4 class="font-serif font-bold text-slate-900 text-base mb-1">Student Scholarships</h4>
+                <p class="text-xs text-slate-500 m-0">Empowering underprivileged students with education aid and study kits.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
+                <div class="text-3xl mb-2">🏥</div>
+                <h4 class="font-serif font-bold text-slate-900 text-base mb-1">Medical Relief Aid</h4>
+                <p class="text-xs text-slate-500 m-0">Offering emergency medical financial support and healthcare assistance.</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 text-center">
+                <div class="text-3xl mb-2">📖</div>
+                <h4 class="font-serif font-bold text-slate-900 text-base mb-1">Spiritual Gatherings</h4>
+                <p class="text-xs text-slate-500 m-0">Organizing weekly dars, Majlis, and youth moral empowerment programs.</p>
+            </div>
+        </div>
+
     </div>
-</div>
+</section>
 
 <script>
 function checkAndProceed() {
@@ -67,10 +137,9 @@ function checkAndProceed() {
     
     errorDiv.style.display = 'none';
     const checkBtn = document.querySelector('#step-identify button');
-    checkBtn.innerHTML = 'Verifying...';
+    checkBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Verifying Details...';
     checkBtn.disabled = true;
     
-    // Fetch contribution data (simulating backend check)
     fetch(`/check-contribution/?name=${encodeURIComponent(nameInput)}&phone=${encodeURIComponent(phoneInput)}`)
         .then(response => response.json())
         .then(data => {
@@ -80,19 +149,19 @@ function checkAndProceed() {
             const statusDiv = document.getElementById('contribution-status');
             
             if (data.is_registered) {
-                statusDiv.innerHTML = `<h4 class="text-[#065f46] mb-2 text-[1.1rem] font-bold"><i class="fas fa-check-circle"></i> Welcome back, ${data.name}!</h4>
-                                       <div class="bg-white rounded-lg p-4 my-3 border border-[#a7f3d0]">
-                                            <p class="mb-1 text-textmuted">Your Monthly Commitment: <strong class="text-textmain text-[1.1rem]">₹${data.commitment}</strong></p>
-                                            <p class="m-0 text-textmuted">Total Paid to date: <strong class="text-[#10b981] text-[1.1rem]">₹${data.total_paid}</strong> 
-                                            <span class="text-[0.85rem]">(across ${data.count} payments)</span></p>
+                statusDiv.innerHTML = `<h4 class="font-serif text-lg font-bold text-emerald-900 mb-2 flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600"></i> Welcome back, ${data.name}!</h4>
+                                       <div class="bg-white rounded-xl p-4 my-3 border border-emerald-200/80 shadow-sm">
+                                            <p class="mb-1.5 text-xs text-slate-600">Your Monthly Commitment: <strong class="text-slate-900 text-sm">₹${data.commitment}</strong></p>
+                                            <p class="m-0 text-xs text-slate-600">Total Paid to date: <strong class="text-emerald-700 text-sm">₹${data.total_paid}</strong> 
+                                            <span class="text-[11px] text-slate-400">(${data.count} payments)</span></p>
                                        </div>
-                                       <p class="text-[#047857] m-0 text-[0.95rem]">Please select or enter the amount you'd like to pay today.</p>`;
+                                       <p class="text-xs text-emerald-800 font-medium m-0">Please select or enter the amount you'd like to pay today.</p>`;
             } else if (data.count === 0) {
-                statusDiv.innerHTML = `<h4 class="text-[#065f46] mb-2 text-[1.1rem] font-bold">Welcome, ${nameInput}!</h4>
-                                       <p class="text-[#047857] m-0">You haven't made any monthly contributions yet. Start supporting our cause today!</p>`;
+                statusDiv.innerHTML = `<h4 class="font-serif text-lg font-bold text-emerald-900 mb-2 flex items-center gap-2"><i class="fas fa-heart text-amber-500"></i> Welcome, ${nameInput}!</h4>
+                                       <p class="text-xs text-emerald-800 font-medium m-0">Thank you for joining our Sahachari Monthly Fund initiative. Please select your contribution amount below.</p>`;
             } else {
-                statusDiv.innerHTML = `<h4 class="text-[#065f46] mb-2 text-[1.1rem] font-bold">Welcome back, ${data.name}!</h4>
-                                       <p class="text-[#047857] m-0">You have successfully contributed a total of <strong>₹${data.total_paid}</strong> towards the Monthly Fund across ${data.count} payment(s).</p>`;
+                statusDiv.innerHTML = `<h4 class="font-serif text-lg font-bold text-emerald-900 mb-2 flex items-center gap-2"><i class="fas fa-check-circle text-emerald-600"></i> Welcome back, ${data.name}!</h4>
+                                       <p class="text-xs text-emerald-800 font-medium m-0">You have successfully contributed a total of <strong class="text-slate-900">₹${data.total_paid}</strong> towards the Monthly Fund across ${data.count} payment(s).</p>`;
             }
         })
         .catch(error => {
