@@ -224,7 +224,7 @@
 </section>
 
 <style>
-    .form-card input, .form-card select, .form-card textarea {
+    .form-card input:not([type="checkbox"]), .form-card select, .form-card textarea {
         width: 100%;
         padding: 0.75rem 1rem;
         background-color: #f8fafc;
@@ -236,7 +236,14 @@
         outline: none;
         transition: all 0.2s ease;
     }
-    .form-card input:focus, .form-card select:focus, .form-card textarea:focus {
+    .form-card input[type="checkbox"] {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+        padding: 0 !important;
+        accent-color: #045a33;
+        cursor: pointer;
+    }
+    .form-card input:not([type="checkbox"]):focus, .form-card select:focus, .form-card textarea:focus {
         border-color: #045a33;
         background-color: #ffffff;
     }
