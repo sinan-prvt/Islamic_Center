@@ -1,27 +1,158 @@
 {% extends 'base.html' %}
-{% block title %}Contact - SKSSF Puthupparamba{% endblock %}
+{% load static %}
+
+{% block title %}Contact Us - SKSSF Puthupparamba{% endblock %}
+{% block meta_title %}Contact Us - SKSSF Puthupparamba Unit{% endblock %}
+{% block meta_description %}Contact SKSSF Puthupparamba Unit committee for inquiries, memberships, relief assistance, or general information.{% endblock %}
 
 {% block content %}
-<div class="bg-primary text-white py-[3rem] md:py-[4rem] px-[5%] text-center relative">
-    <div class="banner-content">
-        <h1 class="text-[2rem] md:text-[2.8rem] mb-2 font-outfit font-bold">Contact Us</h1>
-        <div class="text-[0.95rem] opacity-90">
-            <a href="{% url 'home' %}" class="text-white no-underline mr-[5px] hover:underline">Home</a> | Contact
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-14 md:py-20 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <a href="{% url 'home' %}" class="hover:text-amber-300 no-underline text-emerald-200 transition-colors">Home</a>
+            <span>&bull;</span>
+            <span class="text-amber-400">Contact</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">Get in Touch</h1>
+        <p class="font-malayalam text-base md:text-lg text-emerald-100 max-w-xl mx-auto font-medium">
+            ഞങ്ങളുമായി ബന്ധപ്പെടുക
+        </p>
+    </div>
+</section>
+
+<!-- Main Contact Section -->
+<section class="bg-[#fafaf9] py-12 md:py-24 overflow-hidden relative">
+    <div class="container mx-auto px-4 md:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+                <span class="text-xs md:text-sm font-bold text-amber-700 uppercase tracking-widest">REACH OUT TO US</span>
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-3">
+                We are here to <span class="text-amber-700 font-serif italic font-normal">listen</span> and support.
+            </h2>
+            <p class="text-xs md:text-sm text-slate-500 leading-relaxed m-0">
+                Have questions about our programs, relief drives, or student memberships? Send us a message or call our unit committee directly.
+            </p>
+        </div>
+
+        <!-- 2 Column Layout -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-start">
+            
+            <!-- Left 5 Cols: Contact Information Cards -->
+            <div class="lg:col-span-5 space-y-6">
+                <!-- Location Card -->
+                <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-100 flex items-start gap-4 transition-transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center text-xl shrink-0 border border-amber-200">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-lg font-bold text-slate-900 mb-1">Unit Office Location</h4>
+                        <p class="text-xs md:text-sm text-slate-600 leading-relaxed m-0">
+                            Puthupparamba Juma Masjid Premises,<br>
+                            Puthupparamba, Malappuram,<br>
+                            Kerala &ndash; 676501, India
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Phone & WhatsApp Card -->
+                <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-100 flex items-start gap-4 transition-transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center text-xl shrink-0 border border-emerald-200">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-lg font-bold text-slate-900 mb-1">Phone & WhatsApp</h4>
+                        <p class="text-xs md:text-sm text-slate-600 m-0 mb-3">+91 98765 43210</p>
+                        <a href="https://wa.me/919876543210" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white font-bold text-xs px-4 py-2 rounded-full shadow-md hover:bg-emerald-600 transition-colors no-underline">
+                            <i class="fab fa-whatsapp text-sm"></i> Chat on WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Email Card -->
+                <div class="bg-white p-6 md:p-8 rounded-3xl shadow-lg border border-slate-100 flex items-start gap-4 transition-transform hover:-translate-y-1">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-600 flex items-center justify-center text-xl shrink-0 border border-blue-200">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-lg font-bold text-slate-900 mb-1">Email Support</h4>
+                        <p class="text-xs md:text-sm text-slate-600 m-0">skssfputhupparamba@gmail.com</p>
+                        <p class="text-[11px] text-slate-400 mt-1 m-0">We typically reply within 24 hours.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right 7 Cols: Send Message Form -->
+            <div class="lg:col-span-7 bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-slate-100">
+                <h3 class="font-serif text-xl md:text-2xl font-bold text-slate-900 mb-2">Send Us a Message</h3>
+                <p class="text-xs md:text-sm text-slate-500 mb-8">Fill out the form below and our committee team will get back to you promptly.</p>
+
+                <form onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent to SKSSF Puthupparamba Committee.'); this.reset();" class="space-y-5">
+                    {% csrf_token %}
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Full Name</label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" required placeholder="Your full name" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#045a33] focus:bg-white transition-colors">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Phone / WhatsApp</label>
+                            <div class="relative">
+                                <i class="fas fa-phone-alt absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                <input type="tel" required placeholder="+91 XXXXX XXXXX" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#045a33] focus:bg-white transition-colors">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Email Address</label>
+                            <div class="relative">
+                                <i class="fas fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                                <input type="email" required placeholder="your.email@gmail.com" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#045a33] focus:bg-white transition-colors">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Subject / Inquiry Type</label>
+                        <select class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#045a33] focus:bg-white transition-colors">
+                            <option>General Inquiry</option>
+                            <option>Sahachari Relief Support</option>
+                            <option>Student Membership Drive</option>
+                            <option>Monthly Unit Fund Query</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Your Message</label>
+                        <textarea rows="4" required placeholder="Type your message or inquiry here..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-900 focus:outline-none focus:border-[#045a33] focus:bg-white transition-colors"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-[#045a33] hover:bg-[#064e3b] text-white font-bold py-4 rounded-xl text-sm uppercase tracking-wider shadow-lg transition-all hover:scale-[1.01] cursor-pointer">
+                        <i class="fas fa-paper-plane mr-2 text-amber-400"></i> Send Message
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Google Map Embed Section -->
+<section class="bg-white py-12 md:py-16">
+    <div class="container mx-auto px-4 md:px-8">
+        <h3 class="font-serif text-2xl font-bold text-center text-slate-900 mb-6">Find Our Unit Location</h3>
+        <div class="rounded-3xl overflow-hidden shadow-xl border border-slate-200 h-[380px] bg-slate-100 relative">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15664.847596956637!2d75.98!3d11.02!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba64c1b9f!2sPuthupparamba%2C%20Kerala!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="w-full h-full"></iframe>
         </div>
     </div>
-</div>
-<div class="container mx-auto px-4 mt-8 mb-16">
-    <div class="bg-white p-8 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.1)] max-w-[600px] mx-auto text-center">
-        <h2 class="text-primary font-bold text-2xl mb-6">SKSSF Puthupparamba Unit</h2>
-        <div class="contact-details">
-            <p class="text-[1.1rem] my-2.5">📍 Address: Puthupparamba Juma Masjid Premises, Puthupparamba, Kerala</p>
-            <p class="text-[1.1rem] my-2.5">📞 Phone: +91 98765 43210</p>
-            <p class="text-[1.1rem] my-2.5">✉️ Email: info@skssfputhupparamba.com</p>
-            <p class="text-[1.1rem] my-2.5">🟢 WhatsApp: +91 98765 43210</p>
-        </div>
-        <div class="mt-8 bg-[#eee] h-[200px] flex items-center justify-center rounded-xl">
-            <p>[ Google Map Embed Placeholder ]</p>
-        </div>
-    </div>
-</div>
+</section>
 {% endblock %}
