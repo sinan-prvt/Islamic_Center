@@ -1,99 +1,174 @@
 {% extends 'base.html' %}
-{% block title %}Gallery - SKSSF Puthupparamba{% endblock %}
+{% load static %}
+
+{% block title %}Photo Gallery - SKSSF Puthupparamba{% endblock %}
+{% block meta_title %}Photo Gallery - SKSSF Puthupparamba Unit{% endblock %}
+{% block meta_description %}Explore our event photo gallery showcasing SKSSF Puthupparamba community gatherings, relief drives, Islamic classes, and youth programs.{% endblock %}
 
 {% block content %}
-<div class="bg-primary text-white py-[3rem] md:py-[4rem] px-[5%] text-center relative">
-    <div class="banner-content">
-        <h1 class="text-[2rem] md:text-[2.8rem] mb-2 font-outfit font-bold">Photo Gallery</h1>
-        <div class="text-[0.95rem] opacity-90">
-            <a href="{% url 'home' %}" class="text-white no-underline mr-[5px] hover:underline">Home</a> | Gallery
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-14 md:py-20 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <a href="{% url 'home' %}" class="hover:text-amber-300 no-underline text-emerald-200 transition-colors">Home</a>
+            <span>&bull;</span>
+            <span class="text-amber-400">Photo Gallery</span>
         </div>
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">Unit Photo Gallery</h1>
+        <p class="font-malayalam text-base md:text-lg text-emerald-100 max-w-xl mx-auto font-medium">
+            പുതുപ്പറമ്പ് യൂണിറ്റ് ചിത്രശേഖരം
+        </p>
     </div>
-</div>
-<div class="container mx-auto px-4 mt-8 mb-16">
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-8 py-8">
-        {% for image in images %}
-        <div class="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] group">
-            <div class="w-full h-[240px] overflow-hidden relative cursor-pointer" onclick="openGalleryModal(`{{ image.image.url }}`, `{{ image.title|escapejs }}`)">
-                <img src="{{ image.image.url }}" alt="{{ image.title }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div class="bg-white text-textmain px-5 py-2.5 rounded-full font-bold flex items-center gap-2 translate-y-5 transition-transform duration-300 group-hover:translate-y-0"><i class="fas fa-search-plus"></i> View Image</div>
+</section>
+
+<!-- Main Gallery Section -->
+<section class="bg-[#fafaf9] py-12 md:py-24 overflow-hidden relative">
+    <div class="container mx-auto px-4 md:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <div class="flex items-center justify-center gap-2 mb-3">
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+                <span class="text-xs md:text-sm font-bold text-amber-700 uppercase tracking-widest">MEMORIES & HIGHLIGHTS</span>
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 leading-tight mb-3">
+                Moments of faith, service, and <span class="text-amber-700 font-serif italic font-normal">community</span>.
+            </h2>
+            <p class="text-xs md:text-sm text-slate-500 leading-relaxed m-0">
+                A visual journey through our programs, conferences, relief activities, and youth mentorship sessions.
+            </p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for image in images %}
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col cursor-pointer" onclick="openGalleryModal(`{{ image.image.url }}`, `{{ image.title|escapejs }}`)">
+                <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                    <img src="{{ image.image.url }}" alt="{{ image.title }}" loading="lazy" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-white text-slate-900 font-bold px-4 py-2 rounded-full text-xs shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i class="fas fa-search-plus text-emerald-600"></i> View Full Image
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white flex-1 flex flex-col justify-between">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 group-hover:text-[#045a33] transition-colors mb-2">
+                        {{ image.title }}
+                    </h3>
+                    {% if image.program %}
+                    <p class="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 m-0">
+                        <i class="fas fa-camera text-emerald-500"></i> {{ image.program.title }}
+                    </p>
+                    {% endif %}
                 </div>
             </div>
-            <div class="p-6">
-                <h3 class="m-0 mb-2 text-xl text-textmain font-bold">{{ image.title }}</h3>
-                {% if image.program %}
-                <p class="m-0 text-primary text-[0.9rem] font-semibold"><i class="fas fa-camera-retro"></i> {{ image.program.title }}</p>
-                {% endif %}
+            {% empty %}
+            <!-- Demo Working Gallery Cards -->
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col cursor-pointer" onclick="openGalleryModal(`{% static 'images/skssf_community.png' %}`, `Annual General Assembly & Student Conference`)">
+                <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                    <img src="{% static 'images/skssf_community.png' %}" alt="Annual Assembly" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-white text-slate-900 font-bold px-4 py-2 rounded-full text-xs shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i class="fas fa-search-plus text-emerald-600"></i> View Full Image
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 group-hover:text-[#045a33] transition-colors mb-2">Annual General Assembly</h3>
+                    <p class="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 m-0"><i class="fas fa-camera text-emerald-500"></i> Unit Conference</p>
+                </div>
             </div>
+
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col cursor-pointer" onclick="openGalleryModal(`https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=1000&q=80`, `Weekly Dars & Islamic Learning Session`)">
+                <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800&q=80" alt="Islamic Class" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-white text-slate-900 font-bold px-4 py-2 rounded-full text-xs shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i class="fas fa-search-plus text-emerald-600"></i> View Full Image
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 group-hover:text-[#045a33] transition-colors mb-2">Weekly Dars & Majlis</h3>
+                    <p class="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 m-0"><i class="fas fa-camera text-emerald-500"></i> Spiritual Program</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col cursor-pointer" onclick="openGalleryModal(`https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1000&q=80`, `Youth Leadership & Mentorship Camp`)">
+                <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800&q=80" alt="Youth Camp" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-white text-slate-900 font-bold px-4 py-2 rounded-full text-xs shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i class="fas fa-search-plus text-emerald-600"></i> View Full Image
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 group-hover:text-[#045a33] transition-colors mb-2">Youth Leadership Camp</h3>
+                    <p class="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 m-0"><i class="fas fa-camera text-emerald-500"></i> TREND Guidance</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col cursor-pointer" onclick="openGalleryModal(`https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=1000&q=80`, `Executive Committee Strategic Meeting`)">
+                <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80" alt="Executive Meeting" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-white text-slate-900 font-bold px-4 py-2 rounded-full text-xs shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i class="fas fa-search-plus text-emerald-600"></i> View Full Image
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 group-hover:text-[#045a33] transition-colors mb-2">Executive Committee Session</h3>
+                    <p class="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 m-0"><i class="fas fa-camera text-emerald-500"></i> Committee Meeting</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col cursor-pointer" onclick="openGalleryModal(`https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=1000&q=80`, `Community Relief & Sahachari Drive`)">
+                <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=800&q=80" alt="Relief Drive" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-white text-slate-900 font-bold px-4 py-2 rounded-full text-xs shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i class="fas fa-search-plus text-emerald-600"></i> View Full Image
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 group-hover:text-[#045a33] transition-colors mb-2">Sahachari Relief Distribution</h3>
+                    <p class="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 m-0"><i class="fas fa-camera text-emerald-500"></i> VIKHAYA Relief</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl overflow-hidden shadow-lg border border-slate-100 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl group flex flex-col cursor-pointer" onclick="openGalleryModal(`https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=1000&q=80`, `Excellence Awards & Student Felicitation`)">
+                <div class="relative aspect-[4/3] bg-slate-900 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=800&q=80" alt="Excellence Awards" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span class="bg-white text-slate-900 font-bold px-4 py-2 rounded-full text-xs shadow-lg flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <i class="fas fa-search-plus text-emerald-600"></i> View Full Image
+                        </span>
+                    </div>
+                </div>
+                <div class="p-6 bg-white">
+                    <h3 class="font-serif text-lg font-bold text-slate-900 group-hover:text-[#045a33] transition-colors mb-2">Excellence Awards Ceremony</h3>
+                    <p class="text-xs font-semibold text-emerald-700 flex items-center gap-1.5 m-0"><i class="fas fa-camera text-emerald-500"></i> Student Honor</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
-        {% empty %}
-        <!-- Demo Content (Displayed when DB is empty) -->
-        <div class="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] group">
-            <div class="w-full h-[240px] overflow-hidden relative cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=600&h=400&fit=crop" alt="Community Gathering" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-            </div>
-            <div class="p-6">
-                <h3 class="m-0 mb-2 text-xl text-textmain font-bold">Annual General Meeting 2023</h3>
-                <p class="m-0 text-primary text-[0.9rem] font-semibold"><i class="fas fa-camera-retro"></i> Monthly Meeting</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] group">
-            <div class="w-full h-[240px] overflow-hidden relative cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1593113589914-0755387f3b89?w=600&h=400&fit=crop" alt="Relief Distribution" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-            </div>
-            <div class="p-6">
-                <h3 class="m-0 mb-2 text-xl text-textmain font-bold">Ramadan Relief Distribution</h3>
-                <p class="m-0 text-primary text-[0.9rem] font-semibold"><i class="fas fa-camera-retro"></i> Relief Activity</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] group">
-            <div class="w-full h-[240px] overflow-hidden relative cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&h=400&fit=crop" alt="Meeting" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-            </div>
-            <div class="p-6">
-                <h3 class="m-0 mb-2 text-xl text-textmain font-bold">Executive Committee Session</h3>
-                <p class="m-0 text-primary text-[0.9rem] font-semibold"><i class="fas fa-camera-retro"></i> Weekly Dars</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] group">
-            <div class="w-full h-[240px] overflow-hidden relative cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=600&h=400&fit=crop" alt="Students Class" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-            </div>
-            <div class="p-6">
-                <h3 class="m-0 mb-2 text-xl text-textmain font-bold">Weekend Islamic Workshop</h3>
-                <p class="m-0 text-primary text-[0.9rem] font-semibold"><i class="fas fa-camera-retro"></i> Islamic Class</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] group">
-            <div class="w-full h-[240px] overflow-hidden relative cursor-pointer">
-                <img src="https://images.unsplash.com/photo-1528605105345-5344ea20e269?w=600&h=400&fit=crop" alt="Youth Camp" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-            </div>
-            <div class="p-6">
-                <h3 class="m-0 mb-2 text-xl text-textmain font-bold">Summer Youth Camp</h3>
-                <p class="m-0 text-primary text-[0.9rem] font-semibold"><i class="fas fa-camera-retro"></i> Youth Program</p>
-            </div>
-        </div>
-        <div class="bg-white rounded-xl shadow-[0_4px_15px_rgba(0,0,0,0.05)] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] group">
-            <div class="w-full h-[240px] overflow-hidden relative cursor-pointer" onclick="openGalleryModal('https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=1200&h=800&fit=crop', 'Excellence Awards 2024')">
-                <img src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?w=600&h=400&fit=crop" alt="Award Ceremony" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
-                <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100"><div class="bg-white text-textmain px-5 py-2.5 rounded-full font-bold flex items-center gap-2 translate-y-5 transition-transform duration-300 group-hover:translate-y-0"><i class="fas fa-search-plus"></i> View Image</div></div>
-            </div>
-            <div class="p-6">
-                <h3 class="m-0 mb-2 text-xl text-textmain font-bold">Excellence Awards 2024</h3>
-                <p class="m-0 text-primary text-[0.9rem] font-semibold"><i class="fas fa-camera-retro"></i> Other</p>
-            </div>
-        </div>
-        {% endfor %}
+
     </div>
-</div>
+</section>
 
 <!-- Lightbox Modal -->
-<div class="fixed inset-0 bg-black/85 z-[1000] hidden items-center justify-center p-8 backdrop-blur-sm" id="galleryModal" onclick="closeGalleryModal(event)">
-    <div class="relative max-w-[1000px] w-full flex flex-col items-center animate-[modalFadeIn_0.3s_ease-out]" onclick="event.stopPropagation()">
-        <button class="absolute -top-10 right-0 bg-transparent text-white border-none text-4xl cursor-pointer transition-colors duration-300 hover:text-amber-500 modal-close" onclick="closeGalleryModal()">&times;</button>
-        <img id="galleryModalImg" src="" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
-        <div id="galleryModalCaption" class="text-white text-xl font-semibold mt-4 text-center"></div>
+<div class="fixed inset-0 bg-slate-950/90 z-[1000] hidden items-center justify-center p-4 md:p-8 backdrop-blur-md" id="galleryModal" onclick="closeGalleryModal(event)">
+    <div class="relative max-w-[900px] w-full flex flex-col items-center animate-[modalFadeIn_0.3s_ease-out]" onclick="event.stopPropagation()">
+        <button class="absolute -top-12 right-0 text-white border-none text-3xl cursor-pointer transition-colors duration-300 hover:text-amber-400 modal-close" onclick="closeGalleryModal()">&times;</button>
+        <div class="rounded-2xl overflow-hidden shadow-2xl bg-black border border-white/10">
+            <img id="galleryModalImg" src="" class="max-w-full max-h-[75vh] object-contain">
+        </div>
+        <div id="galleryModalCaption" class="text-white font-serif text-lg md:text-xl font-bold mt-4 text-center"></div>
     </div>
 </div>
 
@@ -113,7 +188,7 @@
     }
 
     function closeGalleryModal(e) {
-        if(e && e.target !== document.getElementById('galleryModal') && e.currentTarget !== document.querySelector('.modal-close')) return;
+        if (e && e.target !== document.getElementById('galleryModal') && e.currentTarget !== document.querySelector('.modal-close')) return;
         document.getElementById('galleryModal').style.display = 'none';
         document.body.style.overflow = 'auto';
         document.getElementById('galleryModalImg').src = '';
