@@ -1,68 +1,200 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block title %}About Us - SKSSF Puthupparamba Unit{% endblock %}
 {% block meta_title %}About Us - SKSSF Puthupparamba Unit{% endblock %}
-{% block meta_description %}Learn about the Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit, our history, our wings (TREND, VIKHAYA, IBAD), and our vision.{% endblock %}
+{% block meta_description %}Learn about the Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit, our history, our specialized wings (TREND, VIKHAYA, IBAD), and our vision.{% endblock %}
 {% block og_title %}About Us - SKSSF Puthupparamba Unit{% endblock %}
-{% block og_description %}Learn about the Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit, our history, our wings (TREND, VIKHAYA, IBAD), and our vision.{% endblock %}
+{% block og_description %}Learn about the Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit, our history, our specialized wings (TREND, VIKHAYA, IBAD), and our vision.{% endblock %}
 {% block twitter_title %}About Us - SKSSF Puthupparamba Unit{% endblock %}
-{% block twitter_description %}Learn about the Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit, our history, our wings (TREND, VIKHAYA, IBAD), and our vision.{% endblock %}
+{% block twitter_description %}Learn about the Samastha Kerala Sunni Students Federation (SKSSF) Puthupparamba Unit, our history, our specialized wings (TREND, VIKHAYA, IBAD), and our vision.{% endblock %}
 
 {% block content %}
-<div class="bg-primary text-white py-[3rem] md:py-[4rem] px-[5%] text-center relative">
-    <div class="banner-content">
-        <h1 class="text-[2rem] md:text-[2.8rem] mb-2 font-outfit font-bold">About Us</h1>
-        <div class="text-[0.95rem] opacity-90">
-            <a href="{% url 'home' %}" class="text-white no-underline mr-[5px] hover:underline">Home</a> | About Us
+<!-- Page Hero Banner -->
+<section class="bg-gradient-to-r from-[#043d23] via-[#045a33] to-[#064e3b] text-white py-14 md:py-20 px-4 text-center relative overflow-hidden">
+    <div class="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.08)_0%,transparent_70%)] pointer-events-none"></div>
+    <div class="container mx-auto relative z-10">
+        <div class="flex justify-center items-center gap-2 text-xs md:text-sm text-emerald-200 font-semibold mb-3 tracking-wide">
+            <a href="{% url 'home' %}" class="hover:text-amber-300 no-underline text-emerald-200 transition-colors">Home</a>
+            <span>&bull;</span>
+            <span class="text-amber-400">About Us</span>
         </div>
+        <h1 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight mb-3 text-white">About SKSSF Puthupparamba</h1>
+        <p class="font-malayalam text-base md:text-lg text-emerald-100 max-w-xl mx-auto font-medium">
+            പുതുപ്പറമ്പ് യൂണിറ്റിലെ എസ്.കെ.എസ്.എസ്.എഫ്.
+        </p>
     </div>
-</div>
-<div class="container mx-auto px-4 mt-8">
-    
-    <div class="bg-white p-6 md:p-12 rounded-xl shadow-[0_4px_6px_rgba(0,0,0,0.05)] mb-12 text-left md:text-center">
-        <div class="about-content">
-            <h2 class="text-[1.35rem] md:text-2xl text-primary font-bold mb-6">About Samastha Kerala Sunni Students Federation (SKSSF)</h2>
-            <p class="text-[0.95rem] md:text-[1.1rem] text-[#4b5563] max-w-[800px] mx-auto mb-4 leading-[1.6] md:leading-[1.8]">The <strong>Samastha Kerala Sunni Students Federation (SKSSF)</strong> is a prominent Islamic student organization in India, serving as the higher student wing of the Samastha Kerala Jamiyyathul Ulama. Founded on February 19, 1989, in Kozhikode, Kerala, the organization operates under the noble motto: <em>"Knowledge, Humility, and Service."</em></p>
-            <p class="text-[0.95rem] md:text-[1.1rem] text-[#4b5563] max-w-[800px] mx-auto mb-4 leading-[1.6] md:leading-[1.8]">SKSSF aims to bring Muslim students under its fold to nurture them into a righteous moral life and to provide leadership and support in educational, spiritual, and community-related issues across the nation.</p>
-        </div>
-    </div>
+</section>
 
-    <h2 class="text-center text-textmain mb-8 text-[1.5rem] md:text-[2rem] font-bold">Our Specialized Wings</h2>
-    <div class="grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4 md:gap-8 mb-16">
-        <div class="bg-white p-5 md:p-8 rounded-xl text-center shadow-[0_4px_15px_rgba(0,0,0,0.05)] border-t-4 border-primary transition-transform duration-300 hover:-translate-y-1.5">
-            <div class="text-[2rem] md:text-[3rem] mb-2 md:mb-4">🎓</div>
-            <h3 class="text-[1.15rem] md:text-xl text-primary font-bold mb-2 md:mb-4">TREND</h3>
-            <p class="text-[0.85rem] md:text-[0.95rem] text-[#64748b]">Our dedicated education and career guidance wing. TREND helps students navigate their academic and professional paths with confidence and clarity.</p>
+<!-- About Main Section -->
+<section class="bg-[#fafaf9] py-12 md:py-24 overflow-hidden relative">
+    <div class="container mx-auto px-4 md:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Left Column Content -->
+        <div data-aos="fade-right">
+            <!-- Label -->
+            <div class="flex items-center gap-2 mb-4">
+                <span class="w-8 h-[2px] bg-amber-600"></span>
+                <span class="text-xs md:text-sm font-bold text-amber-700 uppercase tracking-widest">ABOUT US</span>
+            </div>
+            
+            <!-- Heading -->
+            <h2 class="font-serif text-2xl sm:text-3xl md:text-[2.25rem] font-bold text-slate-900 leading-tight mb-2.5">
+                A movement of faith, <span class="text-amber-700 font-serif italic font-normal">knowledge</span> and service.
+            </h2>
+            
+            <!-- Malayalam Subtitle with Noto Sans Malayalam Google Font -->
+            <p class="font-malayalam text-sm md:text-base text-emerald-800 font-semibold mb-4 leading-normal">
+                പുതുപ്പറമ്പ് യൂണിറ്റിലെ എസ്.കെ.എസ്.എസ്.എഫ്.
+            </p>
+            
+            <!-- Paragraph -->
+            <p class="text-xs md:text-sm text-slate-600 leading-relaxed mb-6">
+                Founded in <strong class="text-slate-900 font-bold">1989</strong> as the student wing of Samastha Kerala Jam'iyyaathul Ulama, SKSSF has grown into one of the largest Islamic student movements in South India. The <strong class="text-slate-900 font-bold">Puthupparamba</strong> unit continues this proud legacy at the roots.
+            </p>
+            
+            <!-- Feature Check List -->
+            <div class="space-y-3.5 mb-6">
+                <!-- Feature 1 -->
+                <div class="flex items-start gap-2.5">
+                    <div class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-[10px]">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm md:text-base">Faith-Driven</h4>
+                        <p class="text-xs text-slate-500">Rooted in the Ahlus Sunnah wal Jama'ah tradition passed down for generations.</p>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="flex items-start gap-2.5">
+                    <div class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm md:text-base">Knowledge-First</h4>
+                        <p class="text-xs text-slate-500">From madrasas to universities &ndash; empowering minds with authentic learning.</p>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="flex items-start gap-2.5">
+                    <div class="w-5 h-5 rounded-full bg-emerald-100 text-[#045a33] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-900 text-sm md:text-base">Service-Oriented</h4>
+                        <p class="text-xs text-slate-500">Standing with the community through relief, education and mentorship.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="bg-white p-5 md:p-8 rounded-xl text-center shadow-[0_4px_15px_rgba(0,0,0,0.05)] border-t-4 border-primary transition-transform duration-300 hover:-translate-y-1.5">
-            <div class="text-[2rem] md:text-[3rem] mb-2 md:mb-4">🤝</div>
-            <h3 class="text-[1.15rem] md:text-xl text-primary font-bold mb-2 md:mb-4">VIKHAYA</h3>
-            <p class="text-[0.85rem] md:text-[0.95rem] text-[#64748b]">The volunteer and relief wing involved in vital humanitarian activities and social service, including providing medical support and emergency relief.</p>
-        </div>
-        <div class="bg-white p-5 md:p-8 rounded-xl text-center shadow-[0_4px_15px_rgba(0,0,0,0.05)] border-t-4 border-primary transition-transform duration-300 hover:-translate-y-1.5">
-            <div class="text-[2rem] md:text-[3rem] mb-2 md:mb-4">📖</div>
-            <h3 class="text-[1.15rem] md:text-xl text-primary font-bold mb-2 md:mb-4">IBAD</h3>
-            <p class="text-[0.85rem] md:text-[0.95rem] text-[#64748b]">Our propagation wing focused on promoting true Islamic values and encouraging individuals to follow a moral and righteous way of life.</p>
-        </div>
-    </div>
 
-    <div class="bg-white rounded-xl p-8 shadow-[0_4px_6px_rgba(0,0,0,0.05)] mb-8">
-        <h2 class="text-primary text-center mb-6 font-bold text-xl md:text-2xl">SKSSF Puthupparamba Unit</h2>
-        <div class="flex gap-8 flex-wrap">
-            <div class="flex-1 min-w-[300px]">
-                <p class="mb-4 text-textmain">The Puthupparamba Unit is one of the most active local branches, deeply committed to working at the grassroots level in our community. For years, we have been a pillar of support, promoting Islamic education, organizing relief activities, and empowering the youth.</p>
-                <p class="mb-4 text-textmain">As an ancillary unit of the state organization, we strive to bring the broader vision of SKSSF to life within Puthupparamba through community service, educational dars, and spiritual guidance.</p>
+        <!-- Right Column Image & Floating Legacy Badge -->
+        <div class="relative pt-4 pb-8 pl-4 pr-2" data-aos="fade-left">
+            <div class="rounded-3xl overflow-hidden shadow-2xl relative aspect-[4/3] md:aspect-[5/4] bg-slate-900">
+                <img src="{% static 'images/skssf_community.png' %}" alt="Building leaders of tomorrow" class="w-full h-full object-cover">
+                <!-- Gradient Overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-8 text-white">
+                    <span class="text-xs uppercase tracking-widest font-semibold text-emerald-400">OUR PEOPLE</span>
+                    <h3 class="font-serif text-xl md:text-2xl font-bold">Building leaders of tomorrow</h3>
+                </div>
             </div>
-            <div class="flex-1 min-w-[300px] flex flex-col gap-4">
-                <div class="bg-background p-6 rounded-lg border-l-4 border-primary-light">
-                    <h4 class="text-primary mb-2 text-[1.1rem] font-bold">👁️ Our Vision</h4>
-                    <p class="text-[0.95rem] text-textmain">To empower the youth with authentic Islamic knowledge and modern education, building a generation of morally upright leaders.</p>
-                </div>
-                <div class="bg-background p-6 rounded-lg border-l-4 border-primary-light">
-                    <h4 class="text-primary mb-2 text-[1.1rem] font-bold">🎯 Our Mission</h4>
-                    <p class="text-[0.95rem] text-textmain">To organize educational classes, conduct monthly spiritual gatherings, and coordinate comprehensive relief efforts to support the needy in our community.</p>
-                </div>
+            
+            <!-- Floating Badge: 35+ YEARS OF LEGACY -->
+            <div class="absolute bottom-2 left-0 bg-[#045a33] text-white p-4 md:p-6 rounded-2xl shadow-2xl flex flex-col justify-center border-2 border-emerald-600/30">
+                <span class="font-outfit text-2xl md:text-4xl font-extrabold text-amber-400 leading-none">35+</span>
+                <span class="text-[9px] md:text-xs font-bold tracking-widest uppercase text-emerald-100 mt-1">YEARS OF<br>LEGACY</span>
             </div>
         </div>
     </div>
-</div>
+</section>
+
+<!-- Vision & Mission Cards -->
+<section class="py-12 md:py-20 bg-white">
+    <div class="container mx-auto px-4 md:px-8">
+        <h2 class="text-center font-serif text-2xl md:text-4xl font-bold text-slate-900 mb-10">Vision & Mission</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <!-- Vision Card -->
+            <div class="bg-emerald-50/60 p-8 rounded-2xl border border-emerald-100 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-[#045a33] text-white flex items-center justify-center text-xl mb-5 shadow-md">
+                    <i class="fas fa-eye text-amber-400"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">Our Vision</h3>
+                <p class="text-slate-600 text-sm leading-relaxed m-0">
+                    To empower the youth with authentic Islamic knowledge and modern secular education, nurturing a morally upright, self-reliant generation equipped to lead society with humility and integrity.
+                </p>
+            </div>
+
+            <!-- Mission Card -->
+            <div class="bg-amber-50/60 p-8 rounded-2xl border border-amber-100 shadow-sm transition-transform duration-300 hover:-translate-y-1">
+                <div class="w-12 h-12 rounded-xl bg-amber-500 text-slate-900 flex items-center justify-center text-xl mb-5 shadow-md">
+                    <i class="fas fa-bullseye text-slate-900"></i>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-3">Our Mission</h3>
+                <p class="text-slate-600 text-sm leading-relaxed m-0">
+                    To organize regular spiritual gatherings, coordinate medical and economic relief for the needy, support underprivileged students, and foster unity across the community.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Specialized Wings -->
+<section class="py-12 md:py-20 bg-[#fafaf9]">
+    <div class="container mx-auto px-4 md:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-xs md:text-sm font-bold text-amber-700 uppercase tracking-widest block mb-2">OUR ORGANIZATIONAL STRUCTURE</span>
+            <h2 class="font-serif text-2xl md:text-4xl font-bold text-slate-900">Specialized Wings</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <!-- TREND -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-emerald-200">
+                <div class="text-4xl mb-4 text-emerald-600">🎓</div>
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-2">TREND</h3>
+                <span class="text-[11px] font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-4">Education & Career</span>
+                <p class="text-slate-600 text-xs md:text-sm leading-relaxed m-0">
+                    Dedicated education and career guidance wing. TREND helps students navigate academic paths, entrance exams, and professional development with clarity.
+                </p>
+            </div>
+
+            <!-- VIKHAYA -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-emerald-200">
+                <div class="text-4xl mb-4 text-emerald-600">🤝</div>
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-2">VIKHAYA</h3>
+                <span class="text-[11px] font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-4">Relief & Volunteer Service</span>
+                <p class="text-slate-600 text-xs md:text-sm leading-relaxed m-0">
+                    Humanitarian and relief wing providing medical support, blood donation drives, emergency disaster response, and community assistance.
+                </p>
+            </div>
+
+            <!-- IBAD -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200/80 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:border-emerald-200">
+                <div class="text-4xl mb-4 text-emerald-600">📖</div>
+                <h3 class="font-serif text-xl font-bold text-slate-900 mb-2">IBAD</h3>
+                <span class="text-[11px] font-bold text-blue-800 bg-blue-100 px-3 py-1 rounded-full uppercase tracking-wider inline-block mb-4">Propagation & Values</span>
+                <p class="text-slate-600 text-xs md:text-sm leading-relaxed m-0">
+                    Dawah and spiritual orientation wing focused on promoting traditional Islamic values, moral guidance, and weekly dars programs.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="bg-[#045a33] py-14 md:py-20 text-center text-white relative overflow-hidden">
+    <div class="container mx-auto px-4 relative z-10">
+        <h2 class="font-serif text-2xl sm:text-3xl md:text-4xl font-bold mb-4 tracking-tight text-white">Join Hands with SKSSF Puthupparamba</h2>
+        <p class="text-xs md:text-sm text-emerald-100 max-w-xl mx-auto leading-relaxed mb-8">
+            Be a part of our journey in serving faith, education, and humanity. Support our monthly unit fund or participate in our community programs.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="{% url 'monthly_fund' %}" class="bg-amber-400 text-slate-900 font-bold px-6 py-3 text-xs md:text-sm rounded-full shadow-lg transition-transform hover:scale-105 no-underline">
+                <i class="fas fa-hand-holding-heart mr-2"></i> Monthly Unit Fund
+            </a>
+            <a href="{% url 'contact' %}" class="bg-transparent text-white border border-white/60 font-bold px-6 py-3 text-xs md:text-sm rounded-full transition-transform hover:scale-105 no-underline hover:bg-white/10">
+                <i class="fas fa-envelope mr-2"></i> Contact Committee
+            </a>
+        </div>
+    </div>
+</section>
 {% endblock %}
