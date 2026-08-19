@@ -41,6 +41,15 @@
                 
                 <form method="POST" class="form-card space-y-4">
                     {% csrf_token %}
+                    {% if form.errors %}
+                    <div class="bg-rose-50 border border-rose-200 text-rose-800 text-xs p-3 rounded-xl space-y-1">
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                                <p class="m-0 flex items-center gap-1.5"><i class="fas fa-exclamation-circle text-rose-600"></i> {{ field|title }}: {{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
                     <div>
                         <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Username</label>
                         {{ form.username }}

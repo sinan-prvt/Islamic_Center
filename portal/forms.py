@@ -79,7 +79,11 @@ class GalleryForm(forms.ModelForm):
 from django.contrib.auth.models import User
 
 class AdminUserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}), required=False, help_text="Leave blank to keep the current password.")
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        required=False,
+        help_text="Required for new admins. Leave blank to keep current password when editing."
+    )
 
     class Meta:
         model = User
@@ -91,12 +95,21 @@ class AdminUserForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
         }
 
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get('password')
+        # If creating a new user, password must be provided
+        if not self.instance.pk and not password:
+            self.add_error('password', 'Password is required when creating a new admin user.')
+        return cleaned_data
+
     def save(self, commit=True):
         user = super().save(commit=False)
         password = self.cleaned_data.get('password')
         if password:
             user.set_password(password)
-        # Ensure the user is an admin
+        # Ensure the user is active, staff, and superuser for admin login
+        user.is_active = True
         user.is_staff = True
         user.is_superuser = True
         if commit:
