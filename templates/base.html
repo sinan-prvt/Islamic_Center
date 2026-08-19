@@ -374,6 +374,11 @@
             <i class="fas fa-images text-[1.2rem] mb-0.5"></i>
             <span>GALLERY</span>
         </a>
+        <a href="{% url 'contact' %}"
+            class="flex flex-col items-center no-underline text-[10px] font-medium gap-1 {% if '/contact/' in request.path %}text-primary{% else %}text-textmuted{% endif %}">
+            <i class="fas fa-envelope text-[1.2rem] mb-0.5"></i>
+            <span>CONTACT</span>
+        </a>
         <a href="{% url 'donate' %}"
             class="flex flex-col items-center no-underline text-[10px] font-medium gap-1 {% if '/donate/' in request.path %}text-primary{% else %}text-textmuted{% endif %}">
             <i class="fas fa-hand-holding-heart text-[1.2rem] mb-0.5"></i>
