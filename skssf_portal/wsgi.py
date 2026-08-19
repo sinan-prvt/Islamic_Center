@@ -29,8 +29,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'skssf_portal.settings')
 application = get_wsgi_application()
 app = application
 
-# Automatically migrate & seed default superuser when production DATABASE_URL is set
-if os.environ.get('DATABASE_URL'):
+# Automatically migrate & seed default superuser when running in production/serverless
+IS_SERVERLESS = os.environ.get('VERCEL') or os.environ.get('AWS_LAMBDA_FUNCTION_NAME') or '/var/task' in str(BASE_DIR)
+if IS_SERVERLESS or os.environ.get('DATABASE_URL'):
     try:
         from django.core.management import call_command
         from django.contrib.auth.models import User
